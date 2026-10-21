@@ -6,6 +6,7 @@
 |---|---|
 | `airchina/` | 国航 H5(m.airchina.com.cn)API:奖励客票查询(单程/往返)、现金低价日历、会话管理、短信重登驱动 |
 | `ctrip/` | 携程 H5 API(CDP 页面代理):航班列表、低价日历、火车票车次查询(免登录)、城市码解析 |
+| `amap/` | 高德导航 App API(Deep Link 页面代理):驾车路线规划(距离/历时/过路费/途经道路) |
 
 ## 快速开始
 
@@ -18,8 +19,8 @@ python -m airchina calendar CAN PEK 2026-11-01       # 现金日历(无需登录
 
 ## 工具链
 
-pytest 74 tests / mypy 0 errors / pylint 10.00
-(airchina 42 + ctrip 32;真实抓包夹具驱动,传输层 mock,不触网)。
+pytest 87 tests / mypy 0 errors / pylint 10.00
+(airchina 42 + ctrip 32 + amap 13;真实抓包夹具驱动,传输层 mock,不触网)。
 
 ## 注意
 

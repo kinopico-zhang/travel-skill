@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "amap"
+version = "0.1.0"
+description = "Amap (Gaode) navigation app API client via deep-link page proxy: drive route planning"
+requires-python = ">=3.9"
+dependencies = ["pydantic>=2"]
+
+[project.optional-dependencies]
+capture = ["mitmproxy", "zstandard"]   # 读 flows / 解 zstd 响应
+
+[tool.setuptools.packages.find]
+include = ["amap*"]
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+# ---------------------------------------------------------------- pylint
+[tool.pylint.MAIN]
+py-version = "3.13"
+
+[tool.pylint.FORMAT]
+max-line-length = 100
+
+[tool.pylint.DESIGN]
+max-branches = 18
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = [
+    "too-few-public-methods",
+    "too-many-instance-attributes",
+    "too-many-arguments",
+    "too-many-positional-arguments",
+    "too-many-locals",
+    "missing-function-docstring",
+    "duplicate-code",
+]
+
+# ---------------------------------------------------------------- mypy
+[tool.mypy]
+python_version = "3.13"
+plugins = ["pydantic.mypy"]
+files = ["amap", "tests"]
+ignore_missing_imports = true
+warn_return_any = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+
+# 手写 protobuf walker 与测试文件动态类型多,放宽
+[[tool.mypy.overrides]]
+module = ["amap.parser", "conftest", "test_parser", "test_client", "test_cli"]
+disallow_untyped_defs = false
+check_untyped_defs = true
