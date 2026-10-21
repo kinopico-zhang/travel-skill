@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fliggy"
+version = "0.1.0"
+description = "Fliggy (h5api.m.taobao.com mtop H5) flight listing API client: single-trip search with transfers, no login"
+requires-python = ">=3.9"
+dependencies = ["pydantic>=2"]
+
+[tool.setuptools.packages.find]
+include = ["fliggy*"]
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+# ---------------------------------------------------------------- pylint
+[tool.pylint.MAIN]
+py-version = "3.13"
+
+[tool.pylint.FORMAT]
+max-line-length = 100
+
+[tool.pylint.DESIGN]
+max-branches = 18
+
+[tool.pylint."MESSAGES CONTROL"]
+# pydantic 模型天然多字段/少方法;测试函数不需要 docstring
+disable = [
+    "too-few-public-methods",
+    "too-many-instance-attributes",
+    "too-many-arguments",
+    "too-many-positional-arguments",
+    "too-many-locals",
+    "missing-function-docstring",
+    "duplicate-code",
+]
+
+# ---------------------------------------------------------------- mypy
+[tool.mypy]
+python_version = "3.13"
+plugins = ["pydantic.mypy"]
+files = ["fliggy", "tests"]
+ignore_missing_imports = true
+warn_return_any = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+
+# 测试放宽:mypy 2.x 视顶层测试模块为无 __init__.py 的独立模块
+[[tool.mypy.overrides]]
+module = ["conftest", "test_models", "test_client", "test_cli"]
+disallow_untyped_defs = false
+check_untyped_defs = true
