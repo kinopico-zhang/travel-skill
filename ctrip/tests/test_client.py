@@ -109,6 +109,7 @@ def test_low_price_calendar(calendar_resp, tmp_path):
     assert dates == sorted(dates)               # 按日期升序
     assert cal[0].date == "2026-10-20"           # /Date(1792425600000+0800)/ = 当天零点
     assert cal[0].price == 1610                 # int,不是 "/Date(...)/" 字符串
+    assert cal[0].total == 1710                 # 含税总价(totalPrice)
     call = fake.calls[-1]
     assert call["path"] == CALENDAR_API
     assert call["payload"]["departNewCityCode"] == "SZX"

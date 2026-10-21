@@ -334,10 +334,15 @@ class TrainSearchResult(BaseModel):
 
 
 class DailyPrice(BaseModel):
-    """低价日历的一个日期:最低票价(国内含税,国际为不含税票面)。"""
+    """低价日历的一个日期。
+
+    price=票面(国内含机建燃油前,国际为不含税票面);total=含税总价
+    (响应 totalPrice,国内外统一口径,比价请用这个)。
+    """
 
     date: str
     price: int
+    total: Optional[int] = None
 
 
 class City(BaseModel):

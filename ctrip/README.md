@@ -54,7 +54,8 @@ for f in r.sorted_by_price()[:5]:
 
 # 低价日历（今天起 ~377 天） —— List[DailyPrice]，按日期升序
 cal = ct.low_price_calendar("SZX", "HAK")
-print(cal[0].date, cal[0].price)
+print(cal[0].date, cal[0].price)      # price＝票面（国际线不含税）
+print(cal[0].total)                   # total＝含税总价（totalPrice），比价用这个
 
 # 城市码（内置 36 城，未知自动 fuzzySearch 并缓存 ~/.ctrip_cities.json）
 c = ct.city("KHN")               # City(code="KHN", name="南昌", id="376")

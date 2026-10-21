@@ -91,6 +91,8 @@ def test_daily_price():
     p = DailyPrice(date="2026-10-19", price=1610)
     assert p.price == 1610
     assert DailyPrice(date="d", price="1610").price == 1610  # 字符串也收
+    assert p.total is None                              # 含税总价缺省无
+    assert DailyPrice(date="d", price=1610, total=1710).total == 1710
 
 
 # ------------------------------------------------------------------ 火车票

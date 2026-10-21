@@ -347,7 +347,7 @@ class CtripClient:
                            start_date: Optional[str] = None) -> List[DailyPrice]:
         """低价日历(默认今天起 377 天),按日期升序。
 
-        国内线 price 含税;国际线是不含税票面(实际含税 +300~800)。
+        price=票面(国际线不含税);total=含税总价(totalPrice),比价用这个。
         """
         org_city, dst_city = self.city(org), self.city(dst)
         if start_date is None:
@@ -370,7 +370,8 @@ class CtripClient:
             if m:
                 ts = int(m.group(1)) / 1000 + 8 * 3600
                 d = time.strftime("%Y-%m-%d", time.gmtime(ts))
-                out.append(DailyPrice(date=d, price=p.get("price")))
+                out.append(DailyPrice(date=d, price=p.get("price"),
+                                      total=p.get("totalPrice")))
         return sorted(out, key=lambda x: x.date)
 
     # ---------- 火车票 ----------
