@@ -5,6 +5,7 @@
 页面代理(模拟器链路,后备)。
 
     amap route 22.9208 113.8903 松山湖 23.1066 113.3245 广州塔
+    amap route ... --strategy cheap            # 路线偏好(App 同款策略名)
     amap route ... --depart "2026-10-22T08:00"   # 未来用时(v4/etd 预测)
     amap etd   22.9208 113.8903 23.1066 113.3245 "2026-10-22T08:00" \
         --interval 1800 --count 6                # 未来时刻表
@@ -34,8 +35,8 @@ def cmd_route(args: argparse.Namespace) -> int:
         from .web import WebClient  # pylint: disable=import-outside-toplevel
         r = WebClient().nav_route(
             args.slat, args.slon, args.sname,
-            args.dlat, args.dlon, args.dname, strategy=args.strategy,
-            depart_at=depart)
+            args.dlat, args.dlon, args.dname,
+            strategy=args.strategy, depart_at=depart)
     print(r.summary())
     best = r.best()
     if best:
@@ -58,7 +59,8 @@ def cmd_etd(args: argparse.Namespace) -> int:
     etas = WebClient().etd_table(
         args.slat, args.slon, args.dlat, args.dlon,
         datetime.fromisoformat(args.first),
-        interval_s=args.interval, count=args.count)
+        interval_s=args.interval, count=args.count,
+        strategy=args.strategy)
     if not etas:
         print("没有返回时刻预估")
         return 1
@@ -125,13 +127,23 @@ def _add_points(p: argparse.ArgumentParser) -> None:
     p.add_argument("dname", help="终点名(展示用)")
 
 
+def _add_strategy(p: argparse.ArgumentParser, help_tail: str) -> None:
+    """--strategy:App「路线偏好」同款策略名(或 v3 数字)。"""
+    from .web import APP_STRATEGIES, DRIVE_STRATEGIES  # pylint: disable=import-outside-toplevel
+    names = sorted(APP_STRATEGIES)
+    nums = [str(n) for n in sorted(DRIVE_STRATEGIES)]
+    p.add_argument("--strategy", default="smart", metavar="STRATEGY",
+                   choices=names + nums,
+                   help=f"路线偏好: {'/'.join(names)}"
+                        f"(默认 smart 高德AI推荐);或 v3 数字 {nums}。{help_tail}")
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     p = argparse.ArgumentParser(prog="amap", description="高德导航 API 客户端")
     sub = p.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("route", help="驾车路线(默认 Web 纯HTTP,--app 走模拟器)")
     _add_points(r)
-    r.add_argument("--strategy", type=int, default=0, choices=[0, 1, 2, 32],
-                   help="Web 驾车策略: 0速度/1费用/2距离/32默认")
+    _add_strategy(r, "no_highway 返回 3 条备选方案")
     r.add_argument("--app", action="store_true",
                    help="强制走模拟器 Deep Link(多方案一次返回;"
                         "--depart 组合它时走模拟器改时钟,后备)")
@@ -149,6 +161,7 @@ def main(argv: Optional[List[str]] = None) -> int:
                    help="相邻时间点间隔秒数(默认 1800=半小时)")
     e.add_argument("--count", type=int, default=4,
                    help="时间点个数 1-48(默认 4)")
+    _add_strategy(e, "v4/etd 仅避堵/免费两档,cheap 与 no_highway 走免费档")
     e.set_defaults(fn=cmd_etd)
     b = sub.add_parser("bus", help="公交(地铁/城际/公交)路线,Web 客户端")
     _add_points(b)

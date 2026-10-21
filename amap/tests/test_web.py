@@ -199,6 +199,53 @@ def test_web_etd_table(web_etd, monkeypatch):
     assert etas[0].duration_min > 0
 
 
+# ------------------------------------------------------------------ 策略
+def test_resolve_strategy():
+    """App 策略名 / v3 数字 → (v3 值, etd 值) 映射。"""
+    from amap.web import resolve_strategy
+    assert resolve_strategy("smart") == (32, 1)
+    assert resolve_strategy("cheap") == (1, 2)        # 费用优先 → etd 免费档
+    assert resolve_strategy("no_highway") == (16, 2)
+    assert resolve_strategy(1) == (1, 2)              # v3 数字:费用最少 → 免费
+    assert resolve_strategy(0) == (0, 1)
+    with pytest.raises(WebError, match="未知策略"):
+        resolve_strategy("teleport")
+
+
+def test_web_nav_route_strategy_etd(web_etd, monkeypatch):
+    """depart_at 组合时策略名映射到 v4/etd 的两档。"""
+    import datetime as dt
+    w = WebClient(min_interval=0)
+    seen = []
+
+    def fake_get(path, params, base="", key=""):
+        seen.append(params["strategy"])
+        return web_etd
+
+    monkeypatch.setattr(w, "_get", fake_get)
+    future = dt.datetime.now() + dt.timedelta(hours=2)
+    w.nav_route(22.9, 113.9, "A", 23.1, 113.3, "B",
+                depart_at=future, strategy="cheap")
+    w.nav_route(22.9, 113.9, "A", 23.1, 113.3, "B", depart_at=future)
+    assert seen == [2, 1]                     # cheap→免费档,默认 smart→避堵档
+
+
+def test_web_etd_table_strategy(web_etd, monkeypatch):
+    import datetime as dt
+    w = WebClient(min_interval=0)
+    seen = []
+
+    def fake_get(path, params, base="", key=""):
+        seen.append(params["strategy"])
+        return web_etd
+
+    monkeypatch.setattr(w, "_get", fake_get)
+    future = dt.datetime.now() + dt.timedelta(hours=2)
+    w.etd_table(22.9, 113.9, 23.1, 113.3, future, 1800, 3,
+                strategy="no_highway")
+    assert seen == [2]
+
+
 def test_web_etd_rejects_past():
     """过去时刻直接拒,不发请求。"""
     import datetime as dt

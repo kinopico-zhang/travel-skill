@@ -36,8 +36,43 @@ WEB_KEY = "ab403a9b356e63c917ff05b037cd3e7d"
 DITU_BASE = "https://ditu.amap.com/_AMapService"
 DITU_KEY = "2f282f369e388ef01bae260cbc35edce"
 
-# v3 驾车 strategy:0 速度优先 1 费用优先 2 距离优先 32 默认
-DRIVE_STRATEGIES = {0: "速度最快", 1: "费用最少", 2: "距离最短", 32: "默认"}
+# v3 驾车 strategy 数字(代理实测认 0/1/2/16/32,其余值全被归并为默认;
+# 16 会返回 3 条备选方案,其余单方案)
+DRIVE_STRATEGIES = {0: "速度最快", 1: "费用最少", 2: "距离最短",
+                    16: "不走高速", 32: "默认"}
+
+# 高德 App「路线偏好」同名的策略体系 → (中文名, v3 值, v4/etd 值)。
+# 两个通道支持的值不同(v4/etd 实测只有两档:1 躲避拥堵 / 2 免费不走高速,
+# 其余值全归这两档),所以每个偏好按通道映射:
+#   v3:  avoid_jam 无独立避堵值回落默认;highway 无独立值用时间优先近似
+#   etd: cheap/no_highway → 2(免费,实测零过路费且不走高速);short 用避堵近似
+APP_STRATEGIES: Dict[str, tuple] = {  # noqa: UP006  # (str, int, int)
+    "smart": ("高德AI推荐", 32, 1),
+    "fast": ("时间优先", 0, 1),
+    "cheap": ("费用优先", 1, 2),
+    "short": ("距离优先", 2, 1),
+    "no_highway": ("不走高速", 16, 2),
+    "avoid_jam": ("躲避拥堵", 32, 1),
+    "highway": ("高速优先", 0, 1),
+}
+
+
+def resolve_strategy(strategy: Any) -> tuple:  # noqa: UP006  # (v3值, etd值)
+    """路线偏好(名字或 v3 数字)→ (v3 strategy, v4/etd strategy)。
+
+    名字用 App「路线偏好」同款概念;数字按 v3 语义(费用最少/不走高速
+    在 etd 通道对应免费档)。
+    """
+    if isinstance(strategy, str):
+        s = strategy.lower()
+        if s not in APP_STRATEGIES:
+            raise WebError(f"未知策略 {strategy!r},可选: "
+                           f"{sorted(APP_STRATEGIES)} 或 v3 数字 {sorted(DRIVE_STRATEGIES)}")
+        return APP_STRATEGIES[s][1], APP_STRATEGIES[s][2]
+    if strategy not in DRIVE_STRATEGIES:
+        raise WebError(f"未知 strategy {strategy},可选: "
+                       f"{sorted(DRIVE_STRATEGIES)} 或名字 {sorted(APP_STRATEGIES)}")
+    return strategy, 2 if strategy in (1, 16) else 1
 
 
 class WebError(Exception):
@@ -108,22 +143,30 @@ class WebClient:
 
     def nav_route(self, slat: float, slon: float, sname: str,
                   dlat: float, dlon: float, dname: str,
-                  strategy: int = 0,
+                  strategy: Any = "smart",
                   depart_at: Optional[datetime.datetime] = None) -> NavResult:
-        """驾车路线(单方案)。strategy: 0 速度/1 费用/2 距离/32 默认。
+        """驾车路线。strategy:App「路线偏好」同款策略名或 v3 数字。
 
-        与 App 侧(多方案一次返回)不同,Web 版一次查询一个策略,
-        想比较多方案就换 strategy 再查。
+        策略名:smart 高德AI推荐(默认)/ fast 时间优先 / cheap 费用优先
+        (少收费)/ short 距离优先 / no_highway 不走高速 / avoid_jam 躲避拥堵 /
+        highway 高速优先。也可传 v3 数字 0/1/2/16/32。
+        同一名字在两个通道各映射到该通道实际支持的值(见 APP_STRATEGIES)。
+
+        与 App 侧(多方案一次返回)不同,v3 一次查询一个策略
+        (no_highway 例外,返回 3 条备选);想比较就换策略再查。
 
         depart_at:未来出发时刻(如明早 8 点)。走 v4/etd 未来预测,
         返回按该时刻路况预估的用时/过路费;必须是未来时间。
-        depart_at 时 strategy 不生效(v4/etd 用躲避拥堵策略)。
+        v4/etd 只有躲避拥堵/免费两档,cheap 与 no_highway 映射免费档
+        (实测零过路费、不走高速,代价是用时明显变长,长途约多三成)。
         """
+        v3s, etds = resolve_strategy(strategy)
         if depart_at is not None:
             ts = int(depart_at.timestamp())
             if ts <= time.time():
                 raise WebError("depart_at 必须是未来时间(v4/etd 预测接口)")
-            routes, etas = self._etd(slon, slat, dlon, dlat, ts, 1, 1)
+            routes, etas = self._etd(slon, slat, dlon, dlat, ts, 1, 1,
+                                     strategy=etds)
             # v4/etd 的用时/费用在时间点上,path 本体不带;响应可能含多个
             # 备选 path,elements[0] 对应首方案 —— 只留它并回填
             if routes and etas:
@@ -131,11 +174,9 @@ class WebClient:
                 routes[0].toll_fen = int(etas[0].toll_yuan * 100)
             return NavResult(depart=sname, arrive=dname, mode="drive",
                              depart_at=ts, routes=routes[:1])
-        if strategy not in DRIVE_STRATEGIES:
-            raise WebError(f"未知 strategy {strategy},可选: {sorted(DRIVE_STRATEGIES)}")
         data = self._get("/v3/direction/driving", {
             "origin": f"{slon},{slat}", "destination": f"{dlon},{dlat}",
-            "strategy": strategy,
+            "strategy": v3s,
             "extensions": "base"})
         routes = parse_web_drive(data)
         if not routes:
@@ -144,12 +185,15 @@ class WebClient:
 
     def etd_table(self, slat: float, slon: float, dlat: float, dlon: float,
                   first: datetime.datetime,
-                  interval_s: int = 1800, count: int = 4) -> List[FutureEta]:
+                  interval_s: int = 1800, count: int = 4,
+                  strategy: Any = "smart") -> List[FutureEta]:
         """未来用时时刻表:v4/etd 一次返回 count 个时间点的预估。
 
         first:首时刻(未来);interval_s:相邻点间隔(秒);
         count:点数,最多 48。改时钟方案要一个点一个点地查,
         这里一次请求全出 —— 明显低频更友好。
+        strategy:App 同款策略名;v4/etd 只有躲避拥堵(默认)/免费两档,
+        cheap 与 no_highway 走免费档(零过路费)。
         """
         if not 1 <= count <= 48:
             raise WebError("count 1-48(v4/etd 上限)")
@@ -158,15 +202,20 @@ class WebClient:
         ts = int(first.timestamp())
         if ts <= time.time():
             raise WebError("first 必须是未来时间(v4/etd 预测接口)")
-        return self._etd(slon, slat, dlon, dlat, ts, interval_s, count)[1]
+        return self._etd(slon, slat, dlon, dlat, ts, interval_s, count,
+                         strategy=resolve_strategy(strategy)[1])[1]
 
     def _etd(self, slon: float, slat: float, dlon: float, dlat: float,
-             firsttime: int, interval: int, count: int
-             ) -> tuple[List[NavRoute], List[FutureEta]]:
-        """调 ditu 代理的 v4/etd,返回 (首方案路线, 全部时刻预估)。"""
+             firsttime: int, interval: int, count: int,
+             strategy: int = 1) -> tuple[List[NavRoute], List[FutureEta]]:
+        """调 ditu 代理的 v4/etd,返回 (首方案路线, 全部时刻预估)。
+
+        strategy:1 躲避拥堵(默认)/ 2 免费路线(零过路费,不走高速)。
+        v3 的位掩码 16/17(不走高速)v4/etd 不认,传了等同 1。
+        """
         data = self._get("/v4/etd/driving", {
             "origin": f"{slon},{slat}", "destination": f"{dlon},{dlat}",
-            "strategy": 1,           # 1=躲避拥堵(v4/etd 默认策略)
+            "strategy": strategy,
             "firsttime": firsttime, "interval": interval, "count": count,
         }, base=DITU_BASE, key=DITU_KEY)
         routes, etas = parse_etd(data, firsttime, interval, count)

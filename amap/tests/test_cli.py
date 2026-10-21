@@ -38,7 +38,7 @@ class FakeWebClient:
         self.bus_kwargs = None
 
     def nav_route(self, slat, slon, sname, dlat, dlon, dname,
-                  strategy=0, depart_at=None):
+                  strategy="smart", depart_at=None):
         self.kwargs = (slat, slon, sname, dlat, dlon, dname, strategy,
                        depart_at)
         return FakeResult()
@@ -71,17 +71,23 @@ def test_cli_route_defaults_to_web(monkeypatch, capsys):
     assert "82公里" in out
     assert fake.kwargs is not None
     assert fake.kwargs[2] == "松山湖"
-    assert fake.kwargs[6] == 0                      # 默认策略 速度最快
+    assert fake.kwargs[6] == "smart"              # 默认 高德AI推荐
 
 
 def test_cli_route_strategy(monkeypatch):
     fake = FakeWebClient()
     monkeypatch.setattr("amap.web.WebClient", lambda: fake)
     rc = main(["route", "22.9", "113.9", "A", "23.1", "113.3", "B",
-               "--strategy", "1"])
+               "--strategy", "cheap"])
     assert rc == 0
     assert fake.kwargs is not None
-    assert fake.kwargs[6] == 1
+    assert fake.kwargs[6] == "cheap"
+
+    # 数字策略(v3 语义)也接受
+    rc = main(["route", "22.9", "113.9", "A", "23.1", "113.3", "B",
+               "--strategy", "16"])
+    assert rc == 0
+    assert fake.kwargs[6] == "16"
 
 
 def test_cli_route_app(monkeypatch):

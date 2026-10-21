@@ -7,6 +7,7 @@
 ```bash
 pip install -e ./amap
 python -m amap route 22.9208 113.8903 松山湖 23.1066 113.3245 广州塔
+python -m amap route ... --strategy cheap           # 路线偏好(App 同款策略名)
 python -m amap route ... --depart 2026-10-22T08:00      # 未来用车时(v4/etd 预测)
 python -m amap etd   22.9208 113.8903 23.1066 113.3245 2026-10-22T08:00 \
            --interval 7200 --count 4                    # 未来时刻表(最多 48 点)
@@ -37,6 +38,8 @@ w = WebClient()
 r = w.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
 best = r.best()                     # 时间最短方案
 best.distance_km, best.duration_s, best.toll_yuan
+
+r = w.nav_route(..., strategy="cheap")   # 费用优先(免费路线,零过路费)
 
 # 未来某时刻出发:按该时刻路况预估用时/过路费(v4/etd)
 r = w.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔",
@@ -76,9 +79,27 @@ window._AMapSecurityConfig = {serviceHost: "https://m.amap.com/_AMapService"}
 城市参数可不传**,跨城查询服务端按坐标识别)、步行 v3、地理编码 v3。
 不可用:骑行(代理未开放)、逆地理 regeo(返回滑块验证页)。
 
-驾车策略 `--strategy`:0 速度最快(默认)/ 1 费用最少 / 2 距离最短 /
-32 默认;与 App 侧一次返回多方案不同,Web 版一次查询一个策略,
-想比较就换 strategy 再查。
+驾车策略即上面的「路线偏好」;与 App 侧一次返回多方案不同,v3 一次
+查询一个策略(`no_highway` 例外,返回 3 条备选),想比较就换策略再查。
+
+## 路线偏好(strategy,App 同款)
+
+`strategy` 用高德 App「路线偏好」同款策略名,两个通道各自映射到
+该通道实际支持的值(实测 v3 代理认 0/1/2/16/32,其余值归默认;
+v4/etd 只有避堵/免费两档,其余值全归这两档):
+
+| 策略名 | App 名称 | v3(实时) | v4/etd(未来) |
+|---|---|---|---|
+| `smart`(默认) | 高德AI推荐 | 32 默认 | 1 躲避拥堵 |
+| `fast` | 时间优先 | 0 速度优先 | 1 |
+| `cheap` | 费用优先 | 1 费用优先 | 2 免费 |
+| `short` | 距离优先 | 2 距离优先 | 1(近似) |
+| `no_highway` | 不走高速 | 16(返回 3 条备选) | 2 免费 |
+| `avoid_jam` | 躲避拥堵 | 32(v3 无独立值) | 1 |
+| `highway` | 高速优先 | 0(v3 无独立值) | 1 |
+
+也可直接传 v3 数字。App 里的「大路优先」两个通道都没有对应值,未收录。
+免费档实测零过路费、全程避开高速,代价是用时明显变长(长途约多三成)。
 
 ## 未来用车时(v4/etd,纯 HTTP)
 
@@ -98,6 +119,10 @@ window._AMapSecurityConfig = {serviceHost: "https://m.amap.com/_AMapService"}
 (firsttime + i×interval)为准 —— 响应里的 starttime 是毫秒且
 存在偏移怪癖,不作展示来源。
 
+`--strategy cheap` / `strategy="cheap"`:免费路线(v4/etd 免费档,
+实测零过路费、全程避开高速;代价是用时明显变长,长途约多三成)。
+官方位掩码 16/17(不走高速)v4/etd 不认,传了等同默认策略。
+
 ### 模拟器改时钟(后备,--app)
 
 `AmapClient().nav_route(..., depart_at=...)` 走 Deep Link 页面代理
@@ -114,6 +139,6 @@ Web 客户端内置 `min_interval=2s`(H5 页面一次查询连发数个请求,
 
 ## 测试
 
-39 tests(真实响应夹具驱动:Web 驾车/公交/步行/地理编码 +
+42 tests(真实响应夹具驱动:Web 驾车/公交/步行/地理编码 +
 v4/etd 未来用车时 + App 抓包驾车短途 3 方案/长途 2117km 2 方案/
 公交 7 方案含跨城直达),mypy / pylint 全绿。
