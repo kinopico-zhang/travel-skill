@@ -10,12 +10,14 @@
 """
 
 from .client import (CDPProxy, CtripClient, CtripError, HttpProxy,
-                     RateLimitedError, HOME)
-from .models import (City, CookieEntry, DailyPrice, Fare, Flight, Segment,
+                     IntlNavProxy, RateLimitedError, HOME)
+from .models import (City, CookieEntry, DailyPrice, Fare, Flight,
+                     IntlFlight, IntlSearchResult, IntlSegment, Segment,
                      SearchResult, Train, TrainSearchResult, TrainSeat)
 
-__all__ = ["CDPProxy", "HttpProxy", "CtripClient", "CtripError",
-           "RateLimitedError",
+__all__ = ["CDPProxy", "HttpProxy", "IntlNavProxy", "CtripClient",
+           "CtripError", "RateLimitedError",
            "Flight", "Fare", "Segment", "SearchResult",
+           "IntlFlight", "IntlSegment", "IntlSearchResult",
            "Train", "TrainSeat", "TrainSearchResult",
            "City", "CookieEntry", "DailyPrice", "HOME"]

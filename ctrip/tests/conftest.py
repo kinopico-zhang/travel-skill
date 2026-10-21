@@ -39,3 +39,9 @@ def train_search_resp():
 def train_empty_resp():
     """真实响应:上海→月球,空结果(Ack=Success + 0 班,缺到达站码)。"""
     return load_fixture("train_empty.json")
+
+
+@pytest.fixture
+def intl_list_resp():
+    """真实响应:国际单程列表(soa2/14780)55 方案,均为一转。"""
+    return load_fixture("intl_list.json")

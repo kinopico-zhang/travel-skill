@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ctrip"
-version = "1.0.0"
-description = "Ctrip H5 (m.ctrip.com) flight API client via CDP page proxy: search, low-price calendar, city codes"
+version = "1.1.0"
+description = "Ctrip H5 (m.ctrip.com) flight/train API client: domestic list & calendar via pure HTTP, intl list via browser navigate channel"
 requires-python = ">=3.9"
 dependencies = ["pydantic>=2", "websocket-client"]
 

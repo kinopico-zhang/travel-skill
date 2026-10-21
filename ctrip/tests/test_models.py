@@ -1,6 +1,7 @@
 """models 解析测试:全部对着真实抓包夹具断言。"""
-from ctrip.models import (DailyPrice, Fare, Flight, SearchResult, Segment,
-                           Train, TrainSearchResult, TrainSeat)
+from ctrip.models import (DailyPrice, Fare, Flight, IntlSearchResult,
+                          SearchResult, Segment, Train, TrainSearchResult,
+                          TrainSeat)
 
 
 def test_parse_search(search_resp):
@@ -131,3 +132,42 @@ def test_train_seat_model():
     s = TrainSeat(seat_name="硬卧", price=455.5, bookable=False, inventory=0)
     assert not s.bookable and "[无票]" in str(s)
     assert "455.5" in str(s)
+
+
+# ------------------------------------------------------------------ intl
+def test_intl_parse(intl_list_resp):
+    """国际列表(14780):方案数/首方案价格时刻/直飞过滤。"""
+    r = IntlSearchResult.parse(intl_list_resp, org="SZX", dst="DPS",
+                               date="2026-10-22")
+    assert len(r) == 55 and len(r.direct()) == 0   # 该夹具航线全部一转
+    f = r.flights[0]
+    assert f.flight_no == "MU5342+MU5029"
+    assert f.stops == 1 and f.duration_min == 655
+    assert (f.dep_time, f.arr_time) == ("13:00", "23:55")
+    assert not f.arr_next_day
+    assert f.fare == 600 and f.tax == 857          # tax=税+燃油
+    assert f.total == 1457 and f.quantity == 9
+
+
+def test_intl_segment_fields(intl_list_resp):
+    """紧凑时刻 YYYYMMDDHHMMSS → HH:MM 与完整日期时间双格式。"""
+    seg = IntlSearchResult.parse(intl_list_resp, "SZX", "DPS",
+                                 "2026-10-22").flights[0].segments[0]
+    assert seg.carrier == "MU"
+    assert seg.dep_airport == "SZX" and seg.dep_terminal == "T3"
+    assert seg.arr_airport == "PVG" and seg.arr_terminal == "T1"
+    assert seg.dep_datetime == "2026-10-22 13:00"
+    assert seg.arr_datetime == "2026-10-22 15:25"
+    assert seg.duration_min == 145 and "330" in seg.aircraft
+
+
+def test_intl_helpers_and_summary(intl_list_resp):
+    r = IntlSearchResult.parse(intl_list_resp, "SZX", "DPS", "2026-10-22")
+    # 排序:先按中转次数,再按含税总价
+    assert r.sorted_by_price()[0].total <= r.sorted_by_price()[-1].total
+    assert r.cheapest().total == 1457
+    assert r.cheapest() is min(r, key=lambda x: x.total)
+    text = r.summary(top=3)
+    assert "共55方案(直飞0)" in text and "MU5342+MU5029" in text
+    # 无直飞时 --direct 只剩表头
+    assert r.summary(direct_only=True).count("\n") == 0

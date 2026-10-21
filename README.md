@@ -16,13 +16,17 @@
 | 包 | 模拟器 | 浏览器 | 登录 |
 |---|---|---|---|
 | `airchina` | 不需要 | 不需要 | 会员功能需要（短信验证码登录，会话保活守护）；现金低价日历免登录 |
-| `ctrip` | 不需要 | 不需要 | 不需要（查询走公共网关请求头，免登录） |
+| `ctrip` | 国内查询不需要；国际列表需要（14780 指纹无法离线复刻） | 同左 | 不需要（免登录） |
 | `amap` | 不需要 | 不需要 | 不需要 |
 | `fliggy` | 不需要 | 不需要 | 不需要（国内单程查询；国际票需登录） |
 
-后备通道（非默认，日常不用开）：`ctrip` 保留 CDP 页面代理链路（浏览器），
-`amap` 保留 Deep Link 页面代理链路（安卓模拟器 + mitmproxy）；
-两者仅在默认链路失效时兜底，不影响上表的零依赖结论。
+后备通道（非默认，日常不用开）：`ctrip` 国内列表保留 CDP 页面代理链路、
+`amap` 保留 Deep Link 页面代理链路（安卓模拟器 + mitmproxy），
+两者仅在默认链路失效时兜底。
+
+例外：`ctrip` 的**国际/港澳台航班列表**（`search_intl`，soa2/14780）没有
+直连通道 —— 请求 head 指纹（mystery/vid/sessionId）离线复刻必被 WAF 432，
+只能走模拟器浏览器 navigate 通道（免登录），详见 `ctrip/README.md`。
 
 ## 快速开始
 
@@ -41,7 +45,7 @@ python -m fliggy flights CAN PEK 2026-11-18 --direct # 单程直飞（免登录�
 | 包 | 子命令 |
 |---|---|
 | `airchina` | `award` 奖励客票 / `calendar` 低价日历 / `account` 账户概要 / `session` 会话提取 / `keepalive` 保活守护 |
-| `ctrip` | `train` 火车票车次 / `cookies` 登录态体检 |
+| `ctrip` | `train` 火车票车次 / `intl` 国际·港澳台单程列表 / `cookies` 登录态体检 |
 | `amap` | `route` 驾车 / `etd` 未来用时表 / `bus` 公交 / `walk` 步行 / `geo` 地理编码 / `check` 体检 |
 | `fliggy` | `flights` 单程航班列表 |
 
@@ -53,8 +57,8 @@ python -m fliggy flights CAN PEK 2026-11-18 --direct # 单程直飞（免登录�
 
 ## 工具链
 
-pytest 140 tests / mypy 0 errors / pylint 10.00
-（airchina 42 + ctrip 35 + amap 42 + fliggy 21；真实抓包夹具驱动，传输层 mock，不触网）。
+pytest 151 tests / mypy 0 errors / pylint 10.00
+（airchina 42 + ctrip 46 + amap 42 + fliggy 21；真实抓包夹具驱动，传输层 mock，不触网）。
 
 ## 注意
 

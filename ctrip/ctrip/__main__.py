@@ -3,6 +3,7 @@
 
     ctrip cookies                        查看 cookie 过期时间(登录态体检)
     ctrip train 上海 北京 2026-10-22      火车票车次查询(免登录)
+    ctrip intl SZX DPS 2027-05-01        国际/港澳台单程列表(需模拟器浏览器)
 """
 from __future__ import annotations
 
@@ -59,6 +60,17 @@ def cmd_train(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_intl(args: argparse.Namespace) -> int:
+    """国际/中国港澳台 单程列表(soa2/14780,navigate 驱动,免登录)。
+
+    需要模拟器浏览器开着且 adb forward tcp:9222(见 README「国际线」)。
+    """
+    from .client import CtripClient  # pylint: disable=import-outside-toplevel
+    r = CtripClient().search_intl(args.org, args.dst, args.date)
+    print(r.summary(top=args.top, direct_only=args.direct))
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     p = argparse.ArgumentParser(prog="ctrip", description="携程 H5 API 客户端")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -70,6 +82,13 @@ def main(argv: Optional[List[str]] = None) -> int:
     t.add_argument("date", nargs="?", default=None, help="YYYY-MM-DD,默认今天")
     t.add_argument("--student", action="store_true", help="学生票")
     t.set_defaults(fn=cmd_train)
+    i = sub.add_parser("intl", help="国际/港澳台 单程航班列表(需模拟器浏览器)")
+    i.add_argument("org", help="出发城市码,如 SZX")
+    i.add_argument("dst", help="到达城市码,如 DPS")
+    i.add_argument("date", help="YYYY-MM-DD")
+    i.add_argument("--direct", action="store_true", help="只看直飞")
+    i.add_argument("--top", type=int, default=20, help="最多显示条数,默认 20")
+    i.set_defaults(fn=cmd_intl)
     args = p.parse_args(argv)
     try:
         return int(args.fn(args))

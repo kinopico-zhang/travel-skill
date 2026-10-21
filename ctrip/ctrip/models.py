@@ -333,6 +333,160 @@ class TrainSearchResult(BaseModel):
         return "\n".join(lines)
 
 
+class IntlSegment(BaseModel):
+    """国际线一个航段(14780 响应,时刻为 YYYYMMDDHHMMSS 紧凑格式)。"""
+
+    flight_no: str = ""
+    carrier: str = ""
+    dep_city: str = ""
+    dep_airport: str = ""
+    dep_airport_name: str = ""
+    dep_terminal: str = ""
+    arr_city: str = ""
+    arr_airport: str = ""
+    arr_airport_name: str = ""
+    arr_terminal: str = ""
+    dep_time: str = ""             # "13:00"
+    arr_time: str = ""
+    dep_datetime: str = ""         # "2026-10-22 13:00"
+    arr_datetime: str = ""
+    duration_min: int = 0
+    aircraft: str = ""
+
+    @classmethod
+    def parse(cls, raw: Dict[str, Any]) -> "IntlSegment":
+        b = raw.get("basinfo") or {}
+        d = raw.get("dportinfo") or {}
+        a = raw.get("aportinfo") or {}
+        dt = raw.get("dateinfo") or {}
+        c = raw.get("craftinfo") or {}
+
+        def _t(s: str) -> str:
+            return f"{s[8:10]}:{s[10:12]}" if len(s) >= 12 else ""
+
+        def _dt(s: str) -> str:
+            return f"{s[0:4]}-{s[4:6]}-{s[6:8]} {s[8:10]}:{s[10:12]}" \
+                if len(s) >= 12 else ""
+
+        return cls(
+            flight_no=b.get("flgno") or "",
+            carrier=b.get("aircode") or "",
+            dep_city=d.get("city") or "",
+            dep_airport=d.get("aport") or "",
+            dep_airport_name=d.get("aportsname") or "",
+            dep_terminal=d.get("bsname") or "",
+            arr_city=a.get("city") or "",
+            arr_airport=a.get("aport") or "",
+            arr_airport_name=a.get("aportsname") or "",
+            arr_terminal=a.get("bsname") or "",
+            dep_time=_t(dt.get("ddate") or ""),
+            arr_time=_t(dt.get("adate") or ""),
+            dep_datetime=_dt(dt.get("ddate") or ""),
+            arr_datetime=_dt(dt.get("adate") or ""),
+            duration_min=dt.get("jtime") or 0,
+            aircraft=c.get("cname") or "",
+        )
+
+    def __str__(self) -> str:
+        return (f"{self.flight_no} {self.dep_airport}{self.dep_terminal} "
+                f"{self.dep_time}->{self.arr_time} {self.arr_airport}"
+                f"{self.arr_terminal}")
+
+
+class IntlFlight(BaseModel):
+    """国际线一个方案(可含中转多段)。total 为成人含税总价。"""
+
+    segments: List[IntlSegment] = Field(default_factory=list)
+    stops: int = 0
+    dep_time: str = ""
+    arr_time: str = ""
+    arr_next_day: bool = False
+    duration_min: int = 0
+    fare: int = 0                   # 票面
+    tax: int = 0                    # 税+燃油
+    total: int = 0                  # 含税总价
+    quantity: int = 0
+
+    @property
+    def flight_no(self) -> str:
+        return "+".join(s.flight_no for s in self.segments)
+
+    def __str__(self) -> str:
+        nxt = "+1" if self.arr_next_day else ""
+        return (f"{self.flight_no} {self.dep_time}->{self.arr_time}{nxt} "
+                f"历时{self.duration_min}分 "
+                f"¥{self.total}(票{self.fare}+税{self.tax}) 余{self.quantity}")
+
+    @classmethod
+    def parse(cls, raw: Dict[str, Any]) -> "IntlFlight":
+        flgs = raw.get("flgs") or []
+        segs = [IntlSegment.parse(g) for g in flgs if g.get("basinfo")]
+        price = None
+        for p in raw.get("policys") or []:
+            for q in p.get("prices") or []:
+                if q.get("psgtype") == 1:
+                    price = q
+                    break
+            if price:
+                break
+        fare = (price or {}).get("price") or 0
+        tax = ((price or {}).get("tax") or 0) + ((price or {}).get("fuel") or 0)
+        d0 = (segs[0].dep_datetime if segs else "")
+        a0 = (segs[-1].arr_datetime if segs else "")
+        return cls(
+            segments=segs,
+            stops=max(len(segs) - 1, 0),
+            dep_time=segs[0].dep_time if segs else "",
+            arr_time=segs[-1].arr_time if segs else "",
+            arr_next_day=(d0[:10] != a0[:10] if d0 and a0 else False),
+            duration_min=(raw.get("seginfo") or {}).get("durtion") or 0,
+            fare=fare, tax=tax, total=fare + tax,
+            quantity=(raw.get("policys") or [{}])[0].get("quantity") or 0,
+        )
+
+
+class IntlSearchResult(BaseModel):
+    """国际单程查询结果(soa2/14780)。total 含税口径,可直接比价。"""
+
+    org: str = ""
+    dst: str = ""
+    date: str = ""
+    flights: List[IntlFlight] = Field(default_factory=list)
+
+    @classmethod
+    def parse(cls, data: Dict[str, Any], org: str, dst: str,
+              date: str) -> "IntlSearchResult":
+        flights = [IntlFlight.parse(s) for s in data.get("segs") or []]
+        flights = [f for f in flights if f.segments]
+        return cls(org=org, dst=dst, date=date, flights=flights)
+
+    def __iter__(self) -> "Iterator[IntlFlight]":  # type: ignore[override]
+        return iter(self.flights)
+
+    def __len__(self) -> int:
+        return len(self.flights)
+
+    def __getitem__(self, i: int) -> IntlFlight:
+        return self.flights[i]
+
+    def direct(self) -> List[IntlFlight]:
+        return [f for f in self.flights if f.stops == 0]
+
+    def sorted_by_price(self) -> List[IntlFlight]:
+        return sorted(self.flights, key=lambda f: (f.stops, f.total))
+
+    def cheapest(self) -> Optional[IntlFlight]:
+        return min(self.flights, key=lambda f: f.total) if self.flights else None
+
+    def summary(self, top: int = 20, direct_only: bool = False) -> str:
+        pool = self.direct() if direct_only else self.sorted_by_price()
+        head = (f"{self.org}→{self.dst} {self.date}  共{len(self.flights)}方案"
+                f"(直飞{len(self.direct())})")
+        if not pool:
+            return head
+        return "\n".join([head] + [f"  {f}" for f in pool[:top]])
+
+
 class DailyPrice(BaseModel):
     """低价日历的一个日期。
 

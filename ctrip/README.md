@@ -1,5 +1,8 @@
 # ctrip — 携程机票/火车票查询 python 库（纯 HTTP 直连，零模拟器）
 
+v1.1.0：新增**国际/中国港澳台单程列表**（`search_intl`，soa2/14780）——该接口
+head 指纹（mystery/vid/sessionId）无法离线复刻，走模拟器浏览器 navigate 通道。
+
 v1.0.0：传输层从 CDP 页面代理升级为 **纯 HTTP 直连** —— App 网关头过 WAF，
 不再依赖 MuMu 模拟器/浏览器 tab。CDPProxy 保留为可选后备（登录态维护用）。
 
@@ -8,6 +11,8 @@ v1.0.0：传输层从 CDP 页面代理升级为 **纯 HTTP 直连** —— App �
 ```bash
 # 火车票车次查询（免登录；城市名或站名均可，日期缺省为今天）
 python -m ctrip train DEPART ARRIVE [DATE] [--student]
+# 国际/港澳台 单程航班列表（需模拟器浏览器，见「国际线」一节）
+python -m ctrip intl ORG DST DATE [--direct] [--top N]
 # 登录态体检（走 CDP，需要模拟器浏览器开着）
 python -m ctrip cookies
 ```
@@ -15,12 +20,15 @@ python -m ctrip cookies
 | 子命令 | 参数说明 |
 |---|---|
 | `train` | `DEPART`/`ARRIVE` 出发/到达城市名或站名；`DATE` 为 `YYYY-MM-DD`（缺省今天）；`--student` 学生票 |
+| `intl` | `ORG`/`DST` 出发/到达**城市码**（如 `SZX`/`DPS`）；`DATE` 为 `YYYY-MM-DD`；`--direct` 只看直飞；`--top N` 最多显示条数（默认 20） |
 | `cookies` | 无参数；列出 m.ctrip.com 全部 cookie 及过期时间，cticket 剩余天数 |
 
 ```bash
 python -m ctrip train 上海 北京 2026-11-20
 python -m ctrip train 上海虹桥 北京南                 # 日期缺省为今天
 python -m ctrip train 上海 北京 2026-11-20 --student
+python -m ctrip intl SZX DPS 2027-05-01              # 按含税价排序
+python -m ctrip intl SZX DPS 2027-05-01 --direct --top 5
 ```
 
 ## 为什么直连能过
@@ -71,16 +79,42 @@ for t in list(tr)[:3]:           # Train：车次/站名/时刻/历时/坐席价
 # CDP 后备通道（需要模拟器；列表 432 长期限流时换它）
 from ctrip import CDPProxy
 ct2 = CtripClient(proxy=CDPProxy())
+
+# 国际/中国港澳台 单程列表（需模拟器浏览器，见「国际线」一节）
+r = ct.search_intl("SZX", "DPS", "2027-05-01")
+print(r.summary())                          # 按中转数+含税价排序
+for f in r.direct():                        # 直飞方案
+    print(f.flight_no, f.dep_time, "->", f.arr_time,
+          f"¥{f.total}(票{f.fare}+税{f.tax}) 余{f.quantity}")
+    for s in f.segments:                    # IntlSegment：时刻/机场/航站楼/机型
+        print("   ", s)
 ```
 
 注意城市码不是机场码：北京=BJS、成都=CTU、西安=SIA、上海=SHA。
-测试 35 个（`pytest -q`），mypy/pylint 全绿。
+测试 46 个（`pytest -q`），mypy/pylint 全绿。
+
+## 国际线（14780）
+
+国际/中国港澳台列表走 **soa2/14780/listSearchForH5**，与国内 14488 是两套接口。
+它的 body 里 head 带服务端校验的指纹（mystery=base64(GUID)、vid、sessionId 等），
+**离线复刻必被 WAF 432，原样重放也 432（有重放检测）**——所以这条线
+没有纯 HTTP 直连，只能让浏览器自己发：
+
+- `IntlNavProxy`（CDP）navigate 到国际列表页 `interFirst?dcode=…&ddate=…`，
+  页面 JS 构造完整指纹的请求，再用 Network 域抓回响应体
+- 前置条件：MuMu 模拟器开着、Chrome 停在 m.ctrip.com、
+  `adb forward tcp:9222 localabstract:chrome_devtools_remote`
+- `CtripClient.search_intl(org, dst, date)` 默认自动建 `IntlNavProxy`，免登录
+- 价格口径：`IntlFlight.total` = 成人**含税总价**（票面+税+燃油），可直接比价；
+  与低价日历的 `DailyPrice.total`（totalPrice）同口径
+- 排序默认先中转数后含税价；`direct()` 取直飞
 
 ## 接口清单
 
 | 功能 | 端点 | 状态 |
 |---|---|---|
-| 航班列表 | `soa2/14488/flightListSearchForH5` | ✅ 直连（易限流） |
+| 航班列表（国内） | `soa2/14488/flightListSearchForH5` | ✅ 直连（易限流） |
+| 航班列表（国际/港澳台） | `soa2/14780/listSearchForH5` | ✅ navigate 通道（免登录，需模拟器） |
 | 火车票车次 | `soa2/14666/json/GetBookingByStationV3` | ✅ **免登录** |
 | 低价日历 | `soa2/15380/FlightIntlAndInlandLowestPriceSearch` | ✅（377 天，基本不限） |
 | 城市/机场模糊查询 | `soa2/19691/airportFuzzySearch` | ✅（基本不限） |
@@ -108,8 +142,10 @@ python -m ctrip cookies    # 体检（走 CDP；需要模拟器浏览器开着�
 
 ## 已知限制
 
-- 只封装了单程经济舱（seat=0）；往返/公务舱参数已摸清（seat/sgrade=1）但
-  未验证稳定性。
+- 国内 `search` 只封装了单程经济舱（seat=0）；往返/公务舱参数已摸清
+  （seat/sgrade=1）但未验证稳定性。国际 `search_intl` 同为单程经济舱。
+- 国际线翻页接口（listSearchNextForH5）未封装：单页返回全部方案
+  （实测 55 方案一次给全），暂无翻页需求。
 - SearchResult 按 policyinfo 解析多等级报价，`f.fares` 里含经济/超经/公务。
 - 列表响应尾部可能混有「邻近城市/日期推荐」条目（flight_no 为空但有真实
   报价，如邻近机场出发的替代方案），按需自行过滤 `f.flight_no`。

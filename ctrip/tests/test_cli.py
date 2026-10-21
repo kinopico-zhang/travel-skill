@@ -81,3 +81,39 @@ def test_cli_train(monkeypatch, capsys, train_search_resp):
     assert stub.calls == [("上海", "北京", "2026-10-22", False)]
     assert "共54班" in out and "G532" in out
     assert "06:31-12:18" in out and "5小时47分" in out
+
+
+class StubIntlClient:
+    """intl 子命令替身:记录参数,弹回夹具解析结果。"""
+
+    def __init__(self, resp):
+        from ctrip.models import IntlSearchResult
+        self.result = IntlSearchResult.parse(resp, "SZX", "DPS", "2027-05-01")
+        self.calls = []
+
+    def search_intl(self, org, dst, date):
+        self.calls.append((org, dst, date))
+        return self.result
+
+
+def test_cli_intl(monkeypatch, capsys, intl_list_resp):
+    import ctrip.client as client_mod
+    stub = StubIntlClient(intl_list_resp)
+    monkeypatch.setattr(client_mod, "CtripClient", lambda: stub)
+    rc = cli.main(["intl", "SZX", "DPS", "2027-05-01", "--top", "3"])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert stub.calls == [("SZX", "DPS", "2027-05-01")]
+    assert "共55方案(直飞0)" in out and "MU5342+MU5029" in out
+    assert "¥1457" in out
+
+
+def test_cli_intl_direct_only(monkeypatch, capsys, intl_list_resp):
+    """--direct:无直飞的航线只剩表头(默认 top=20 也不该出方案行)。"""
+    import ctrip.client as client_mod
+    stub = StubIntlClient(intl_list_resp)
+    monkeypatch.setattr(client_mod, "CtripClient", lambda: stub)
+    rc = cli.main(["intl", "SZX", "DPS", "2027-05-01", "--direct"])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert "共55方案(直飞0)" in out and "MU5342" not in out

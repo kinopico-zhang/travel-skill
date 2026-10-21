@@ -16,12 +16,14 @@ CDPProxy(模拟器浏览器页面代理)保留为可选传输,用于登录态维
 """
 from __future__ import annotations
 
+import base64
 import gzip
 import json
 import os
 import re
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 import uuid
 from typing import Any, Dict, List, Optional, Protocol
@@ -29,13 +31,22 @@ from typing import Any, Dict, List, Optional, Protocol
 import websocket
 
 from .cities import CITIES
-from .models import City, DailyPrice, SearchResult, TrainSearchResult
+from .models import (City, DailyPrice, IntlSearchResult, SearchResult,
+                     TrainSearchResult)
 
 CDP_HTTP = "http://127.0.0.1:9222"
 LIST_API = "/restapi/soa2/14488/flightListSearchForH5"
+INTL_LIST_API = "/restapi/soa2/14780/listSearchForH5"
 CALENDAR_API = "/restapi/soa2/15380/bjjson/FlightIntlAndInlandLowestPriceSearch"
 FUZZY_API = "/restapi/soa2/19691/airportFuzzySearch"
 TRAIN_API = "/restapi/soa2/14666/json/GetBookingByStationV3"
+
+# 国际列表页(浏览器 navigate 到此 URL,页面 JS 自行发完整指纹的
+# listSearchForH5 请求 —— 直连构造的 body 缺 head 指纹会被 WAF 432)。
+INTL_PAGE = ("https://m.ctrip.com/html5/flight/taro/interFirst?from=inner"
+             "&tripType=ONE_WAY&dcode={dc}&dcityName={dcn}"
+             "&acode={ac}&acityName={acn}"
+             "&ddate={dd}&seat=5&adult=1&child=0&baby=0")
 
 # tab 上必须停留的域(fetch 相对路径 + cookie 同源)
 HOME = "https://m.ctrip.com/html5/flight/taro/home?from=outer"
@@ -197,6 +208,61 @@ class CDPProxy:
                    payload: Dict[str, Any]) -> Dict[str, Any]:
         """在页面上下文 fetch,返回 dict;HTTP 非 200 时含 __http 键。"""
         return fetch_json_via(self, path, payload)
+
+
+class IntlNavProxy(CDPProxy):
+    """国际列表传输(navigate 驱动):跳到 interFirst 列表页,
+    用 CDP Network 域抓页面自己发的 listSearchForH5 响应。
+
+    页面 JS 构造的请求带完整 head 指纹(mystery/vid/sessionId),
+    直连复刻不了(WAF 432),所以国际线只能走浏览器通道。
+    需要模拟器浏览器停在 m.ctrip.com、adb forward tcp:9222。
+    """
+
+    def __init__(self, timeout: int = 45):
+        super().__init__()
+        self.nav_timeout = timeout
+
+    def _wait_body(self, api_path: str) -> Dict[str, Any]:
+        """等 Network 事件流里 api_path 响应完成,取 body 解析。"""
+        assert self.ws is not None
+        request_id: Optional[str] = None
+        deadline = time.time() + self.nav_timeout
+        while time.time() < deadline:
+            try:
+                msg = json.loads(self.ws.recv())
+            except websocket.WebSocketTimeoutException as e:
+                raise CtripError(f"等待 {api_path.split('/')[-1]} 超时") from e
+            if msg.get("id"):          # 旧 call 的响应,忽略
+                continue
+            m, params = msg.get("method", ""), msg.get("params", {})
+            if m == "Network.responseReceived" and api_path in params.get(
+                    "response", {}).get("url", ""):
+                request_id = params["requestId"]
+            elif (m == "Network.loadingFinished" and request_id
+                    and params.get("requestId") == request_id):
+                body = self.call("Network.getResponseBody",
+                                 {"requestId": request_id})
+                raw = body.get("body") or ""
+                if body.get("base64Encoded"):
+                    raw = base64.b64decode(raw).decode("utf-8", "replace")
+                data: Dict[str, Any] = json.loads(raw)
+                return data
+        raise CtripError(f"navigate 后未捕获 {api_path.split('/')[-1]} "
+                         f"({self.nav_timeout}s)")
+
+    def fetch_json(self, path: str,
+                   payload: Dict[str, Any]) -> Dict[str, Any]:
+        """跳列表页抓响应。payload 只用 segs[0](dcode/acode/ddate)。"""
+        seg = (payload.get("segs") or [{}])[0]
+        names = payload.get("__names") or {}
+        url = INTL_PAGE.format(
+            dc=seg.get("dcode", ""), dcn=urllib.parse.quote(names.get("dc", "")),
+            ac=seg.get("acode", ""), acn=urllib.parse.quote(names.get("ac", "")),
+            dd=seg.get("ddate", ""))
+        self.call("Network.enable", {})
+        self.call("Page.navigate", {"url": url})
+        return self._wait_body(path)
 
 
 class EvalProxy(Protocol):
@@ -373,6 +439,43 @@ class CtripClient:
                 out.append(DailyPrice(date=d, price=p.get("price"),
                                       total=p.get("totalPrice")))
         return sorted(out, key=lambda x: x.date)
+
+    # ---------- 国际线 ----------
+
+    def search_intl(self, org: str, dst: str, date: str,
+                    proxy: Optional["IntlNavProxy"] = None) -> IntlSearchResult:
+        """国际/中国港澳台 单程经济舱(14780)。
+
+        默认走 IntlNavProxy(模拟器浏览器 navigate 通道,免登录);
+        页面自己的请求带完整指纹,直连构造会被 WAF 432。
+        """
+        org_city, dst_city = self.city(org), self.city(dst)
+        if proxy is None:
+            proxy = IntlNavProxy()
+        payload: Dict[str, Any] = {
+            "segs": [{"dcode": org_city.code, "acode": dst_city.code,
+                      "ddate": date}],
+            "tripType": 1,
+            "psglst": [{"psgtype": 1, "psgcnt": 1},
+                       {"psgtype": 2, "psgcnt": 0},
+                       {"psgtype": 3, "psgcnt": 0}],
+            "segno": 1, "grade": 4,
+            "sortinfo": {"idx": 1, "size": 0, "ordby": 105,
+                         "meyordby": 2, "dir": 2},
+            "polid": "", "prdid": "",
+            # IntlNavProxy 额外要的中文名(仅 URL 展示用)
+            "__names": {"dc": org_city.name, "ac": dst_city.name},
+        }
+        self._throttle()
+        data = proxy.fetch_json(INTL_LIST_API, payload)
+        ack = (data.get("ResponseStatus") or {}).get("Ack")
+        if ack == "Failure":
+            errs = (data.get("ResponseStatus") or {}).get("Errors") or [{}]
+            raise CtripError(f"国际列表查询失败: "
+                             f"{errs[0].get('ErrorCode')} "
+                             f"{errs[0].get('Message', '')[:80]}")
+        return IntlSearchResult.parse(data, org=org_city.code,
+                                      dst=dst_city.code, date=date)
 
     # ---------- 火车票 ----------
 
