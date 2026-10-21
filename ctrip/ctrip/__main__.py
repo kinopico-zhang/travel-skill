@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """命令行入口:python -m ctrip <子命令>
 
-    ctrip cookies          查看浏览器里携程 cookie 的过期时间(登录态体检)
+    ctrip cookies                        查看 cookie 过期时间(登录态体检)
+    ctrip train 上海 北京 2026-10-22      火车票车次查询(免登录)
 """
 from __future__ import annotations
 
@@ -48,11 +49,27 @@ def cmd_cookies(_args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_train(args: argparse.Namespace) -> int:
+    """火车票车次查询(soa2/14666,免登录;需模拟器页面代理)。"""
+    from .client import CtripClient  # pylint: disable=import-outside-toplevel
+    date = args.date or time.strftime("%Y-%m-%d")
+    r = CtripClient().train_search(args.depart, args.arrive, date,
+                                   student=args.student)
+    print(r.summary())
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     p = argparse.ArgumentParser(prog="ctrip", description="携程 H5 API 客户端")
     sub = p.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("cookies", help="查看 cookie 过期时间(登录态体检)")
     c.set_defaults(fn=cmd_cookies)
+    t = sub.add_parser("train", help="火车票车次查询(免登录)")
+    t.add_argument("depart", help="出发城市/站名,如 上海 或 上海虹桥")
+    t.add_argument("arrive", help="到达城市/站名")
+    t.add_argument("date", nargs="?", default=None, help="YYYY-MM-DD,默认今天")
+    t.add_argument("--student", action="store_true", help="学生票")
+    t.set_defaults(fn=cmd_train)
     args = p.parse_args(argv)
     try:
         return int(args.fn(args))

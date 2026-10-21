@@ -1,0 +1,31 @@
+{
+ "ResponseStatus": {
+  "Timestamp": "/Date(1792552193666+0800)/",
+  "Ack": "Success",
+  "Errors": [],
+  "Extension": [
+   {
+    "Id": "app_cat_id",
+    "Value": "100025527-0a2ccd53-497931-632800"
+   },
+   {
+    "Id": "CLOGGING_TRACE_ID",
+    "Value": "5509933267962550264"
+   },
+   {
+    "Id": "RootMessageId",
+    "Value": "100025527-0a2ccd53-497931-632795"
+   }
+  ]
+ },
+ "ResponseBody": {
+  "SearchDepartStation": "上海",
+  "SearchArriveStation": "月球",
+  "SearchDepartStationCode": "SHH",
+  "ChineseDepartStation": "上海",
+  "TrainInfoList": []
+ },
+ "IsRealTicket": false,
+ "IsNeedReturnData": false,
+ "IsHongKongTrainOpen": false
+}

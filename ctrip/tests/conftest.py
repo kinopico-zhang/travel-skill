@@ -27,3 +27,15 @@ def calendar_resp():
 def fuzzy_resp():
     """真实响应:airportFuzzySearch(丽江 cityId=37)。"""
     return load_fixture("fuzzy.json")
+
+
+@pytest.fixture
+def train_search_resp():
+    """真实响应:上海→北京 2026-10-22,54 班(含 G/D/C 各席别)。"""
+    return load_fixture("train_search.json")
+
+
+@pytest.fixture
+def train_empty_resp():
+    """真实响应:上海→月球,空结果(Ack=Success + 0 班,缺到达站码)。"""
+    return load_fixture("train_empty.json")

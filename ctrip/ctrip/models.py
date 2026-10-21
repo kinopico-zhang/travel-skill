@@ -217,6 +217,122 @@ class SearchResult(BaseModel):
         return "\n".join(lines)
 
 
+class TrainSeat(BaseModel):
+    """一种坐席的票价与余票。"""
+
+    seat_name: str               # 二等座 / 一等座 / 商务座 / 硬卧 / 无座...
+    price: float
+    bookable: bool
+    inventory: int               # 余票张数;响应里 99 表示充足
+    discount: Optional[float] = None
+
+    @classmethod
+    def parse(cls, raw: Dict[str, Any]) -> "TrainSeat":
+        return cls(
+            seat_name=raw.get("SeatName") or "",
+            price=raw.get("SeatPrice") or 0.0,
+            bookable=bool(raw.get("SeatBookable")),
+            inventory=raw.get("SeatInventory") or 0,
+            discount=raw.get("DiscountRate"),
+        )
+
+    def __str__(self) -> str:
+        state = "" if self.bookable else "[无票]"
+        inv = f"({self.inventory}张)" if 0 < self.inventory < 99 else ""
+        return f"{self.seat_name}¥{self.price:g}{state}{inv}"
+
+
+class Train(BaseModel):
+    """一趟车次。"""
+
+    train_number: str            # G532
+    depart_station: str          # 上海虹桥
+    arrive_station: str
+    depart_code: str             # AOH(站电报码)
+    arrive_code: str
+    depart_time: str             # 06:31
+    arrive_time: str             # 12:18
+    run_time_minutes: int
+    bookable: bool
+    seats: List[TrainSeat] = Field(default_factory=list)
+
+    @classmethod
+    def parse(cls, raw: Dict[str, Any]) -> "Train":
+        return cls(
+            train_number=raw.get("TrainNumber") or "",
+            depart_station=raw.get("DepartStation") or "",
+            arrive_station=raw.get("ArriveStation") or "",
+            depart_code=raw.get("DepartCode") or "",
+            arrive_code=raw.get("ArriveCode") or "",
+            depart_time=raw.get("DepartTime") or "",
+            arrive_time=raw.get("ArriveTime") or "",
+            run_time_minutes=raw.get("RunTime") or 0,
+            bookable=bool(raw.get("IsBookable")),
+            seats=[TrainSeat.parse(s) for s in raw.get("SeatList") or []
+                   if s.get("SeatName")],
+        )
+
+    @property
+    def duration(self) -> str:
+        """历时文本:347 → '5小时47分'。"""
+        return f"{self.run_time_minutes // 60}小时{self.run_time_minutes % 60}分"
+
+    @property
+    def cheapest(self) -> Optional[TrainSeat]:
+        """可订坐席中最低价者(无可订返回 None)。"""
+        ok = [s for s in self.seats if s.bookable and s.price > 0]
+        return min(ok, key=lambda s: s.price) if ok else None
+
+    def __str__(self) -> str:
+        low = self.cheapest
+        return (f"{self.train_number:6}{self.depart_station}→{self.arrive_station}"
+                f" {self.depart_time}-{self.arrive_time} {self.duration} "
+                + (str(low) if low else "无可订坐席"))
+
+
+class TrainSearchResult(BaseModel):
+    """train_search() 的返回:可迭代(迭代出 Train)、len()。
+
+    与 SearchResult 一样必须显式覆盖 __iter__(pydantic 基类迭代字段对)。
+    """
+
+    depart: str                  # 上海(查询词,城市或站名)
+    arrive: str
+    depart_code: str             # SHH(城市电报码;空线路可能缺键)
+    arrive_code: str
+    trains: List[Train] = Field(default_factory=list)
+
+    @classmethod
+    def parse(cls, data: Dict[str, Any]) -> "TrainSearchResult":
+        rb = data.get("ResponseBody") or {}
+        return cls(
+            depart=rb.get("SearchDepartStation") or "",
+            arrive=rb.get("SearchArriveStation") or "",
+            depart_code=rb.get("SearchDepartStationCode") or "",
+            arrive_code=rb.get("SearchArriveStationCode") or "",
+            trains=[Train.parse(t) for t in rb.get("TrainInfoList") or []],
+        )
+
+    def __iter__(self) -> "Iterator[Train]":  # type: ignore[override]
+        return iter(self.trains)
+
+    def __len__(self) -> int:
+        return len(self.trains)
+
+    def __bool__(self) -> bool:
+        return bool(self.trains)
+
+    def bookable(self) -> List[Train]:
+        """可预订(且至少有一种可订坐席)的车次。"""
+        return [t for t in self.trains if t.bookable and t.cheapest]
+
+    def summary(self) -> str:
+        lines = [f"{self.depart}→{self.arrive} {self.depart_code}-{self.arrive_code}"
+                 f"  共{len(self)}班(可订{len(self.bookable())}班)"]
+        lines.extend(f"  {t}" for t in self.trains)
+        return "\n".join(lines)
+
+
 class DailyPrice(BaseModel):
     """低价日历的一个日期:最低票价(国内含税,国际为不含税票面)。"""
 

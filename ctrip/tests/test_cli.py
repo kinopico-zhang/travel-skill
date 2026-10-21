@@ -56,3 +56,28 @@ def test_cli_cookies_no_ticket(monkeypatch, capsys):
     assert rc == 0
     assert "未发现 cticket" in out
     assert "机票查询不受影响" in out
+
+
+class StubTrainClient:
+    """train 子命令替身:记录参数,弹回夹具解析结果。"""
+
+    def __init__(self, resp):
+        from ctrip.models import TrainSearchResult
+        self.result = TrainSearchResult.parse(resp)
+        self.calls = []
+
+    def train_search(self, depart, arrive, date, student=False):
+        self.calls.append((depart, arrive, date, student))
+        return self.result
+
+
+def test_cli_train(monkeypatch, capsys, train_search_resp):
+    import ctrip.client as client_mod
+    stub = StubTrainClient(train_search_resp)
+    monkeypatch.setattr(client_mod, "CtripClient", lambda: stub)
+    rc = cli.main(["train", "上海", "北京", "2026-10-22"])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert stub.calls == [("上海", "北京", "2026-10-22", False)]
+    assert "共54班" in out and "G532" in out
+    assert "06:31-12:18" in out and "5小时47分" in out

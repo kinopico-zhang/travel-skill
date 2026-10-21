@@ -1,4 +1,4 @@
-# ctrip — 携程 H5 机票查询 python 库
+# ctrip — 携程 H5 机票/火车票查询 python 库
 
 CDP 页面代理模式:所有请求在模拟器浏览器的 `m.ctrip.com` 页面上下文里发出,
 与真人操作完全同栈,继承登录态与风控上下文。
@@ -40,6 +40,13 @@ print(cal[0].date, cal[0].price)
 # 城市码(内置 36 城,未知自动 fuzzySearch 并缓存 ~/.ctrip_cities.json)
 c = ct.city("KHN")               # City(code="KHN", name="南昌", id="376")
 print(c.name, c.id)
+
+# 火车票车次查询(免登录;城市名或站名均可)
+tr = ct.train_search("上海", "北京", "2026-10-22")
+print(len(tr), "班,可订", len(tr.bookable()))
+for t in list(tr)[:3]:           # Train: 车次/站名/时刻/历时/坐席价格
+    print(t.train_number, t.depart_station, "→", t.arrive_station,
+          t.depart_time, "-", t.arrive_time, t.duration, t.cheapest)
 ```
 
 注意城市码不是机场码:北京=BJS、成都=CTU、西安=SIA、上海=SHA。
@@ -50,6 +57,7 @@ print(c.name, c.id)
 | 功能 | 端点 | 状态 |
 |---|---|---|
 | 航班列表 | `soa2/14488/flightListSearchForH5` | ✅(易限流) |
+| 火车票车次 | `soa2/14666/json/GetBookingByStationV3` | ✅ **免登录** |
 | 低价日历 | `soa2/15380/FlightIntlAndInlandLowestPriceSearch` | ✅(377天,基本不限) |
 | 城市/机场模糊查询 | `soa2/19691/airportFuzzySearch` | ✅(基本不限) |
 | 登录-发短信 | `soa2/24863/sendVerifyCodeByMobilePhone` | 已抓包(见 `~/travel-skill/ctrip/scripts/ctrip_login.py`) |

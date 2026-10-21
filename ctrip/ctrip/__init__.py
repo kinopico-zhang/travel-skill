@@ -12,8 +12,9 @@
 from .client import (CDPProxy, CtripClient, CtripError, RateLimitedError,
                      HOME)
 from .models import (City, CookieEntry, DailyPrice, Fare, Flight, Segment,
-                     SearchResult)
+                     SearchResult, Train, TrainSearchResult, TrainSeat)
 
 __all__ = ["CDPProxy", "CtripClient", "CtripError", "RateLimitedError",
            "Flight", "Fare", "Segment", "SearchResult",
+           "Train", "TrainSeat", "TrainSearchResult",
            "City", "CookieEntry", "DailyPrice", "HOME"]

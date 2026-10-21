@@ -1,5 +1,6 @@
 """models 解析测试:全部对着真实抓包夹具断言。"""
-from ctrip.models import DailyPrice, Fare, Flight, SearchResult, Segment
+from ctrip.models import (DailyPrice, Fare, Flight, SearchResult, Segment,
+                           Train, TrainSearchResult, TrainSeat)
 
 
 def test_parse_search(search_resp):
@@ -90,3 +91,41 @@ def test_daily_price():
     p = DailyPrice(date="2026-10-19", price=1610)
     assert p.price == 1610
     assert DailyPrice(date="d", price="1610").price == 1610  # 字符串也收
+
+
+# ------------------------------------------------------------------ 火车票
+def test_train_parse(train_search_resp):
+    r = TrainSearchResult.parse(train_search_resp)
+    assert len(r) == 54
+    assert r.depart == "上海" and r.arrive == "北京"
+    assert r.depart_code == "SHH" and r.arrive_code == "BJP"
+    g = r.trains[0]
+    assert g.train_number == "G532"
+    assert g.depart_station == "上海虹桥" and g.arrive_station == "北京南"
+    assert g.depart_code == "AOH" and g.arrive_code == "VNP"
+    assert g.depart_time == "06:31" and g.arrive_time == "12:18"
+    assert g.run_time_minutes == 347
+    assert g.duration == "5小时47分"
+    low = g.cheapest
+    assert low is not None
+    assert low.seat_name == "二等座" and low.price == 576.0
+    assert low.bookable and low.inventory == 99
+    # 迭代语义:迭代出 Train 而非字段对
+    trains = list(r)
+    assert len(trains) == 54 and isinstance(trains[0], Train)
+    assert "共54班" in r.summary()
+
+
+def test_train_parse_empty(train_empty_resp):
+    """空线路(上海→月球):Ack=Success + 0 班,缺到达站码,不抛错。"""
+    r = TrainSearchResult.parse(train_empty_resp)
+    assert not r and len(r) == 0
+    assert r.depart == "上海" and r.arrive == "月球"
+    assert r.arrive_code == ""
+    assert r.summary() and r.bookable() == []
+
+
+def test_train_seat_model():
+    s = TrainSeat(seat_name="硬卧", price=455.5, bookable=False, inventory=0)
+    assert not s.bookable and "[无票]" in str(s)
+    assert "455.5" in str(s)

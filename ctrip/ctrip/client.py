@@ -21,12 +21,13 @@ from typing import Any, Dict, List, Optional, Protocol
 import websocket
 
 from .cities import CITIES
-from .models import City, DailyPrice, SearchResult
+from .models import City, DailyPrice, SearchResult, TrainSearchResult
 
 CDP_HTTP = "http://127.0.0.1:9222"
 LIST_API = "/restapi/soa2/14488/flightListSearchForH5"
 CALENDAR_API = "/restapi/soa2/15380/bjjson/FlightIntlAndInlandLowestPriceSearch"
 FUZZY_API = "/restapi/soa2/19691/airportFuzzySearch"
+TRAIN_API = "/restapi/soa2/14666/json/GetBookingByStationV3"
 
 # tab 上必须停留的域(fetch 相对路径 + cookie 同源)
 HOME = "https://m.ctrip.com/html5/flight/taro/home?from=outer"
@@ -292,3 +293,23 @@ class CtripClient:
                 d = time.strftime("%Y-%m-%d", time.gmtime(ts))
                 out.append(DailyPrice(date=d, price=p.get("price")))
         return sorted(out, key=lambda x: x.date)
+
+    # ---------- 火车票 ----------
+
+    def train_search(self, depart: str, arrive: str, date: str,
+                     student: bool = False) -> TrainSearchResult:
+        """火车票车次查询(免登录)。
+
+        depart/arrive 用中文城市名或站名均可(如 "上海" / "上海虹桥"),
+        服务端按城市级搜索。无此线路/无票时返回空结果(Ack=Success + 0 班),
+        不抛错 —— 用 `if not r:` 判空。
+        """
+        payload: Dict[str, Any] = {
+            "contentType": "json", "channel": "H5",
+            "DepartStation": depart, "ArriveStation": arrive,
+            "DepartDate": date, "Student": student,
+            "ChannelName": "ctrip.h5", "c_sec": True,
+        }
+        self._throttle()
+        data = self.proxy.fetch_json(TRAIN_API, payload)
+        return TrainSearchResult.parse(data)

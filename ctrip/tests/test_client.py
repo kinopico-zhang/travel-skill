@@ -6,8 +6,10 @@ from typing import Any, Dict, List
 
 import pytest
 
-from ctrip import CtripClient, CtripError, RateLimitedError
-from ctrip.client import CALENDAR_API, FUZZY_API, LIST_API, fetch_json_via
+from ctrip import CtripClient, CtripError, RateLimitedError, \
+    TrainSearchResult
+from ctrip.client import (CALENDAR_API, FUZZY_API, LIST_API, TRAIN_API,
+                          fetch_json_via)
 from ctrip.models import City, DailyPrice, SearchResult
 
 
@@ -182,3 +184,31 @@ def test_fetch_json_reconnects_once(monkeypatch):
     assert out == {"ok": 1}
     assert len(p.js_seen) == 2
     assert p.connects == 1                    # 重连过一次
+
+
+# ------------------------------------------------------------------ train
+def test_train_search_request_shape(tmp_path, train_search_resp):
+    fake = FakeProxy([train_search_resp, train_search_resp])
+    ct = CtripClient(proxy=fake, city_cache=str(tmp_path / "c.json"))
+    r = ct.train_search("上海", "北京", "2026-10-22")
+    assert isinstance(r, TrainSearchResult) and len(r) == 54
+    call = fake.calls[0]
+    assert call["path"] == TRAIN_API
+    assert call["payload"]["DepartStation"] == "上海"
+    assert call["payload"]["ArriveStation"] == "北京"
+    assert call["payload"]["DepartDate"] == "2026-10-22"
+    assert call["payload"]["Student"] is False
+    assert call["payload"]["ChannelName"] == "ctrip.h5"
+    assert call["payload"]["c_sec"] is True
+    # head 由 fetch_json_via 注入,payload 里不带
+    assert "head" not in call["payload"]
+    ct.train_search("上海", "北京", "2026-10-22", student=True)
+    assert fake.calls[1]["payload"]["Student"] is True
+
+
+def test_train_search_empty_route(tmp_path, train_empty_resp):
+    """不存在的线路返回空结果而不是抛错。"""
+    fake = FakeProxy([train_empty_resp])
+    ct = CtripClient(proxy=fake, city_cache=str(tmp_path / "c.json"))
+    r = ct.train_search("上海", "月球", "2026-10-22")
+    assert not r and len(r) == 0
