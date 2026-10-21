@@ -1,99 +1,96 @@
-# amap — 高德导航 App API
+# amap — 高德路线查询(纯 Python)
 
-驾车与公交路线查询(距离/历时/过路费/途经道路/换乘方案),
-数据来自高德 Android App 的真实导航接口:
-驾车 `nvg.amap.com/ws/transfer/navigation/auto/`,
-公交 `nvg.amap.com/ws/bus/plan/new_integrate`。
-
-## 模式:Deep Link 页面代理
-
-高德 App 的请求体是阿里 securityguard 加密的(`in=` 参数 + 密文 body),
-自主构造不现实;但**响应不加密**(gzip → zstd → protobuf),完全可读。
-因此本库让模拟器里的 App 替我们发起查询,响应从抓包层解析:
-
-```
-AmapClient.nav_route() ──adb──▶ amapuri://route/plan Deep Link
-                                    │ 高德 App 生成加密请求(真实用户栈)
-                                    ▼
-                          mitmproxy 捕获 nvg 响应
-                                    ▼
-                       gzip → zstd → protobuf → NavResult
-```
-
-## 前提(一次性配好)
-
-1. MuMu 模拟器开着,高德已安装并同意过隐私政策(不登录也能导航);
-2. `mitmdump -w /tmp/amap.flows --listen-host 0.0.0.0 --listen-port 8080 --set block_global=false`;
-3. 模拟器 `settings put global http_proxy <本机IP>:8080`,且系统 CA 区
-   信任 mitmproxy CA(tmpfs 覆盖法,详见 didi 抓包笔记);
-4. **关键**:模拟器内 iptables 掐直连,否则高德 HTTPDNS 解析后直连绕过代理:
-   ```
-   iptables -A OUTPUT -p tcp -d 192.168.0.0/16 -j ACCEPT
-   iptables -A OUTPUT -p tcp -d 10.0.2.0/24 -j ACCEPT
-   iptables -A OUTPUT -p tcp -j DROP
-   ```
-   模拟器重启后 3、4 需重做;掐直连后 App 启动变慢(约 90s)属正常。
-
-## 用法
+驾车/公交/步行路线与地理编码查询,默认走 **Web 客户端**:
+直调高德 H5(m.amap.com)的服务代理接口,纯 HTTP、零模拟器依赖。
 
 ```bash
-uv pip install -e ./amap --extra capture     # pydantic + mitmproxy + zstandard
-python -m amap check                         # 链路体检
+pip install -e ./amap
 python -m amap route 22.9208 113.8903 松山湖 23.1066 113.3245 广州塔
 python -m amap bus  22.9208 113.8903 松山湖 23.1066 113.3245 广州塔
-python -m amap route … --depart 2026-10-22T08:00   # 未来出发时刻
+python -m amap walk 22.9208 113.8903 松山湖 22.9250 113.8950 松山湖北
+python -m amap geo   广州塔
 ```
 
 ```
-松山湖→广州塔(drive) 共3条方案
-  方案1: 82公里 1小时34分 过路费¥25
-  方案2: 89公里 1小时48分
-  方案3: 84公里 1小时35分 过路费¥30
-最快方案途经: G4京港澳高速 → 鹤洲立交 → G2518深岑高速 → …
+松山湖→广州塔(drive) 87公里 1小时33分 过路费¥77
+最快方案途经: 沁园路 → 新城路 → G94珠三角环线高速 → …
 
-松山湖→广州塔(bus) 共5条方案
-  2小时48分 步行3.4km 费用少  轨道交通1号线(梅塘--东莞西站)→城际(惠州北--番禺)→地铁3号线(海傍--天河客运站)
-  2小时33分 ¥34.8 最快
-  2小时41分 ¥46 火车直达
+松山湖→广州塔(bus) 共2条方案
+  3小时3分 步行1.787km ¥9  343路(散裂中子源--松山湖北站微枢纽)→城际(惠州北--番禺)→地铁3号线(海傍--天河客运站)
+  2小时51分 步行3.19km ¥12  轨道交通1号线(梅塘--东莞西站)→城际(惠州北--番禺)→地铁3号线(海傍--天河客运站)
 ```
 
 Python 侧:
 
 ```python
-from amap import AmapClient
-am = AmapClient()
-r = am.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
-best = r.best()          # 时间最短方案
+from amap import WebClient
+w = WebClient()
+r = w.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
+best = r.best()                     # 时间最短方案
 best.distance_km, best.duration_s, best.toll_yuan
 
-b = am.bus_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
-b.best().legs            # 换乘段:线路名/上下车站/途经站数/班距
+b = w.bus_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
+b.best().legs                       # 换乘段:线路名/上下车站/途经站数
+
+g = w.geocode("广州塔")             # 地名 → 坐标列表
 ```
 
 坐标为 GCJ-02(高德坐标系);起终点名仅用于展示。
-步行/骑行的响应端点(`walkcloud`)未解析,暂不支持。
 
-## 未来用时(depart_at)
+## Web 客户端原理
+
+高德官网 JS API 有两种接法:直连 `restapi.amap.com` 需要
+key + 安全密钥(jscode)成对签名;或者配服务代理 ——
+m.amap.com(H5 版)页面源码里就是后者:
+
+```js
+window._AMapSecurityConfig = {serviceHost: "https://m.amap.com/_AMapService"}
+```
+
+浏览器里的所有查询都经这个代理转发,密钥由 m.amap.com 服务端代持。
+所以带上 H5 页面公开的 JS key、`platform=JS` 参数与 `Referer: https://m.amap.com/`
+即可直调 `https://m.amap.com/_AMapService/v3/...`,与在手机浏览器里
+用 m.amap.com 查路线完全等价。高德 App native 接口(`in=` 签名 + 密文 body)
+在这里不存在 —— 这是全链路里唯一不需要模拟器的入口。
+
+可用端点:驾车 v3(每步道路名含市政路/过路费/打车参考价)、
+公交 v3(方案/换乘段/票价/步行,含城际铁路与地铁,**city/cityd
+城市参数可不传**,跨城查询服务端按坐标识别)、步行 v3、地理编码 v3。
+不可用:骑行(代理未开放)、逆地理 regeo(返回滑块验证页)。
+
+驾车策略 `--strategy`:0 速度最快(默认)/ 1 费用最少 / 2 距离最短 /
+32 默认;与 App 侧一次返回多方案不同,Web 版一次查询一个策略,
+想比较就换 strategy 再查。
+
+## 未来用时(depart_at,可选 App 模式)
+
+Web 版查的是"现在出发"的路线,无未来用时。要查未来出发时刻的
+预测,仍走 Deep Link 页面代理(需安卓模拟器):
+
+```python
+from amap import AmapClient
+from datetime import datetime
+r = AmapClient().nav_route(
+    22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔",
+    depart_at=datetime(2026, 10, 22, 8, 0))
+```
 
 高德 Deep Link 无出发时间参数,UI 时间选择器是自绘弹窗点不开;
 唯一入口是把**模拟器系统时间**改到目标时刻再触发查询,App 即以
 该时刻向服务端请求预测(实测同一秒级对照,方案集按绝对时刻完全重算)。
-
-```python
-from datetime import datetime
-r = am.nav_route(…, depart_at=datetime(2026, 10, 22, 8, 0))
-```
-
-查询完自动恢复真实时间(auto_time=1)。注意:改时间是全局副作用,
-模拟器上其他 App 也会感知跳变(开屏广告重弹、推送风暴),**偶发可用,
-勿高频**,两次之间至少隔几分钟。
+查询完自动恢复真实时间。注意:改时间是全局副作用,模拟器上其他
+App 也会感知跳变(开屏广告重弹、推送风暴),**偶发可用,勿高频**,
+两次之间至少隔几分钟。模拟器侧的抓包配置见 docstring
+(`amap/capture.py`,mitmproxy + iptables 掐直连)。
 
 ## 节流
 
-内置 `min_interval=8s`:导航查询远重于网页查询,保持人类节奏,
-勿调低。查询由真实 App 发出,与手动操作无差异,但高频仍可能触发风控。
+Web 客户端内置 `min_interval=2s`(H5 页面一次查询连发数个请求,
+2s 已明显保守于人手点按);App 客户端 `min_interval=8s`
+(导航查询更重)。保持人类节奏,勿调低,高频可能触发风控。
 
 ## 测试
 
-23 tests(真实抓包夹具驱动:驾车短途 3 方案 / 长途 2117km 2 方案 /
-公交 7 方案含跨城直达),mypy / pylint 全绿。
+33 tests(真实响应夹具驱动:Web 驾车/公交/步行/地理编码 +
+App 抓包驾车短途 3 方案/长途 2117km 2 方案/公交 7 方案含跨城直达),
+mypy / pylint 全绿。

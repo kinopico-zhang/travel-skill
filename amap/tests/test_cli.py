@@ -1,5 +1,5 @@
 # pylint: disable=protected-access,redefined-outer-name,unused-argument
-"""CLI 测试:mock AmapClient,不触网。"""
+"""CLI 测试:mock 客户端,不触网。"""
 from datetime import datetime
 
 import pytest
@@ -24,31 +24,44 @@ class FakeBusResult:
     """替身公交结果。"""
 
     def summary(self):
-        return "松山湖→广州塔(bus) 共7条方案\n  2小时50分 步行3.4km 费用少"
+        return "松山湖→广州塔(bus) 共5条方案\n  2小时48分 步行3.4km 费用少"
 
     def best(self):
         return None
 
 
-class FakeClient:
-    """替身客户端,记录 nav_route/bus_route 参数。"""
+class FakeWebClient:
+    """替身 Web 客户端,记录 nav_route/bus_route 参数。"""
 
     def __init__(self):
         self.kwargs = None
         self.bus_kwargs = None
 
+    def nav_route(self, slat, slon, sname, dlat, dlon, dname, strategy=0):
+        self.kwargs = (slat, slon, sname, dlat, dlon, dname, strategy)
+        return FakeResult()
+
+    def bus_route(self, slat, slon, sname, dlat, dlon, dname,
+                  city="", cityd=""):
+        self.bus_kwargs = (slat, slon, sname, dlat, dlon, dname, city, cityd)
+        return FakeBusResult()
+
+
+class FakeAppClient:
+    """替身模拟器客户端(--app / --depart 路径)。"""
+
+    def __init__(self):
+        self.kwargs = None
+
     def nav_route(self, slat, slon, sname, dlat, dlon, dname, depart_at=None):
         self.kwargs = (slat, slon, sname, dlat, dlon, dname, depart_at)
         return FakeResult()
 
-    def bus_route(self, slat, slon, sname, dlat, dlon, dname):
-        self.bus_kwargs = (slat, slon, sname, dlat, dlon, dname)
-        return FakeBusResult()
 
-
-def test_cli_route(monkeypatch, capsys):
-    fake = FakeClient()
-    monkeypatch.setattr("amap.client.AmapClient", lambda: fake)
+def test_cli_route_defaults_to_web(monkeypatch, capsys):
+    """默认 Web 客户端(纯 HTTP,无模拟器)。"""
+    fake = FakeWebClient()
+    monkeypatch.setattr("amap.web.WebClient", lambda: fake)
     rc = main(["route", "22.9208", "113.8903", "松山湖",
                "23.1066", "113.3245", "广州塔"])
     out = capsys.readouterr().out
@@ -56,12 +69,32 @@ def test_cli_route(monkeypatch, capsys):
     assert "82公里" in out
     assert fake.kwargs is not None
     assert fake.kwargs[2] == "松山湖"
-    assert fake.kwargs[6] is None               # 未指定出发时刻
+    assert fake.kwargs[6] == 0                      # 默认策略 速度最快
+
+
+def test_cli_route_strategy(monkeypatch):
+    fake = FakeWebClient()
+    monkeypatch.setattr("amap.web.WebClient", lambda: fake)
+    rc = main(["route", "22.9", "113.9", "A", "23.1", "113.3", "B",
+               "--strategy", "1"])
+    assert rc == 0
+    assert fake.kwargs is not None
+    assert fake.kwargs[6] == 1
+
+
+def test_cli_route_app(monkeypatch):
+    """--app 显式走模拟器 Deep Link。"""
+    fake = FakeAppClient()
+    monkeypatch.setattr("amap.client.AmapClient", lambda: fake)
+    rc = main(["route", "22.9", "113.9", "A", "23.1", "113.3", "B", "--app"])
+    assert rc == 0
+    assert fake.kwargs is not None
+    assert fake.kwargs[6] is None
 
 
 def test_cli_route_depart(monkeypatch):
-    """--depart 传 ISO 时刻,转成 datetime 交给 client。"""
-    fake = FakeClient()
+    """--depart 传 ISO 时刻,走模拟器(Web 无未来用时)。"""
+    fake = FakeAppClient()
     monkeypatch.setattr("amap.client.AmapClient", lambda: fake)
     rc = main(["route", "22.9", "113.9", "A", "23.1", "113.3", "B",
                "--depart", "2026-10-22T08:00"])
@@ -71,8 +104,8 @@ def test_cli_route_depart(monkeypatch):
 
 
 def test_cli_bus(monkeypatch, capsys):
-    fake = FakeClient()
-    monkeypatch.setattr("amap.client.AmapClient", lambda: fake)
+    fake = FakeWebClient()
+    monkeypatch.setattr("amap.web.WebClient", lambda: fake)
     rc = main(["bus", "22.9208", "113.8903", "松山湖",
                "23.1066", "113.3245", "广州塔"])
     out = capsys.readouterr().out
@@ -80,6 +113,7 @@ def test_cli_bus(monkeypatch, capsys):
     assert "费用少" in out
     assert fake.bus_kwargs is not None
     assert fake.bus_kwargs[2] == "松山湖"
+    assert fake.bus_kwargs[6] == ""              # city 缺省,坐标识别
 
 
 def test_cli_bad_args():

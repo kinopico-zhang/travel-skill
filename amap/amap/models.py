@@ -164,3 +164,12 @@ class BusResult(BaseModel):
         lines = [f"{self.depart}→{self.arrive}(bus) 共{len(self)}条方案"]
         lines.extend(f"  {p}" for p in self.plans)
         return "\n".join(lines)
+
+
+class GeoPlace(BaseModel):
+    """geocode() 的一个结果:地名 → 坐标。"""
+
+    address: str                      # 广东省广州市海珠区广州塔(地铁站)
+    lng: float
+    lat: float
+    citycode: str = ""                # 020

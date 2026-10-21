@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "amap"
-version = "0.2.0"
-description = "Amap (Gaode) navigation app API client via deep-link page proxy: drive/bus route planning, future departure"
+version = "0.3.0"
+description = "Amap (Gaode) route planning: pure-Python web client (drive/bus/walk/geocode) plus optional emulator-backed app client for future departure"
 requires-python = ">=3.9"
 dependencies = ["pydantic>=2"]
 
@@ -53,6 +53,6 @@ disallow_untyped_defs = true
 
 # 手写 protobuf walker 与测试文件动态类型多,放宽
 [[tool.mypy.overrides]]
-module = ["amap.parser", "conftest", "test_parser", "test_client", "test_cli"]
+module = ["amap.parser", "conftest", "test_parser", "test_client", "test_cli", "test_web"]
 disallow_untyped_defs = false
 check_untyped_defs = true
