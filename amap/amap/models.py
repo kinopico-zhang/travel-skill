@@ -173,3 +173,22 @@ class GeoPlace(BaseModel):
     lng: float
     lat: float
     citycode: str = ""                # 020
+
+
+class FutureEta(BaseModel):
+    """etd_table() 的一个时间点:未来某时刻出发的驾车预估。"""
+
+    depart_at: int                    # 出发时刻(unix 秒)
+    duration_min: int                 # 预估用时(分钟)
+    toll_yuan: float = 0.0            # 预估过路费(元)
+    restriction: int = 0              # 0=无限行(或已规避) 1=有限行无法规避
+
+    def __str__(self) -> str:
+        import time  # pylint: disable=import-outside-toplevel
+        t = time.strftime("%m-%d %H:%M", time.localtime(self.depart_at))
+        s = f"{t} {self.duration_min}分钟"
+        if self.toll_yuan:
+            s += f" 过路费¥{self.toll_yuan:g}"
+        if self.restriction:
+            s += " ⚠限行"
+        return s

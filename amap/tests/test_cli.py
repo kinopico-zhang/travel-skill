@@ -37,8 +37,10 @@ class FakeWebClient:
         self.kwargs = None
         self.bus_kwargs = None
 
-    def nav_route(self, slat, slon, sname, dlat, dlon, dname, strategy=0):
-        self.kwargs = (slat, slon, sname, dlat, dlon, dname, strategy)
+    def nav_route(self, slat, slon, sname, dlat, dlon, dname,
+                  strategy=0, depart_at=None):
+        self.kwargs = (slat, slon, sname, dlat, dlon, dname, strategy,
+                       depart_at)
         return FakeResult()
 
     def bus_route(self, slat, slon, sname, dlat, dlon, dname,
@@ -93,11 +95,22 @@ def test_cli_route_app(monkeypatch):
 
 
 def test_cli_route_depart(monkeypatch):
-    """--depart 传 ISO 时刻,走模拟器(Web 无未来用时)。"""
+    """--depart 传 ISO 时刻:默认走 Web v4/etd 未来预测(纯 HTTP)。"""
+    fake = FakeWebClient()
+    monkeypatch.setattr("amap.web.WebClient", lambda: fake)
+    rc = main(["route", "22.9", "113.9", "A", "23.1", "113.3", "B",
+               "--depart", "2026-10-22T08:00"])
+    assert rc == 0
+    assert fake.kwargs is not None
+    assert fake.kwargs[7] == datetime(2026, 10, 22, 8, 0)
+
+
+def test_cli_route_depart_app(monkeypatch):
+    """--depart --app 组合:模拟器改时钟(后备链路)。"""
     fake = FakeAppClient()
     monkeypatch.setattr("amap.client.AmapClient", lambda: fake)
     rc = main(["route", "22.9", "113.9", "A", "23.1", "113.3", "B",
-               "--depart", "2026-10-22T08:00"])
+               "--depart", "2026-10-22T08:00", "--app"])
     assert rc == 0
     assert fake.kwargs is not None
     assert fake.kwargs[6] == datetime(2026, 10, 22, 8, 0)

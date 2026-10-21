@@ -148,3 +148,69 @@ def test_web_get_request_shape(web_drive, monkeypatch):
     assert "platform=JS" in captured["url"]
     assert "key=ab403a9b356e63c917ff05b037cd3e7d" in captured["url"]
     assert "m.amap.com" in captured["headers"].get("Referer", "")
+
+
+# ------------------------------------------------------------------ v4/etd
+def test_parse_etd(web_etd):
+    """v4/etd 解析:路线 + 每时刻 duration(分钟)/tolls(元)。"""
+    from amap.web import parse_etd
+    ft = 1792643200
+    routes, etas = parse_etd(web_etd, ft, 1800, 3)
+    assert len(etas) == 3
+    # 时刻按请求推算:firsttime + i*interval
+    assert etas[0].depart_at == ft
+    assert etas[2].depart_at == ft + 2 * 1800
+    assert all(e.duration_min > 0 for e in etas)
+    assert any(e.toll_yuan > 0 for e in etas)
+    assert routes and routes[0].distance_m > 80000   # 松山湖→广州塔 87km
+
+
+def test_web_nav_route_depart_at(web_etd, monkeypatch):
+    """depart_at 走 v4/etd(ditu 代理),用时/过路费回填方案。"""
+    import datetime as dt
+    w = WebClient(min_interval=0)
+    seen = []
+
+    def fake_get(path, params, base="", key=""):
+        seen.append((path, base))
+        return web_etd
+
+    monkeypatch.setattr(w, "_get", fake_get)
+    future = dt.datetime.now() + dt.timedelta(hours=2)
+    r = w.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔",
+                    depart_at=future)
+    assert seen[0][0] == "/v4/etd/driving"
+    assert "ditu.amap.com" in seen[0][1]
+    best = r.best()
+    assert best is not None
+    assert best.duration_s > 0 and best.toll_fen > 0
+    assert r.depart_at == int(future.timestamp())
+
+
+def test_web_etd_table(web_etd, monkeypatch):
+    import datetime as dt
+    w = WebClient(min_interval=0)
+    monkeypatch.setattr(w, "_get",
+                        lambda path, params, base="", key="": web_etd)
+    future = dt.datetime.now() + dt.timedelta(hours=2)
+    etas = w.etd_table(22.9208, 113.8903, 23.1066, 113.3245, future,
+                       interval_s=1800, count=3)
+    assert len(etas) == 3
+    assert etas[0].duration_min > 0
+
+
+def test_web_etd_rejects_past():
+    """过去时刻直接拒,不发请求。"""
+    import datetime as dt
+    w = WebClient(min_interval=0)
+    past = dt.datetime.now() - dt.timedelta(hours=1)
+    with pytest.raises(Exception, match="未来"):
+        w.etd_table(22.9, 113.9, 23.1, 113.3, past, 1800, 3)
+
+
+def test_web_etd_count_bounds():
+    import datetime as dt
+    w = WebClient(min_interval=0)
+    future = dt.datetime.now() + dt.timedelta(hours=2)
+    with pytest.raises(Exception, match="1-48"):
+        w.etd_table(22.9, 113.9, 23.1, 113.3, future, 1800, 49)

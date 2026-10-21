@@ -54,3 +54,9 @@ def web_walk() -> dict:
 def web_geo() -> dict:
     """Web v3 地理编码 广州塔(2026-10-21)。"""
     return _json_fixture("web_geo.json")
+
+
+@pytest.fixture
+def web_etd() -> dict:
+    """Web v4/etd 未来驾车 松山湖→广州塔(2026-10-21,3 时刻点)。"""
+    return _json_fixture("etd_drive.json")

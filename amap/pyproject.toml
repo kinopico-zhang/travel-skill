@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "amap"
-version = "0.3.0"
+version = "0.4.0"
 description = "Amap (Gaode) route planning: pure-Python web client (drive/bus/walk/geocode) plus optional emulator-backed app client for future departure"
 requires-python = ">=3.9"
 dependencies = ["pydantic>=2"]
