@@ -17,7 +17,7 @@ MODES = {"drive": 0, "bus": 1, "walk": 2, "bike": 3, "train": 4}
 class NavStep(BaseModel):
     """路线的一个路段(引导级,信息有限:道路名)。"""
 
-    road: str = ""                # S1广连高速 / 石牯岭隧道...
+    road: str = ""                # 高速路名 / 隧道名...
     distance_m: int = 0           # 路段距离(米),解析不出为 0
     duration_s: int = 0           # 路段历时(秒),解析不出为 0
 
@@ -87,7 +87,7 @@ class NavResult(BaseModel):
 class BusLeg(BaseModel):
     """公交方案的一个乘车段(步行段不在此列,仅计步行总距离)。"""
 
-    line: str = ""                # 城际(惠州北--番禺) / 地铁3号线(...)
+    line: str = ""                # 城际(a--b) / 地铁N号线(...)
     from_station: str = ""        # 上车站
     to_station: str = ""          # 下车站
     via_count: int = 0            # 途经站数
@@ -169,7 +169,7 @@ class BusResult(BaseModel):
 class GeoPlace(BaseModel):
     """geocode() 的一个结果:地名 → 坐标。"""
 
-    address: str                      # 广东省广州市海珠区广州塔(地铁站)
+    address: str                      # 省/市/区+POI 的完整地址
     lng: float
     lat: float
     citycode: str = ""                # 020

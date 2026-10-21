@@ -4,14 +4,14 @@
 默认走 Web 客户端(纯 HTTP,零模拟器依赖);--app 切到 Deep Link
 页面代理(模拟器链路,后备)。
 
-    amap route 22.9208 113.8903 松山湖 23.1066 113.3245 广州塔
+    amap route 22.9208 113.8903 起点 23.1066 113.3245 终点
     amap route ... --strategy cheap            # 路线偏好(App 同款策略名)
     amap route ... --depart "2026-10-22T08:00"   # 未来用时(v4/etd 预测)
     amap etd   22.9208 113.8903 23.1066 113.3245 "2026-10-22T08:00" \
         --interval 1800 --count 6                # 未来时刻表
-    amap bus  22.9208 113.8903 松山湖 23.1066 113.3245 广州塔
-    amap walk 22.9208 113.8903 松山湖 22.9250 113.8950 松山湖北
-    amap geo 广州塔                                # 地名 → 坐标
+    amap bus  22.9208 113.8903 起点 23.1066 113.3245 终点
+    amap walk 22.9208 113.8903 起点 22.9250 113.8950 附近
+    amap geo 天安门                                # 地名 → 坐标
     amap check
 """
 from __future__ import annotations
@@ -105,7 +105,7 @@ def cmd_check(_args: argparse.Namespace) -> int:
     """链路体检:Web(必过)+ 模拟器 App 链路(可选)。"""
     from .web import WebClient  # pylint: disable=import-outside-toplevel
     w = WebClient()
-    places = w.geocode("广州塔", city="广州")
+    places = w.geocode("天安门", city="北京")
     assert places, "geocode 竟然返回空"
     print(f"Web 客户端 OK(geocode: {places[0].address} "
           f"{places[0].lng:.4f},{places[0].lat:.4f})")
@@ -174,7 +174,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     _add_points(w)
     w.set_defaults(fn=cmd_walk)
     g = sub.add_parser("geo", help="地名 → 坐标")
-    g.add_argument("address", help="地名(如 广州塔)")
+    g.add_argument("address", help="地名(如 天安门)")
     g.add_argument("--city", default="", help="限定城市")
     g.set_defaults(fn=cmd_geo)
     c = sub.add_parser("check", help="链路体检(Web 必过,模拟器可选)")

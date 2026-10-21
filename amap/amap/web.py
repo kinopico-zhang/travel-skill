@@ -84,9 +84,9 @@ class WebClient:
 
         from amap import WebClient
         w = WebClient()
-        r = w.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
-        b = w.bus_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
-        g = w.geocode("广州塔")        # 地名 → 坐标
+        r = w.nav_route(22.9208, 113.8903, "起点", 23.1066, 113.3245, "终点")
+        b = w.bus_route(22.9208, 113.8903, "起点", 23.1066, 113.3245, "终点")
+        g = w.geocode("地址")          # 地名 → 坐标
     """
 
     def __init__(self, key: str = WEB_KEY, base: str = WEB_BASE,
@@ -228,7 +228,7 @@ class WebClient:
                   city: str = "", cityd: str = "") -> BusResult:
         """公交(地铁/公交/城际)路线。
 
-        city/cityd(起终点城市)一般不用传:实测跨城查询(东莞→广州)
+        city/cityd(起终点城市)一般不用传:实测跨城查询
         不带城市参数也能正确出方案,服务端按坐标识别;显式传入仅在
         识别不准时兜底。regeo 逆地理不在代理白名单里(会回滑块
         验证页),所以不做坐标→城市的自动识别。

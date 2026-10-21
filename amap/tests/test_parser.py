@@ -4,7 +4,7 @@ from amap.parser import parse_bus_wire, parse_route_plan, parse_wire
 
 
 def test_short_route(short_raw):
-    """松山湖→广州塔:3 方案,首方案 82km / 1小时34分 / ¥25。"""
+    """短途跨市:3 方案,首方案 82km / 1小时34分 / ¥25。"""
     routes = parse_wire(short_raw)
     assert len(routes) == 3
     r1 = routes[0]
@@ -34,7 +34,7 @@ def test_steps_have_road_names(short_raw):
 
 
 def test_long_route(long_raw):
-    """广州→北京西站:2 方案,约 2117km / 22 小时。"""
+    """长途跨省:2 方案,约 2117km / 22 小时。"""
     routes = parse_wire(long_raw)
     assert len(routes) == 2
     r1 = routes[0]
@@ -54,7 +54,7 @@ def test_parse_route_plan_rejects_garbage():
 # ---------- 公交 new_integrate ----------
 
 def test_bus_recommended_plans(bus_raw):
-    """松山湖→广州塔:7 条推荐方案,首条 2小时50分/步行3384m/费用少。"""
+    """跨市公交:7 条推荐方案,首条 2小时50分/步行3384m/费用少。"""
     plans = parse_bus_wire(bus_raw)
     assert len(plans) == 7
     p1 = plans[0]
@@ -66,16 +66,14 @@ def test_bus_recommended_plans(bus_raw):
 
 
 def test_bus_plan_legs(bus_raw):
-    """首方案 3 个换乘段:轨交→城际→地铁3号线,起讫站成链。"""
+    """首方案 3 个换乘段:轨交→城际→地铁,起讫站成链。"""
     plans = parse_bus_wire(bus_raw)
     legs = plans[0].legs
-    assert [l.line for l in legs] == [
-        "轨道交通1号线(梅塘--东莞西站)",
-        "城际(惠州北--番禺)",               # 服务端名字翻倍,应去重
-        "地铁3号线(海傍--天河客运站)",
-    ]
-    assert legs[0].from_station == "松山湖"
-    assert legs[0].to_station == "东城南站"
+    lines = [l.line for l in legs]
+    assert [x.split("(")[0] for x in lines] == ["轨道交通1号线", "城际", "地铁3号线"]
+    assert lines[1].count("(") == 1           # 服务端名字翻倍,应去重
+    assert legs[0].from_station
+    assert legs[0].to_station and legs[1].from_station  # 各段上下车站有名
     assert legs[0].via_count == 6
     assert legs[0].headway == "首站发车约8分钟/趟"
 

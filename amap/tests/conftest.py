@@ -10,7 +10,7 @@ def _fixture(name: str) -> bytes:
 
 @pytest.fixture
 def short_raw() -> bytes:
-    """松山湖→广州塔 驾车,3 方案(2026-10-21 抓包)。"""
+    """App 抓包驾车短途,3 方案(2026-10-21)。"""
     return _fixture("nav_auto_short.gz")
 
 
@@ -22,7 +22,7 @@ def long_raw() -> bytes:
 
 @pytest.fixture
 def bus_raw() -> bytes:
-    """松山湖→广州塔 公交,7 推荐方案(2026-10-21 抓包)。"""
+    """App 抓包跨市公交,7 推荐方案(2026-10-21)。"""
     return _fixture("bus_integrate.gz")
 
 
@@ -34,29 +34,29 @@ def _json_fixture(name: str) -> dict:
 
 @pytest.fixture
 def web_drive() -> dict:
-    """Web v3 驾车 松山湖→广州塔(2026-10-21,速度最快 87km)。"""
+    """Web v3 驾车 87km 跨城(2026-10-21,速度最快)。"""
     return _json_fixture("web_drive.json")
 
 
 @pytest.fixture
 def web_transit() -> dict:
-    """Web v3 公交 松山湖→广州塔,2 方案(2026-10-21)。"""
+    """Web v3 公交跨城,2 方案(2026-10-21)。"""
     return _json_fixture("web_transit.json")
 
 
 @pytest.fixture
 def web_walk() -> dict:
-    """Web v3 步行 松山湖→松山湖北,2068m(2026-10-21)。"""
+    """Web v3 步行 短距离 2068m(2026-10-21)。"""
     return _json_fixture("web_walk.json")
 
 
 @pytest.fixture
 def web_geo() -> dict:
-    """Web v3 地理编码 广州塔(2026-10-21)。"""
+    """Web v3 地理编码(2026-10-21)。"""
     return _json_fixture("web_geo.json")
 
 
 @pytest.fixture
 def web_etd() -> dict:
-    """Web v4/etd 未来驾车 松山湖→广州塔(2026-10-21,3 时刻点)。"""
+    """Web v4/etd 未来驾车跨城 87km(2026-10-21,3 时刻点)。"""
     return _json_fixture("etd_drive.json")

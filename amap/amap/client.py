@@ -5,10 +5,10 @@
 
     from amap import AmapClient
     am = AmapClient()
-    r = am.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
+    r = am.nav_route(22.9208, 113.8903, "起点", 23.1066, 113.3245, "终点")
     print(r.summary())
     b = r.best()   # 时间最短方案
-    bus = am.bus_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
+    bus = am.bus_route(22.9208, 113.8903, "起点", 23.1066, 113.3245, "终点")
 """
 from __future__ import annotations
 

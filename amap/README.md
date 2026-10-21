@@ -6,21 +6,21 @@
 
 ```bash
 pip install -e ./amap
-python -m amap route 22.9208 113.8903 松山湖 23.1066 113.3245 广州塔
+python -m amap route 22.9208 113.8903 起点 23.1066 113.3245 终点
 python -m amap route ... --strategy cheap           # 路线偏好(App 同款策略名)
 python -m amap route ... --depart 2026-10-22T08:00      # 未来用车时(v4/etd 预测)
 python -m amap etd   22.9208 113.8903 23.1066 113.3245 2026-10-22T08:00 \
            --interval 7200 --count 4                    # 未来时刻表(最多 48 点)
-python -m amap bus  22.9208 113.8903 松山湖 23.1066 113.3245 广州塔
-python -m amap walk 22.9208 113.8903 松山湖 22.9250 113.8950 松山湖北
-python -m amap geo   广州塔
+python -m amap bus  22.9208 113.8903 起点 23.1066 113.3245 终点
+python -m amap walk 22.9208 113.8903 起点 22.9250 113.8950 附近
+python -m amap geo   地址
 ```
 
 ```
-松山湖→广州塔(drive) 87公里 1小时33分 过路费¥77
-最快方案途经: 沁园路 → 新城路 → G94珠三角环线高速 → …
+起点→终点(drive) 87公里 1小时33分 过路费¥77
+最快方案途经: 市政路 → 主干道 → 高速 → …
 
-松山湖→广州塔(drive) 共1条方案 @ 10-22 08:00出发
+起点→终点(drive) 共1条方案 @ 10-22 08:00出发
   方案1: 87公里 1小时40分 过路费¥77
 
 出发时刻        预估用时      过路费
@@ -35,14 +35,14 @@ Python 侧:
 from datetime import datetime
 from amap import WebClient
 w = WebClient()
-r = w.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
+r = w.nav_route(22.9208, 113.8903, "起点", 23.1066, 113.3245, "终点")
 best = r.best()                     # 时间最短方案
 best.distance_km, best.duration_s, best.toll_yuan
 
 r = w.nav_route(..., strategy="cheap")   # 费用优先(免费路线,零过路费)
 
 # 未来某时刻出发:按该时刻路况预估用时/过路费(v4/etd)
-r = w.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔",
+r = w.nav_route(22.9208, 113.8903, "起点", 23.1066, 113.3245, "终点",
                 depart_at=datetime(2026, 10, 22, 8, 0))
 
 # 未来时刻表:一次返回 count 个时间点(改时钟方案要一个点一个点查,
@@ -50,10 +50,10 @@ r = w.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔",
 etas = w.etd_table(22.9208, 113.8903, 23.1066, 113.3245,
                    datetime(2026, 10, 22, 8, 0), interval_s=3600, count=12)
 
-b = w.bus_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
+b = w.bus_route(22.9208, 113.8903, "起点", 23.1066, 113.3245, "终点")
 b.best().legs                       # 换乘段:线路名/上下车站/途经站数
 
-g = w.geocode("广州塔")             # 地名 → 坐标列表
+g = w.geocode("地址")               # 地名 → 坐标列表
 ```
 
 坐标为 GCJ-02(高德坐标系);起终点名仅用于展示。

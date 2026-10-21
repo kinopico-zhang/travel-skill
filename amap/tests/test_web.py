@@ -21,8 +21,8 @@ def test_parse_web_drive(web_drive):
     assert r.duration_s == 5570
     assert r.toll_fen == 7700                 # ¥77 → 分
     roads = [s.road for s in r.steps if s.road]
-    assert "G94珠三角环线高速" in " ".join(roads)
-    assert roads[0] == "沁园路"                # 市政路也有名(App 侧没有)
+    assert any("高速" in r for r in roads)
+    assert roads[0]                            # 市政路也有名(App 侧没有)
 
 
 def test_parse_web_transit(web_transit):
@@ -33,15 +33,13 @@ def test_parse_web_transit(web_transit):
     assert p1.price == 9.0
     assert p1.duration_s == 10560
     assert p1.walk_m == 1787
-    assert [l.line for l in p1.legs] == [
-        "343路(散裂中子源--松山湖北站微枢纽)",
-        "城际(惠州北--番禺)",               # 服务端名字翻倍,应去重
-        "地铁3号线(海傍--天河客运站)",
-    ]
-    assert p1.legs[2].from_station == "汉溪长隆"
-    assert p1.legs[2].to_station == "广州塔"
+    lines = [l.line for l in p1.legs]
+    assert [x.split("(")[0] for x in lines] == ["343路", "城际", "地铁3号线"]
+    assert lines[1].count("(") == 1           # 服务端名字翻倍,应去重
+    assert p1.legs[1].from_station and p1.legs[2].from_station
+    assert p1.legs[2].to_station                     # 各段上下车站有名
     assert p1.legs[2].via_count == 5
-    assert p1.legs[1].from_station == "松山湖北"
+    assert p1.legs[1].from_station
 
 
 def test_parse_web_walk(web_walk):
@@ -56,12 +54,12 @@ def test_parse_web_walk(web_walk):
 def test_web_nav_route(web_drive, monkeypatch):
     w = WebClient(min_interval=0)
     monkeypatch.setattr(w, "_get", lambda path, params: web_drive)
-    r = w.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
+    r = w.nav_route(22.9208, 113.8903, "A", 23.1066, 113.3245, "B")
     assert r.mode == "drive"
     best = r.best()
     assert best is not None
     assert best.distance_km > 80
-    assert r.depart == "松山湖"
+    assert r.depart == "A"
 
 
 def test_web_bus_route_city_passthrough(web_transit, monkeypatch):
@@ -75,7 +73,7 @@ def test_web_bus_route_city_passthrough(web_transit, monkeypatch):
         return web_transit
 
     monkeypatch.setattr(w, "_get", fake_get)
-    b = w.bus_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔")
+    b = w.bus_route(22.9208, 113.8903, "A", 23.1066, 113.3245, "B")
     assert len(b) == 2
     path, p = seen[-1]
     assert "transit" in path
@@ -83,9 +81,9 @@ def test_web_bus_route_city_passthrough(web_transit, monkeypatch):
     assert p["origin"] == "113.8903,22.9208"
     assert p["destination"] == "113.3245,23.1066"
     # 显式传入兜底
-    w.bus_route(22.9, 113.9, "A", 23.1, 113.3, "B", city="东莞市", cityd="广州市")
+    w.bus_route(22.9, 113.9, "A", 23.1, 113.3, "B", city="城市A", cityd="城市B")
     _, p2 = seen[-1]
-    assert p2["city"] == "东莞市" and p2["cityd"] == "广州市"
+    assert p2["city"] == "城市A" and p2["cityd"] == "城市B"
 
 
 def test_web_error_status(monkeypatch):
@@ -162,7 +160,7 @@ def test_parse_etd(web_etd):
     assert etas[2].depart_at == ft + 2 * 1800
     assert all(e.duration_min > 0 for e in etas)
     assert any(e.toll_yuan > 0 for e in etas)
-    assert routes and routes[0].distance_m > 80000   # 松山湖→广州塔 87km
+    assert routes and routes[0].distance_m > 80000   # 87km 跨城段
 
 
 def test_web_nav_route_depart_at(web_etd, monkeypatch):
@@ -177,7 +175,7 @@ def test_web_nav_route_depart_at(web_etd, monkeypatch):
 
     monkeypatch.setattr(w, "_get", fake_get)
     future = dt.datetime.now() + dt.timedelta(hours=2)
-    r = w.nav_route(22.9208, 113.8903, "松山湖", 23.1066, 113.3245, "广州塔",
+    r = w.nav_route(22.9208, 113.8903, "A", 23.1066, 113.3245, "B",
                     depart_at=future)
     assert seen[0][0] == "/v4/etd/driving"
     assert "ditu.amap.com" in seen[0][1]

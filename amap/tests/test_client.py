@@ -49,30 +49,30 @@ def client(transport, short_raw, monkeypatch):
 
 
 def test_nav_route_returns_routes(client, transport):
-    r = client.nav_route(22.9208, 113.8903, "松山湖",
-                         23.1066, 113.3245, "广州塔")
+    r = client.nav_route(22.9208, 113.8903, "A",
+                         23.1066, 113.3245, "B")
     assert len(r) == 3
-    assert r.depart == "松山湖"
-    assert r.arrive == "广州塔"
+    assert r.depart == "A"
+    assert r.arrive == "B"
     assert r.mode == "drive"
     assert r.best().index == 1
     # transport 收到的参数原样透传
-    assert transport.calls[0][:6] == (22.9208, 113.8903, "松山湖",
-                                      23.1066, 113.3245, "广州塔")
+    assert transport.calls[0][:6] == (22.9208, 113.8903, "A",
+                                      23.1066, 113.3245, "B")
 
 
 def test_nav_route_summary_format(client):
-    r = client.nav_route(22.9208, 113.8903, "松山湖",
-                         23.1066, 113.3245, "广州塔")
+    r = client.nav_route(22.9208, 113.8903, "A",
+                         23.1066, 113.3245, "B")
     s = r.summary()
-    assert "松山湖→广州塔" in s
+    assert "A→B" in s
     assert "82公里" in s
     assert "过路费¥25" in s
 
 
 def test_result_iteration(client):
-    r = client.nav_route(22.9208, 113.8903, "松山湖",
-                         23.1066, 113.3245, "广州塔")
+    r = client.nav_route(22.9208, 113.8903, "A",
+                         23.1066, 113.3245, "B")
     assert [x.index for x in r] == [1, 2, 3]
     assert bool(r) is True
 
@@ -136,10 +136,10 @@ def test_nav_route_rejects_unsupported_mode(client):
 def test_bus_route_returns_plans(client, transport, bus_raw, monkeypatch):
     monkeypatch.setattr("amap.client.wait_for_response",
                         lambda *a, **k: bus_raw)
-    b = client.bus_route(22.9208, 113.8903, "松山湖",
-                         23.1066, 113.3245, "广州塔")
+    b = client.bus_route(22.9208, 113.8903, "A",
+                         23.1066, 113.3245, "B")
     assert len(b) == 7
-    assert b.depart == "松山湖"
+    assert b.depart == "A"
     assert b.best().duration_s == 7820            # 最快(打车)2小时10分
     # 公交方式(t=1)透传给了 transport
     assert transport.calls[0][6] == "bus"

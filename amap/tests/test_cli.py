@@ -10,11 +10,11 @@ from amap.__main__ import main
 class FakeResult:
     """替身查询结果。"""
 
-    depart = "松山湖"
-    arrive = "广州塔"
+    depart = "起点"
+    arrive = "终点"
 
     def summary(self):
-        return "松山湖→广州塔(drive) 共3条方案\n  方案1: 82公里 1小时34分 过路费¥25"
+        return "起点→终点(drive) 共3条方案\n  方案1: 82公里 1小时34分 过路费¥25"
 
     def best(self):
         return None
@@ -24,7 +24,7 @@ class FakeBusResult:
     """替身公交结果。"""
 
     def summary(self):
-        return "松山湖→广州塔(bus) 共5条方案\n  2小时48分 步行3.4km 费用少"
+        return "起点→终点(bus) 共5条方案\n  2小时48分 步行3.4km 费用少"
 
     def best(self):
         return None
@@ -64,13 +64,13 @@ def test_cli_route_defaults_to_web(monkeypatch, capsys):
     """默认 Web 客户端(纯 HTTP,无模拟器)。"""
     fake = FakeWebClient()
     monkeypatch.setattr("amap.web.WebClient", lambda: fake)
-    rc = main(["route", "22.9208", "113.8903", "松山湖",
-               "23.1066", "113.3245", "广州塔"])
+    rc = main(["route", "22.9208", "113.8903", "起点",
+               "23.1066", "113.3245", "终点"])
     out = capsys.readouterr().out
     assert rc == 0
     assert "82公里" in out
     assert fake.kwargs is not None
-    assert fake.kwargs[2] == "松山湖"
+    assert fake.kwargs[2] == "起点"
     assert fake.kwargs[6] == "smart"              # 默认 高德AI推荐
 
 
@@ -125,13 +125,13 @@ def test_cli_route_depart_app(monkeypatch):
 def test_cli_bus(monkeypatch, capsys):
     fake = FakeWebClient()
     monkeypatch.setattr("amap.web.WebClient", lambda: fake)
-    rc = main(["bus", "22.9208", "113.8903", "松山湖",
-               "23.1066", "113.3245", "广州塔"])
+    rc = main(["bus", "22.9208", "113.8903", "起点",
+               "23.1066", "113.3245", "终点"])
     out = capsys.readouterr().out
     assert rc == 0
     assert "费用少" in out
     assert fake.bus_kwargs is not None
-    assert fake.bus_kwargs[2] == "松山湖"
+    assert fake.bus_kwargs[2] == "起点"
     assert fake.bus_kwargs[6] == ""              # city 缺省,坐标识别
 
 
