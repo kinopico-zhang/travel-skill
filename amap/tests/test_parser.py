@@ -1,6 +1,6 @@
 # pylint: disable=protected-access,redefined-outer-name,unused-argument
 """parser 测试:真实 protobuf 响应驱动。"""
-from amap.parser import parse_route_plan, parse_wire
+from amap.parser import parse_bus_wire, parse_route_plan, parse_wire
 
 
 def test_short_route(short_raw):
@@ -49,3 +49,44 @@ def test_parse_route_plan_rejects_garbage():
     """乱字节不应崩(宽容解析,返回空/部分)。"""
     assert not parse_route_plan(b"\x08\x01")
     assert not parse_route_plan(b"")
+
+
+# ---------- 公交 new_integrate ----------
+
+def test_bus_recommended_plans(bus_raw):
+    """松山湖→广州塔:7 条推荐方案,首条 2小时50分/步行3384m/费用少。"""
+    plans = parse_bus_wire(bus_raw)
+    assert len(plans) == 7
+    p1 = plans[0]
+    assert p1.duration_s == 10237             # 2小时50分
+    assert p1.walk_m == 3384
+    assert p1.price is None                   # 公交组合无总价
+    assert p1.tag == "费用少"
+    assert p1.duration_str == "2小时50分"
+
+
+def test_bus_plan_legs(bus_raw):
+    """首方案 3 个换乘段:轨交→城际→地铁3号线,起讫站成链。"""
+    plans = parse_bus_wire(bus_raw)
+    legs = plans[0].legs
+    assert [l.line for l in legs] == [
+        "轨道交通1号线(梅塘--东莞西站)",
+        "城际(惠州北--番禺)",               # 服务端名字翻倍,应去重
+        "地铁3号线(海傍--天河客运站)",
+    ]
+    assert legs[0].from_station == "松山湖"
+    assert legs[0].to_station == "东城南站"
+    assert legs[0].via_count == 6
+    assert legs[0].headway == "首站发车约8分钟/趟"
+
+
+def test_bus_direct_plans(bus_raw):
+    """跨城直达方案(客车/火车/打车)有票价无换乘明细。"""
+    plans = parse_bus_wire(bus_raw)
+    tags = [p.tag for p in plans]
+    assert "客车直达" in tags and "火车直达" in tags
+    coach = next(p for p in plans if p.tag == "客车直达")
+    assert coach.price == 34.8
+    assert coach.legs == []
+    fastest = min(plans, key=lambda p: p.duration_s)
+    assert fastest.tag == "最快" and fastest.price == 121.5

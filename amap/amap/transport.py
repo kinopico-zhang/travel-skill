@@ -64,6 +64,25 @@ class DeepLinkTransport:
         if out.strip() != "1":
             raise TransportError(f"高德({PKG})未安装")
 
+    # ---------- 时钟(未来用时) ----------
+
+    def set_clock(self, ts: float) -> None:
+        """把模拟器系统时间设为 ts(unix 秒,需 root 的 adb)。
+
+        高德 App 以设备时间为"出发时刻"请求预测路线 —— 这是查
+        未来用时的唯一入口(URI 无时间参数,UI 时间选择器点不开)。
+        全局影响:模拟器上其他 App 也会感知跳变,查询完必须恢复。
+        """
+        self._shell("settings put global auto_time 0")
+        out = self._shell(f"date @{int(ts)}")
+        if "date" in out.lower() and "usage" in out.lower():
+            raise TransportError(f"date 设置失败: {out[:120]}")
+
+    def restore_clock(self, ts: float) -> None:
+        """恢复系统时间为 ts(传真实当前时刻),并打开自动对时。"""
+        self._shell(f"date @{int(ts)}")
+        self._shell("settings put global auto_time 1")
+
     # ---------- 触发 ----------
 
     def launch_route(self, slat: float, slon: float, dlat: float, dlon: float,

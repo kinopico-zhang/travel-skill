@@ -18,3 +18,9 @@ def short_raw() -> bytes:
 def long_raw() -> bytes:
     """广州→北京西站 驾车,2 方案(2026-10-21 抓包)。"""
     return _fixture("nav_auto_long.gz")
+
+
+@pytest.fixture
+def bus_raw() -> bytes:
+    """松山湖→广州塔 公交,7 推荐方案(2026-10-21 抓包)。"""
+    return _fixture("bus_integrate.gz")

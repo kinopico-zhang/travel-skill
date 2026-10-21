@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "amap"
-version = "0.1.0"
-description = "Amap (Gaode) navigation app API client via deep-link page proxy: drive route planning"
+version = "0.2.0"
+description = "Amap (Gaode) navigation app API client via deep-link page proxy: drive/bus route planning, future departure"
 requires-python = ">=3.9"
 dependencies = ["pydantic>=2"]
 

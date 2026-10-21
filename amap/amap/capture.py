@@ -14,15 +14,17 @@ from typing import List, Tuple
 
 NAV_HOST = "nvg.amap.com"
 NAV_PATH = "/ws/transfer/navigation/auto/"
+BUS_PATH = "/ws/bus/plan/new_integrate"
 
 
 class CaptureError(Exception):
     """抓包链路异常的基类。"""
 
 
-def read_nav_responses(flows_path: str, after_ts: float = 0.0
+def read_nav_responses(flows_path: str, after_ts: float = 0.0,
+                       path: str = NAV_PATH
                        ) -> List[Tuple[float, bytes]]:
-    """读 flows 文件,返回 (时间戳, 响应原始字节) 列表,只取 nvg 的 auto 端点。
+    """读 flows 文件,返回 (时间戳, 响应原始字节) 列表,只取 nvg 指定端点。
 
     flows 文件被 mitmdump 追加写,流式读到文件尾即止,不锁文件。
     """
@@ -41,7 +43,7 @@ def read_nav_responses(flows_path: str, after_ts: float = 0.0
                     continue
                 if req.pretty_host != NAV_HOST:
                     continue
-                if not req.path.startswith(NAV_PATH):
+                if not req.path.startswith(path):
                     continue
                 if req.timestamp_start < after_ts:
                     continue
@@ -53,14 +55,15 @@ def read_nav_responses(flows_path: str, after_ts: float = 0.0
 
 def wait_for_response(flows_path: str, since_ts: float,
                       timeout: float = 90.0,
-                      poll: float = 2.0) -> bytes:
+                      poll: float = 2.0,
+                      path: str = NAV_PATH) -> bytes:
     """轮询 flows,等第一条晚于 since_ts 的导航响应,返回响应字节。
 
     90s 上限:高德掐直连后偶发降级重试,首条路线可能要等一会儿。
     """
     deadline = time.time() + timeout
     while time.time() < deadline:
-        rows = read_nav_responses(flows_path, after_ts=since_ts)
+        rows = read_nav_responses(flows_path, after_ts=since_ts, path=path)
         if rows:
             rows.sort()
             return rows[-1][1]
