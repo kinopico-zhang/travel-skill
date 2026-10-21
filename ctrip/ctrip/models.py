@@ -34,24 +34,24 @@ class Segment(BaseModel):
 
     @classmethod
     def parse(cls, raw: Dict[str, Any]) -> "Segment":
-        b = raw["basinfo"]
+        b = raw.get("basinfo") or {}
         d = raw.get("dportinfo") or {}
         a = raw.get("aportinfo") or {}
         dt = raw.get("dateinfo") or {}
         c = raw.get("craftinfo") or {}
         ddate, adate = dt.get("ddate") or "", dt.get("adate") or ""
         return cls(
-            flight_no=b.get("flgno", ""),
-            carrier=b.get("aircode", ""),
+            flight_no=b.get("flgno") or "",
+            carrier=b.get("aircode") or "",
             actual_carrier=b.get("crerairlinecode") or b.get("aircode") or "",
             actual_flight_no=b.get("crerflgno") or b.get("flgno") or "",
             is_shared=bool(b.get("ishared")),
-            dep_city=d.get("city", ""),
-            dep_airport=d.get("aport", ""),
-            dep_terminal=d.get("bsname", ""),
-            arr_city=a.get("city", ""),
-            arr_airport=a.get("aport", ""),
-            arr_terminal=a.get("bsname", ""),
+            dep_city=d.get("city") or "",
+            dep_airport=d.get("aport") or "",
+            dep_terminal=d.get("bsname") or "",
+            arr_city=a.get("city") or "",
+            arr_airport=a.get("aport") or "",
+            arr_terminal=a.get("bsname") or "",
             dep_time=ddate[11:16],
             arr_time=adate[11:16],
             dep_datetime=ddate.replace("T", " "),

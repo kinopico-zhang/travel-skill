@@ -212,3 +212,71 @@ def test_train_search_empty_route(tmp_path, train_empty_resp):
     ct = CtripClient(proxy=fake, city_cache=str(tmp_path / "c.json"))
     r = ct.train_search("上海", "月球", "2026-10-22")
     assert not r and len(r) == 0
+
+
+# ------------------------------------------------------------------ HttpProxy
+class FakeHTTPResponse:
+    """urlopen 替身返回的响应对象。"""
+
+    def __init__(self, body: bytes, status: int = 200, gzipped: bool = False):
+        import gzip as gz
+        self._body = gz.compress(body) if gzipped else body
+        self.status = status
+        self.headers = {"content-encoding": "gzip"} if gzipped else {}
+
+    def read(self) -> bytes:
+        return self._body
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+
+def test_http_proxy_injects_app_head_and_parses(monkeypatch):
+    """HttpProxy:payload 补 App head、URL 带网关 query、gzip 解压。"""
+    import gzip as gz
+    from ctrip.client import HttpProxy, GW_QUERY
+    seen = {}
+
+    def fake_urlopen(req, timeout=None):
+        seen["url"] = req.full_url
+        seen["body"] = json.loads(req.data.decode())
+        seen["ua"] = req.headers.get("User-agent")
+        return FakeHTTPResponse(json.dumps({"ok": 1}).encode(), gzipped=True)
+
+    monkeypatch.setattr("ctrip.client.urllib.request.urlopen", fake_urlopen)
+    out = HttpProxy().fetch_json(LIST_API, {"searchitem": []})
+    assert out == {"ok": 1}
+    assert seen["url"] == f"https://m.ctrip.com{LIST_API}{GW_QUERY}"
+    assert seen["body"]["head"]["appid"] == "99999999"
+    assert seen["body"]["head"]["auth"] == ""
+    assert seen["body"]["searchitem"] == []
+    assert "CtripAPP" in seen["ua"]
+
+
+def test_http_proxy_432_raises_rate_limited(monkeypatch):
+    """HTTP 432 → RateLimitedError。"""
+    import urllib.error
+    from ctrip.client import HttpProxy
+
+    def fake_urlopen(req, timeout=None):
+        raise urllib.error.HTTPError(req.full_url, 432, "ratelimited",
+                                     {}, None)  # type: ignore[arg-type]
+
+    monkeypatch.setattr("ctrip.client.urllib.request.urlopen", fake_urlopen)
+    with pytest.raises(RateLimitedError):
+        HttpProxy().fetch_json(LIST_API, {})
+
+
+def test_http_proxy_other_http_error(monkeypatch):
+    import urllib.error
+    from ctrip.client import HttpProxy, CtripError
+
+    def fake_urlopen(req, timeout=None):
+        raise urllib.error.HTTPError(req.full_url, 502, "badgw", {}, None)  # type: ignore[arg-type]
+
+    monkeypatch.setattr("ctrip.client.urllib.request.urlopen", fake_urlopen)
+    with pytest.raises(CtripError, match="502"):
+        HttpProxy().fetch_json(LIST_API, {})

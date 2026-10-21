@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""携程 H5 机票查询 python 库(CDP 页面代理模式)。
+"""携程机票/火车票查询 python 库(纯 HTTP 直连,零模拟器依赖)。
 
 用法:
     from ctrip import CtripClient
@@ -9,12 +9,13 @@
     cal = ct.low_price_calendar("SZX", "HAK")   # List[DailyPrice]
 """
 
-from .client import (CDPProxy, CtripClient, CtripError, RateLimitedError,
-                     HOME)
+from .client import (CDPProxy, CtripClient, CtripError, HttpProxy,
+                     RateLimitedError, HOME)
 from .models import (City, CookieEntry, DailyPrice, Fare, Flight, Segment,
                      SearchResult, Train, TrainSearchResult, TrainSeat)
 
-__all__ = ["CDPProxy", "CtripClient", "CtripError", "RateLimitedError",
+__all__ = ["CDPProxy", "HttpProxy", "CtripClient", "CtripError",
+           "RateLimitedError",
            "Flight", "Fare", "Segment", "SearchResult",
            "Train", "TrainSeat", "TrainSearchResult",
            "City", "CookieEntry", "DailyPrice", "HOME"]
