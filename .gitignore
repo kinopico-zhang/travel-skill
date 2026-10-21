@@ -17,3 +17,4 @@ scripts/
 
 # 打包产物
 *.egg-info/
+amap/uv.lock
