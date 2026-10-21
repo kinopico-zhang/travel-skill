@@ -1,0 +1,384 @@
+{
+ "resp": {
+  "msg": "成功",
+  "code": "00000000",
+  "travelTip": {
+   "code": "00000007",
+   "titleList": [],
+   "urlList": [],
+   "contentList": []
+  },
+  "lowPriceList": [
+   {
+    "date": "2026-10-20",
+    "hasTicket": "0"
+   },
+   {
+    "date": "2026-10-21",
+    "hasTicket": "6"
+   },
+   {
+    "date": "2026-10-22",
+    "hasTicket": "5"
+   },
+   {
+    "date": "2026-10-23",
+    "hasTicket": "5"
+   },
+   {
+    "date": "2026-10-24",
+    "hasTicket": "7"
+   },
+   {
+    "date": "2026-10-25",
+    "hasTicket": "0"
+   },
+   {
+    "date": "2026-10-26",
+    "hasTicket": "6"
+   },
+   {
+    "date": "2026-10-27",
+    "hasTicket": "3"
+   },
+   {
+    "date": "2026-10-28",
+    "hasTicket": "6"
+   },
+   {
+    "date": "2026-10-29",
+    "hasTicket": "6"
+   },
+   {
+    "date": "2026-10-30",
+    "hasTicket": "8"
+   },
+   {
+    "date": "2026-10-31",
+    "hasTicket": "6"
+   },
+   {
+    "date": "2026-11-01",
+    "hasTicket": "6"
+   },
+   {
+    "date": "2026-11-02",
+    "hasTicket": "6"
+   },
+   {
+    "date": "2026-11-03",
+    "hasTicket": "0"
+   }
+  ],
+  "loginStatus": "N",
+  "departureFlightInfos": [
+   {
+    "depTerm": "T3",
+    "dstStr": "HAK",
+    "arrDayOfWeek": "2.0",
+    "dstCityName": "海口",
+    "rules": "",
+    "minCombinedPrice": "5600",
+    "radio": "--",
+    "seatNum": "1",
+    "opline": "ZH",
+    "orgCityName": "广州",
+    "orgDate": "2026-10-27",
+    "id": "2112513821557051393",
+    "imageName": "",
+    "totalTime": "85",
+    "foodType": "无餐食",
+    "dstTerminal": "--",
+    "flightNumber": "8991",
+    "sequence": 0.0,
+    "flightNo": "8991",
+    "flightCompanyNameCode": "ZH",
+    "lowClassName": "经济舱",
+    "connectingFlight": false,
+    "mealDesc": "无餐食",
+    "departure": {
+     "date": "2026-10-27",
+     "dayOfWeek": 2.0,
+     "week": "周二",
+     "time": "16:15"
+    },
+    "arriDate": "2026-10-27",
+    "txnId": "2112513820126793728",
+    "allow": "",
+    "orgAirport": "CAN",
+    "dst": {
+     "airportName": "海口美兰国际机场",
+     "country": "CN",
+     "cityName": "海口",
+     "city": "HAK",
+     "airportCodeType": "airport",
+     "timeZone": "GMT+8",
+     "countryName": "中国",
+     "airportSimpleName": "海口",
+     "airport": "HAK"
+    },
+    "arrival": {
+     "date": "2026-10-27",
+     "dayOfWeek": 2.0,
+     "week": "周二",
+     "time": "17:40"
+    },
+    "arriTime": "17:40",
+    "orgCity": "CAN",
+    "planeSizeId": "",
+    "orgStr": "CAN",
+    "depDate": "2026-10-27",
+    "airCraftCode": "",
+    "flightTimeDesc": "1小时25分钟",
+    "dstAirport": "HAK",
+    "imageUrl": "",
+    "airCraft": "",
+    "orgTerminal": "--",
+    "airline": "ZH",
+    "flightCompanyName": "",
+    "cabins": [
+     {
+      "classCode": "X",
+      "classOfService": "economy",
+      "handBaggage": "5KG",
+      "pprice": -1.0,
+      "childBaggage": "20KG",
+      "fprice": -1.0,
+      "classDescOfService": "经济舱",
+      "seatNum": "1",
+      "handAllowImgUrl": "economy-portable",
+      "allowImgUrl": "",
+      "id": "2112513821590605825",
+      "ffBases": [
+       {
+        "transfer": "不可签转",
+        "exchangeBeforeFlight": "100 元",
+        "refoundBeforeFlight": "100%",
+        "refoundAfterFlight": "100%",
+        "cabin": "X",
+        "accumulate": "0%",
+        "language": "ZH",
+        "exchangeAfterFlight": "100 元"
+       },
+       {
+        "transfer": "Non-endorsable",
+        "exchangeBeforeFlight": "RMB 100",
+        "refoundBeforeFlight": "100%",
+        "refoundAfterFlight": "100%",
+        "cabin": "X",
+        "accumulate": "0%",
+        "language": "EN",
+        "exchangeAfterFlight": "RMB 100"
+       },
+       {
+        "transfer": "裏書き不可",
+        "exchangeBeforeFlight": "100 元",
+        "refoundBeforeFlight": "100%",
+        "refoundAfterFlight": "100%",
+        "cabin": "X",
+        "accumulate": "0%",
+        "language": "JA",
+        "exchangeAfterFlight": "100 元"
+       }
+      ],
+      "adultBaggage": "20KG",
+      "eprice": 1.0
+     }
+    ],
+    "nationFlag": "0",
+    "netFlag": "N",
+    "arriTerm": "T1",
+    "org": {
+     "airportName": "广州白云国际机场",
+     "country": "CN",
+     "cityName": "广州",
+     "city": "CAN",
+     "airportCodeType": "airport",
+     "timeZone": "GMT+8",
+     "countryName": "中国",
+     "airportSimpleName": "广州",
+     "airport": "CAN"
+    },
+    "depTime": "16:15",
+    "aircraft": {
+     "pcImgUrl": "h/A321-177.png",
+     "aircraftType": "M",
+     "aircraftNo": "32A",
+     "mobilImgUrl": "v/A321-177.png",
+     "craftTypeDetails": "空客",
+     "aircraftTypeDesc": "中"
+    },
+    "airMacauLabel": "",
+    "remainTime": "591373308",
+    "flightType": "中型机",
+    "isAllSSeat": false,
+    "meal": "N",
+    "shareAirName": "",
+    "carrier": "ZH",
+    "airlineFullName": "深圳航空公司",
+    "paneStyle": "",
+    "hasMeal": false,
+    "flightTime": "01:25",
+    "orgAirportName": "广州白云国际机场",
+    "airlineDesc": "深圳航空",
+    "dstAirportName": "海口美兰国际机场",
+    "dstCity": "HAK",
+    "depDayOfWeek": "2.0"
+   },
+   {
+    "depTerm": "T3",
+    "dstStr": "HAK",
+    "arrDayOfWeek": "2.0",
+    "dstCityName": "海口",
+    "rules": "",
+    "minCombinedPrice": "5600",
+    "radio": "--",
+    "seatNum": "2",
+    "opline": "ZH",
+    "orgCityName": "广州",
+    "orgDate": "2026-10-27",
+    "id": "2112513821594800131",
+    "imageName": "",
+    "totalTime": "95",
+    "foodType": "无餐食",
+    "dstTerminal": "--",
+    "flightNumber": "8995",
+    "sequence": 0.0,
+    "flightNo": "8995",
+    "flightCompanyNameCode": "ZH",
+    "lowClassName": "经济舱",
+    "connectingFlight": false,
+    "mealDesc": "无餐食",
+    "departure": {
+     "date": "2026-10-27",
+     "dayOfWeek": 2.0,
+     "week": "周二",
+     "time": "22:40"
+    },
+    "arriDate": "2026-10-28",
+    "txnId": "2112513820126793728",
+    "allow": "",
+    "orgAirport": "CAN",
+    "dst": {
+     "airportName": "海口美兰国际机场",
+     "country": "CN",
+     "cityName": "海口",
+     "city": "HAK",
+     "airportCodeType": "airport",
+     "timeZone": "GMT+8",
+     "countryName": "中国",
+     "airportSimpleName": "海口",
+     "airport": "HAK"
+    },
+    "arrival": {
+     "date": "2026-10-28",
+     "modify": "+1",
+     "dayOfWeek": 3.0,
+     "week": "周三",
+     "time": "00:15"
+    },
+    "arriTime": "00:15",
+    "orgCity": "CAN",
+    "planeSizeId": "",
+    "orgStr": "CAN",
+    "depDate": "2026-10-27",
+    "airCraftCode": "",
+    "flightTimeDesc": "1小时35分钟",
+    "dstAirport": "HAK",
+    "imageUrl": "",
+    "airCraft": "",
+    "orgTerminal": "--",
+    "airline": "ZH",
+    "flightCompanyName": "",
+    "cabins": [
+     {
+      "classCode": "X",
+      "classOfService": "economy",
+      "handBaggage": "5KG",
+      "pprice": -1.0,
+      "childBaggage": "20KG",
+      "fprice": -1.0,
+      "classDescOfService": "经济舱",
+      "seatNum": "2",
+      "handAllowImgUrl": "economy-portable",
+      "allowImgUrl": "",
+      "id": "2112513821628354561",
+      "ffBases": [
+       {
+        "transfer": "不可签转",
+        "exchangeBeforeFlight": "100 元",
+        "refoundBeforeFlight": "100%",
+        "refoundAfterFlight": "100%",
+        "cabin": "X",
+        "accumulate": "0%",
+        "language": "ZH",
+        "exchangeAfterFlight": "100 元"
+       },
+       {
+        "transfer": "Non-endorsable",
+        "exchangeBeforeFlight": "RMB 100",
+        "refoundBeforeFlight": "100%",
+        "refoundAfterFlight": "100%",
+        "cabin": "X",
+        "accumulate": "0%",
+        "language": "EN",
+        "exchangeAfterFlight": "RMB 100"
+       },
+       {
+        "transfer": "裏書き不可",
+        "exchangeBeforeFlight": "100 元",
+        "refoundBeforeFlight": "100%",
+        "refoundAfterFlight": "100%",
+        "cabin": "X",
+        "accumulate": "0%",
+        "language": "JA",
+        "exchangeAfterFlight": "100 元"
+       }
+      ],
+      "adultBaggage": "20KG",
+      "eprice": 1.0
+     }
+    ],
+    "nationFlag": "0",
+    "netFlag": "N",
+    "arriTerm": "T1",
+    "org": {
+     "airportName": "广州白云国际机场",
+     "country": "CN",
+     "cityName": "广州",
+     "city": "CAN",
+     "airportCodeType": "airport",
+     "timeZone": "GMT+8",
+     "countryName": "中国",
+     "airportSimpleName": "广州",
+     "airport": "CAN"
+    },
+    "depTime": "22:40",
+    "aircraft": {
+     "pcImgUrl": "",
+     "aircraftType": "",
+     "aircraftNo": "32N",
+     "mobilImgUrl": "",
+     "craftTypeDetails": ""
+    },
+    "airMacauLabel": "",
+    "remainTime": "614473287",
+    "flightType": "小型机",
+    "isAllSSeat": false,
+    "meal": "N",
+    "shareAirName": "",
+    "carrier": "ZH",
+    "airlineFullName": "深圳航空公司",
+    "paneStyle": "",
+    "hasMeal": false,
+    "flightTime": "01:35",
+    "orgAirportName": "广州白云国际机场",
+    "airlineDesc": "深圳航空",
+    "dstAirportName": "海口美兰国际机场",
+    "dstCity": "HAK",
+    "depDayOfWeek": "3.0"
+   }
+  ],
+  "txnId": "2112513820126793728"
+ }
+}

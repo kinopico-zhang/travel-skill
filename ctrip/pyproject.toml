@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ctrip"
+version = "0.2.0"
+description = "Ctrip H5 (m.ctrip.com) flight API client via CDP page proxy: search, low-price calendar, city codes"
+requires-python = ">=3.9"
+dependencies = ["pydantic>=2", "websocket-client"]
+
+[tool.setuptools.packages.find]
+include = ["ctrip*"]
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+# ---------------------------------------------------------------- pylint
+[tool.pylint.MAIN]
+py-version = "3.13"
+
+[tool.pylint.FORMAT]
+max-line-length = 100
+
+[tool.pylint.DESIGN]
+max-branches = 18
+
+[tool.pylint."MESSAGES CONTROL"]
+# pydantic 模型天然多字段/少方法;测试函数不需要 docstring
+disable = [
+    "too-few-public-methods",
+    "too-many-instance-attributes",
+    "too-many-arguments",
+    "too-many-positional-arguments",
+    "too-many-locals",
+    "missing-function-docstring",
+    "duplicate-code",
+]
+
+# ---------------------------------------------------------------- mypy
+[tool.mypy]
+python_version = "3.13"
+plugins = ["pydantic.mypy"]
+files = ["ctrip", "scripts", "tests"]
+ignore_missing_imports = true
+warn_return_any = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+
+# 登录驱动脚本与测试放宽:mypy 2.x 视它们为顶层模块(无 __init__.py)
+[[tool.mypy.overrides]]
+module = [
+    "cdp", "ctrip_login",
+    "conftest", "test_models", "test_client", "test_cities", "test_cli",
+]
+disallow_untyped_defs = false
+check_untyped_defs = true

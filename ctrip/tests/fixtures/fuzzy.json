@@ -1,0 +1,22 @@
+{
+ "data": "[{\"poiType\":\"CITY\",\"cityCode\":\"LJG\",\"cityName\":\"丽江\",\"isIntl\":false,\"names\":[\"丽江\",\"中国\",\"LJG\"],\"airports\":[],\"cities\":[],\"cityId\":\"37\",\"cityCodeType\":\"CityCode\",\"timeZone\":8},{\"poiType\":\"AIRPORT\",\"cityCode\":\"LJG\",\"cityName\":\"丽江\",\"airportCode\":\"LJG\",\"airportName\":\"三义机场\",\"province\":\"云南\",\"isIntl\":false,\"names\":[\"丽江\",\"三义机场\",\"中国\",\"LJG\"],\"airports\":[],\"cities\":[],\"cityId\":\"0\",\"cityCodeType\":\"CityCode\"},{\"poiType\":\"AIRPORT\",\"cityCode\":\"CGQ\",\"cityName\":\"长春\",\"airportCode\":\"CGQ\",\"airportName\":\"龙嘉国际机场\",\"province\":\"吉林\",\"isIntl\":false,\"names\":[\"长春\",\"龙嘉国际机场\",\"中国\",\"CGQ\"],\"airports\":[],\"cities\":[],\"cityId\":\"0\",\"cityCodeType\":\"CityCode\"},{\"poiType\":\"AIRPORT\",\"cityCode\":\"KWL\",\"cityName\":\"桂林\",\"airportCode\":\"KWL\",\"airportName\":\"两江国际机场\",\"province\":\"广西\",\"isIntl\":false,\"names\":[\"桂林\",\"两江国际机场\",\"中国\",\"KWL\"],\"airports\":[],\"cities\":[],\"cityId\":\"0\",\"cityCodeType\":\"CityCode\"},{\"poiType\":\"SIGHT\",\"isIntl\":false,\"names\":[\"龙井沟\",\"中国\"],\"airports\":[{\"airportCode\":\"HFE\",\"airportName\":\"新桥国际机场\",\"cityCode\":\"HFE\",\"cityName\":\"合肥\",\"province\":\"安徽\",\"distance\":83,\"isIntl\":false},{\"airportCode\":\"FD3\",\"airportName\":\"白龙通用机场\",\"cityCode\":\"HFE\",\"cityName\":\"合肥\",\"province\":\"安徽\",\"distance\":110,\"isIntl\":false},{\"airportCode\":\"AQG\",\"airportName\":\"天柱山机场\",\"cityCode\":\"AQG\",\"cityName\":\"安庆\",\"province\":\"安徽\",\"distance\":138,\"isIntl\":false}],\"cities\":[]},{\"poiType\":\"CITY\",\"cityCode\":\"HSR\",\"cityName\":\"拉杰果德(印度)\",\"isIntl\":true,\"names\":[\"拉杰果德\",\"印度\",\"HSR\"],\"airports\":[],\"cities\":[],\"cityId\":\"60164\",\"cityCodeType\":\"CityCode\",\"timeZone\":5},{\"poiType\":\"AIRPORT\",\"cityCode\":\"RIX\",\"cityName\":\"里加\",\"airportCode\":\"RIX\",\"airportName\":\"里加国际机场\",\"province\":\"里加\",\"isIntl\":true,\"names\":[\"里加\",\"里加国际机场\",\"拉脱维亚\",\"RIX\"],\"airports\":[],\"cities\":[],\"cityId\":\"0\",\"cityCodeType\":\"CityCode\"},{\"poiType\":\"AIRPORT\",\"cityCode\":\"FNA\",\"cityName\":\"弗里敦\",\"airportCode\":\"FNA\",\"airportName\":\"伦吉国际机场\",\"isIntl\":true,\"names\":[\"弗里敦\",\"伦吉国际机场\",\"塞拉利昂\",\"FNA\"],\"airports\":[],\"cities\":[],\"cityId\":\"0\",\"cityCodeType\":\"CityCode\"}]",
+ "ResponseStatus": {
+  "Timestamp": "/Date(1792497546824+0800)/",
+  "Ack": "Success",
+  "Errors": [],
+  "Extension": [
+   {
+    "Id": "uuid",
+    "Value": "d2693c85-49f7-4284-9a26-467a5fed001f"
+   },
+   {
+    "Id": "CLOGGING_TRACE_ID",
+    "Value": "4788404414131662147"
+   },
+   {
+    "Id": "RootMessageId",
+    "Value": "100025527-0a2a44c1-497915-3034375"
+   }
+  ]
+ }
+}

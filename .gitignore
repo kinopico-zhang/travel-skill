@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 历史实验脚本(抓包期含真实数据,不入库)
+airchina/archive/
+
+# 本地业务脚本(扫描流水线等,不属于本 API 库)
+scripts/
+
+# 环境与编辑器
+.venv/
+.idea/
+.vscode/
+
+# 打包产物
+*.egg-info/

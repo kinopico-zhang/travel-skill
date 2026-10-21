@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "airchina"
+version = "0.2.0"
+description = "Air China H5 (m.airchina.com.cn) API client: award-ticket search, low-price calendar, mileage account"
+requires-python = ">=3.9"
+dependencies = ["pydantic>=2"]
+
+[project.optional-dependencies]
+flows = ["mitmproxy"]
+
+[tool.setuptools.packages.find]
+include = ["airchina*"]
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+# ---------------------------------------------------------------- pylint
+[tool.pylint.MAIN]
+py-version = "3.13"
+ignore-paths = ["^archive/.*"]
+
+[tool.pylint.FORMAT]
+max-line-length = 100
+
+[tool.pylint.DESIGN]
+max-branches = 18   # from_flows 抓包提取循环分支多,属正常解析逻辑
+
+[tool.pylint."MESSAGES CONTROL"]
+# pydantic 模型天然多字段/少方法;测试函数不需要 docstring
+disable = [
+    "too-few-public-methods",
+    "too-many-instance-attributes",
+    "too-many-arguments",
+    "too-many-positional-arguments",
+    "too-many-locals",
+    "missing-function-docstring",
+    "duplicate-code",
+]
+
+# ---------------------------------------------------------------- mypy
+[tool.mypy]
+python_version = "3.13"
+plugins = ["pydantic.mypy"]
+files = ["airchina", "scripts", "tests"]
+ignore_missing_imports = true
+warn_return_any = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+
+# 抓包工具脚本与测试放宽:mypy 2.x 视它们为顶层模块(无 __init__.py),
+# 允许无注解函数,但仍做函数体检查(模块名需逐个列出,mypy 不接受 test_* 通配)
+[[tool.mypy.overrides]]
+module = [
+    "cdp", "login_driver", "login_flow", "submit_code",
+    "award_query", "block_trackers", "flowdump",
+    "conftest", "test_models", "test_client", "test_session", "test_cli",
+]
+disallow_untyped_defs = false
+check_untyped_defs = true

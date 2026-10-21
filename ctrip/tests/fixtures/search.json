@@ -1,0 +1,4694 @@
+{
+ "ResponseStatus": {
+  "Timestamp": "2026-10-20 19:59:00",
+  "Ack": "Success",
+  "Errors": [],
+  "Build": null,
+  "Version": null,
+  "Extension": [
+   {
+    "Id": "flt-roc-guid",
+    "Version": null,
+    "ContentType": null,
+    "Value": "ff6cba23-0709-4dd1-a4d5-5f429afbcb50"
+   },
+   {
+    "Id": "CLOGGING_TRACE_ID",
+    "Version": null,
+    "ContentType": null,
+    "Value": "6238954995279514711"
+   },
+   {
+    "Id": "RootMessageId",
+    "Version": null,
+    "ContentType": null,
+    "Value": "100025527-0a62df7e-497915-3026524"
+   }
+  ]
+ },
+ "flag": 4196384,
+ "rlt": 0,
+ "rltstatus": 0,
+ "rltmsg": null,
+ "Tranno": "{\"msgtoken\":\"00000000-0000-0000-0000-000000000000\",\"sc\":\"10400108\",\"tag\":{\"TripType\":\"OW\"}}",
+ "msgtoken": "00000000-0000-0000-0000-000000000000",
+ "total": 17,
+ "fltitem": [
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "SC9227",
+      "aircode": "SC",
+      "ishared": true,
+      "crerflgno": "ZH9313",
+      "crerairlinecode": "ZH",
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T1"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 21:00:00",
+      "adate": "2026-10-27 22:20:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客321(中)"
+     },
+     "flagMap": 536870976,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 0,
+       "wifi": false,
+       "prate": null,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄15年4个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率93%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误29分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "90.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "S"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "BusinessPriority,StandardPrice,Luggage"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 680,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱",
+       "notetitle": null
+      }
+     ],
+     "drate": 5.2,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "KLUv/WCNCc0mAKpWuBAq0IbsPBBwH8K+2h5ucA+ujD6FiIHTfv0ReAWBNeV74E+5ML+MUg+j1JsB/AAAAQABDpSXoPTOf/Sb0xynG+MuO6ckf+e1jx4MOTlu3HUJ7o+PW9xMYMhLPW7xoGt+2SL5zn/0WNcgpyXJ+ztPP3oO5B3Ju0l3KXX1zj9owo5U+Oi5UKJQggvhheSb8/CVrr8xBC0c10QGqwk7TAE9BYgEY7GAngUBwUQw5gZhuPAeipy2Jf94p+iR+4qj8BXKgjwwyGNiHVOFGFjyASVZS54sy4TdryREXyErzle+En1lb6Fjj5pukHPg/orzBHgIFtFX9oWPk901xnH6Kw4JH31JckmIASH7wkfxnZ8fPSVJqIWiJEuerHeInvx2yd+Z0XO6Y97ZZNeY6Bm+Ub9DWqcfztO75JkpVuw1456peSlZ/C6iIFd183DO5qXxtVgH6bwhtM3z1LzJ2CDzdo70PEY6pma+Y6UqbE3ajXx3QPlhhGzS6tZxxnPDuGOsQ+ic9bupsJWhGfwQMc5Wt1SkmdpQuEAHVrXLVAIYwiidWUNTXks5DAHJVIrquRTEG5BINKrnogAgQbC48GroCk1DkgOTKJM0NTiN46OnWMDthXbcGMzBO89Q8jHk44QkN8jJhYZjoVgkHoJBwCiAEgoFVH30G1945+1Hz2m7uXFX7zxiIgoe2Uc/bu1bsMoxFElQj/adf6h0JMd0HO8sFo/ko/5KQl8gd91d053rAvorAR/9FhlsCe6P22RoZd55hAz76BfKUYt7e+efJ3qeaEKWAQ08c2ABPdBHv0u9vfMDpMdHv7fQ0XUBPo76HaJn2OC4EEa6y6g3VpK6v/Pw00cPRSh2YrESallAcyYgkr/zAqSGSnMzVbdlKs21meJxZAkvQykhHwW6rKR3DZY3efZAMpTpWWte/KAi7wWxuE0R5zWAPC7qmCRJkiTJw5OCC0ImEJmqNSl9RbxBEcGOWa8skcruvDfS3QuM3AuB3mua3lUgcq2je5cVebRqXd2gT50XVx7pd6wdH2w+iub6MN68jCP0hpalUOKk3a1fKus112sPGmDNVPBmxVOfDedLnAIPD2nG3Iv5FCT0HmAkGAQDc3sSAwRa4hlYbARGWygWm/IdhYfHPnqS1N2hLZAvQICGkmkYVF9nMwauofIwVGU2W12Qh8Q1pCxJBlUjbFQNSKNqhJeDSxKluJNWq2ex1bVnw5fKbp10CE0j3eZKMcUGlSXSS1mxRZWZMon0rTGuRvxpLKP4ZrTSOFM14bwojLEjm6raeVgTzorC/TpoA66ZVzH9Lm97rqNbrUY8nGm/MsZXcy+uGw/jOjHFZWIquxizpgyBdhtuoIuAZvaA6eLEdy5h3wnRk+Q7CgnRk5O+NS3ZwP194WWP4UZ/7zw8nAQZEFTgwC4cg9Fj+c7bBwWR0DwgIELCUBWtBxCYYKQkArgQCsne9uZGNsCY3uiAB0WLHRoIgRJFPI1znZvVqiypRWtaKmdQUzbzeXCjzNeiRaWxUQJXNLBUjmGjMhY0JBPzdGh+g5Je9+NMqFZO2xq1KdopKG7ZKH+Ov0GIoTrxrthBTllO37VAgS0M9l4DOrwaYIrvAhML0o2EQ5s2eCmCUgLkX6i2OBrGcCFCyxWlGd1hLgn2eq0o"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":680.0,\"flags\":[],\"policyId\":\"173188602667439025\",\"showPrice\":680.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 80
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "SC9225",
+      "aircode": "SC",
+      "ishared": true,
+      "crerflgno": "ZH9311",
+      "crerairlinecode": "ZH",
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T1"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 07:10:00",
+      "adate": "2026-10-27 08:25:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客320(中)"
+     },
+     "flagMap": 536870976,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 0,
+       "wifi": false,
+       "prate": 97,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄15年6个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率67%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误20分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "97.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "S"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "BusinessPriority,StandardPrice,Luggage"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 680,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱",
+       "notetitle": null
+      }
+     ],
+     "drate": 5.2,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "KLUv/WCNCb0mAKpWsBAp0IbsPBhyfEU81cpedh40bStJCahtzH4LvILAmvI98OcXc4tczSBXAzP9AP8A/wAFKC9B6Z3/6DenOU4zxl12Tkn+zmsfPRhycty46xLcHx+3uJnAkJd63OJB19yyRfKd/+ixrkFOS5L3d55+9BzIO5J3ks5S6uqdb9CEHanw0XNhRKEEM6GF5JvT8JSuvzEEKxzXxAWrCTssAT0FB8RCoYAeBQHBPCzm9liw8B6KnLYl/3if6JF7iqPwFMp6OLCHQ2IbU30YVPIBJdlKnqzKhN2nJERPISnOU54SPWVvYWOPmm6Qc+B+ivMAeAgU0VO2hY+S3TXGcfopBRI++pLkkfACPraFj+I7Pz96SorQCkVJlTxZXyB68tslf2dGz+l+eWeTXV+iX/hG/QUCWqcfztOz5JknVuw1456peSdZ/O6hIFd183DO5qXxtVgH6bwdtM3z1LzJ2CDzdob0PEI6pma+Y6UqbE3ahXxXQPlhhGzS6tZxxnPDuGOsO+ic9bupsIWhGOwQMc5Wt1SkmdpQmEAHVrXD1AEYwiidGUNTXks5bD4wVaJ6LvXwBCAQjOqxJBCZdoAIL4beXUhPMsCkySRNDE7T+OgnFXB7oR335XLwzi+UfAz5KCHJDXIyw3Aqk0rEOywIFgUQIpGAqo9+45l33n70nLabG3f1zs95KHBkH/24tS9jlWMokqAe7TvfQOlIfuk43lUqHslH/ZSEniF33V3TnWsC+ikBH/0WF2wJ7o/bZGhh3nmEDPvoM+Woxb29888TPTNaPHYBDTxzQAE90Ee/S7298wIkx0e/t7DRNQE+jvoLRL+wwTETQjrLqDdWkrq/0/DTRw9BJlZSsRFaUUBzIiCSv/MBJIZKczFVt2EqzbVZ4mlkCA8zKR/fBLpspHcMljd59jwwk+lZa178oCLv9bC4PRHnNXg4LtqYJEmSJMnDkoLJywMgU7Umpa+INygi2DHrlSVS2Z33Qrp7gZB7IdB7TdO7CECubXTvsiCPVq2rGfSp8+LKIf2OteODzTfRXB/Gm5cxhN7QshNKnLS79UtlveZ67QEDrJgK3px46rPhfIlTDQ/pxdyK+RQg9B5YIBYEA3N7EAMEGuIZUOzDRVMkFJvyHYWGxz56ktS9oWXIDxBAyjAMg+rrbLbAMVQehirMZqvr4ZA4hpQlyaBihIyK8WBUjPBqcEmiEnfSavUstrr2bPhS2a2S7qAppNtcKabYoLJEaikrtqgyTySQvjXG1Yg/jWUU34xWGmOqJpwXhTFuZFNVOw9rwllRuN8GZcA18yqm3+Vtz210q1WIhzPtV8b4au7FdeNhXCeWsExMZRdj1pQh0G7DDXQRUMwWMF2c+I4l7DshepJ8RyEhelLSt6YjG7i/L7TsMdzo752Gh5NgAoIKGpiFXy56LN9566AeERo8ICBCwlAVrQcQmGCkJAK4EArJ3vbmRjbAmN7ogAdFix0aCIESRTyNc52b1aosqUVrWipnUFM283lwo8zXokWlsVECVzSwVI5hozIWNCQT83RofoOSXvfjTKhWTtsatSnaKShu2Sh/jr9BiKE68a7YQU5ZTt+1QIEtDPZeAzq8GmCK7wITC9KNhEObNngpglIC5F+otjgaxnAhQssVpRndYS4J9nqtKA=="
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":680.0,\"flags\":[],\"policyId\":\"173188602667439025\",\"showPrice\":680.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 75
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "CA3551",
+      "aircode": "CA",
+      "ishared": true,
+      "crerflgno": "ZH9313",
+      "crerairlinecode": "ZH",
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T1"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 21:00:00",
+      "adate": "2026-10-27 22:20:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客321(中)"
+     },
+     "flagMap": 536870976,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 0,
+       "wifi": false,
+       "prate": null,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄15年4个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率93%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误29分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "90.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "S"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "BusinessPriority,StandardPrice,Luggage"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 680,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱4.7折",
+       "notetitle": null
+      }
+     ],
+     "drate": 4.7,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 0,
+       "wifi": false,
+       "prate": null,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄15年4个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率93%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误29分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "90.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "J"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "Normal"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 4410,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱全价",
+       "notetitle": null
+      }
+     ],
+     "drate": 10,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "KLUv/WDRCt0nAIpVjBAp0GbuPCw6dEinjwdYASKYDS8BG1qwDrqUP8OQA/+IsDjX1Ad88QBfzAwAAfwA9wAYX6qRNXMNynsxVrtaVmxxrAtl46WBGW1AjbZaacfIuj2o38axHNapoMxqhAeHA+OCLggADwn2kVmHIyw5mqhtmlRTxfg21EtPVUYdkpypMRjIP7+wIcGe8NJ/5CPhHDXkpW/vWXgKz6JJjpVvW0oFbkOC22KhOCgU0YImvIbCZXOy/DJ3bnHzSTa/pzwJT7GwhsHWMIhwVKU1CioYYk1cBVdYpdrsUxCkp3TK85SnSE/RHklpM1c97m/UT3mgANAiIT1FX7YZ0Txv35efUgDhpT/7fpCYsaEv2yz/efrSW9OjVixrquAK+wLSd1Gf+x8q/Zc55h/decZIryCa+QsEF132f/6l33gedz375v98fem/cYN9gxHwcubrnxcwda6NzVygl7k2lusQENUdwszkbIiTKOMeHOxgId0d1MhMaMhhNNuQq9usgX16UlJb0DDIOAMKpmmapimsmOZZzsCpFuGIW0UQas3jOEHDCwJKMhLDGcOzWeewGeZJtNGDvOphzXChrqC0W0G12OCFGEFgWTSC8HJs5TKDm2wllCVcYjmZqMMT3+x2Mi+5NqGhRrtoDbWjYRpii9oJLkVrIMCX5oUXdzTL13IbGGXsGSwcCNIwB9+CLtTYwbHp4Nei2JqadV2ssliHaA9O8Uq6yqJ5/OJLvXv53UBD3kAemX9e0m0vveY0c6m9fx6CJAiSaMQpogGIDiQiKHrp9Zm9f/5gMnjptUdSPBPYppm/gPQKejQ1pAO8mFlvZ8/8n4WvXvrIMeEiFe5RK4mI0kPUd6Uq6nWdBkqsRUMOd9xyrotlOMdNFM5tktuM9K7H3TWMZ1J5hAbFQkEQHRCI6Hrpva3557mX/suc/kx9/fMGaiAw6F56U1tEDXaaZNnHbHL//IQ9UACIHg6VSlUe//wCBewbA34brFTCvs38FASu6VrT3JL5zgTyUwrUfY7TP//S6y9/X2aY+uS79v3PW176kdzd1Jfnc9TiNnXJqUZyn9nUJYTnHQsfZQXVCQoRHLIeUBwUiwHqQYeBheUADSS0AWNJIBKc85+EhXe89L1nTlk0/aU/ZNa1mVgQ7iiAdDLcda4I40zgZZqsacKYrk31WZvqqzbVRzka1DTZWJ0CyTPIpfbRQVlzhFgho17HC20EEequSq6KCLUNte7V1SvfjLYhaWbde6muujQwvBuSXtbllqqdq3WhdquYhR5kKc5ZNEd4ceUZvtdurL0aJ9Qk3bUWSK/V2bt5VSepnDucUbaomXxQZV/5z4XkGkH63v9JQJC+R7i25Ic3alEkL9qs3QHJyeI/C9DuI0UgDBN12RhMNs9/njOwGo/60utSgTtHLX66k1hKqMEgZMgYxBDFCEnKqA5gIilTReUBEmizSA9UyhglNGJGOEFFE01chVlYB+IHhxKUiVPL2lcxhDWYKo0OAa1g1wIhQD7Aj23ER/BiFqsKlHuWZKAxfRUFtZrMkmeQme1kAl3sY6sSpix6FE6HEz0Ucg/Unut+r1ytAsyfKj/vdwTfxqCPTLMOhTmt7scOeeHAFwW6JIATW3DeE3b+x/u8t37grEsl6mMwA0UEQdNf5c187f/e9JfJmskmgqen8HrRb+XTKC84L6QkAk/D4G+3V8yiAg=="
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":680.0,\"flags\":[],\"policyId\":\"6182774788\",\"showPrice\":680.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 80
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "CA3425",
+      "aircode": "CA",
+      "ishared": true,
+      "crerflgno": "ZH9311",
+      "crerairlinecode": "ZH",
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T1"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 07:10:00",
+      "adate": "2026-10-27 08:25:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客320(中)"
+     },
+     "flagMap": 536870976,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 0,
+       "wifi": false,
+       "prate": 97,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄15年6个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率67%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误20分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "97.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "S"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "BusinessPriority,StandardPrice,Luggage"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 680,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱4.7折",
+       "notetitle": null
+      }
+     ],
+     "drate": 4.7,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 0,
+       "wifi": false,
+       "prate": 97,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄15年6个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率67%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误20分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "97.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "J"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "Normal"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 4410,
+     "quantity": 8,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱全价",
+       "notetitle": null
+      }
+     ],
+     "drate": 10,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "KLUv/WDRCtUnAJpViBAo4GTuPAh6XpJ9tf3YJhDAPPlEYHGNy+hq+1VyHnz5fc7gHcMYY4wNDgAB/AD4ABzjSzWyai5BeS/GalfLii2OdaFsvDRQowmo0VYr7RZZtwX126ijgXUqKLMcYYEkLS4Ic5C6S0Qisw4HMz2kGhtFqahq8W0YPz3DMuqQ5EydyUT++YUNCfaDn/4jIQfniEBi+vaeha/wLJrkaPn2pUzgNiS4KRQJKZGIFBThORIwm5Pll7lzi5tTsvl95Tn4ioU5CDYHgYRjVJqjYcERi+IsuMIs1Wa/YjB9pVeer3xl+or2SIY2c9Xj/kb9lQcCACkQ01c0ZpsSzfP2ffkrCgY//dk3hMyMDo3ZZvnP05/eoiDVYlmUBVfYK0zfRX3uf+j0X+aZf3TnOTN9gmjmVwh5Y3TZ//mffuN53PXsm//z9af/xg32DUpAzJmvfz4A1bk2VnOBnubaWK47QIxOCjWU0yFSooyDcLCDhXR3kENDoSGH0WxHrm4zB/ZpSkltw0GQcQQ0KIqiKCqs1/UsZ+BUk3DErRoIteZxjKDhFQEnGYnhbOHZrHvYDPMm2uhBXvWwZrhQ1yjt1qgWG7wQHwasizYQXo6tXF5wlK2E8oRPLCcTdXjim91O5iXXKDTUaBetoXY0TENsUUvBpWgNA/jSvPDijmb5Wm4Do4w9w4UDQRrm4NvoQo0fHJsPfi2KralZ18Wqi32ItuAU76SrLprHL77Uu5ffDTTkDQwkpvnnJ9320yOcZi61989D0ATRKQFxiUgAogKICIp+en1m758voAh+eu2RDJ4HbNPMrzB9gh5NBPIBYsyst7Nn/s/CVz999KBwEgsHqRZERKkU9V0ZFc9b12ngxFo05HDHLee6mIZzHCXh3Ca5TUnvetwdYfFQLJDQkFAkBiLpcIiun97bCP8899N/mdOfqa9/nlLDAEH305v6IiJgp0mWfcwm989T2AMBgKgkWSrDAvnnFypg3xnw26DFEvZt5q8YcISuNc0vme88IH9Foe5zpP75n15/+fvywtQn37Xvf/7y04/k7qa+PJ+jFrepS041kvvMpi4jPAsf5QTVCAoNSFkLJKSEQoB6kCSguEiQAEIbMhfEAcE5/zlY+MdP33vmjAtC/+kha10bihXhj0akk+Guc0UYhwIxFGVRlAV1barP2lRftak+xsPBoCgbq0sgeRa51EI6KGuPECdk1Ot4oZUcQt3VyVUPobah1r26euWr0TYkzax7L6OrLg0M74akl3W5ZdTO1bpQu1XMQg+yDM5dtEd4ceUZvtdurL0aJ9Qm3bUWSK/V2bt5VTepnJPOKFNUTS6osq/8B0NybTB97/8cGEzfJVxfMsQbtSiSGG3WroDkZPGfBWj38RBJBoqB2ZlMNs9/niOwHJD60+sygTtHLX66B0qowaBzyBjEEMUIScqoDmAiKVNF5QESaLNID1TKGCU0YkY4QUUTTVyFWVgH4gcPJWgQp5a1rwKE9TJVgg4FWmHXciFAPsqPjcRH8GIWqxro+5ZkoDF9FQW1mswSYpCZ7WQCXezjqxKmLHoUTocnemhyDUQ8935cuVsVvJ82P493GN/GoI9Msw6FOa3uxw554cAXBbokgBNbcN4Tdn7C+7y3fuCsSyXqYzADRQRB01/lzXzt/970l8maySaCp6fwetFv5dMoLzgvpCQCT+Pgb7dXzKIC"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":680.0,\"flags\":[],\"policyId\":\"6182774788\",\"showPrice\":680.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 75
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "ZH9313",
+      "aircode": "ZH",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T1"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 21:00:00",
+      "adate": "2026-10-27 22:20:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客321(中)"
+     },
+     "flagMap": 536870912,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 0,
+       "wifi": false,
+       "prate": null,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄15年4个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率93%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误29分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "90.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "P"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LockPrice,PriceBidding,TravelPackage,EngineLowPrice,SurpriseProduct,LowPricePoolV1,IataNoProduct"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 440,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱",
+       "notetitle": null
+      }
+     ],
+     "drate": 2.9,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 3,
+      "disAmount": 15,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "3;4",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 0,
+       "wifi": false,
+       "prate": null,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄15年4个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率93%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误29分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "90.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "Z"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "Normal"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 810,
+     "quantity": 4,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱1.9折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.9,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 1,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "优惠后￥425",
+       "style": "blue",
+       "tcode": "Campaign_MergeDiscountShowLabel",
+       "extrainfo": null,
+       "flag": 256,
+       "tcType": 2,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 44,
+     "indexno": 4,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "舒适座椅 舒享体验",
+       "style": "",
+       "tcode": "G_SFTFWSTY",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 0,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "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"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":425.0,\"flags\":[],\"policyId\":\"408017043961627053\",\"showPrice\":440.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 80
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "ZH9311",
+      "aircode": "ZH",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T1"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 07:10:00",
+      "adate": "2026-10-27 08:25:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客320(中)"
+     },
+     "flagMap": 536870912,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 0,
+       "wifi": false,
+       "prate": 97,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄15年6个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率67%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误20分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "97.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "P"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LockPrice,PriceBidding,TravelPackage,EngineLowPrice,SurpriseProduct,LowPricePoolV1,IataNoProduct"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 400,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱",
+       "notetitle": null
+      }
+     ],
+     "drate": 2.6,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 3,
+      "disAmount": 20,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "3;4",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 0,
+       "wifi": false,
+       "prate": 97,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄15年6个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率67%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误20分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "97.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "Z"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "Normal"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 690,
+     "quantity": 4,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱1.6折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.6,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 1,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "优惠后￥380",
+       "style": "blue",
+       "tcode": "Campaign_MergeDiscountShowLabel",
+       "extrainfo": null,
+       "flag": 256,
+       "tcType": 2,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 44,
+     "indexno": 4,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "舒适座椅 舒享体验",
+       "style": "",
+       "tcode": "G_SFTFWSTY",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 0,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 4,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": null,
+       "tagcnt": "近期热卖",
+       "style": null,
+       "tcode": null,
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": null,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "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"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":380.0,\"flags\":[],\"policyId\":\"408017043961626932\",\"showPrice\":400.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 75
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "DZ6259",
+      "aircode": "DZ",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T1"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 00:20:00",
+      "adate": "2026-10-27 01:30:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "波音",
+      "cdisname": "波音 737(中)"
+     },
+     "flagMap": 0,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2;3",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 100,
+       "wifi": false,
+       "prate": null,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄9年6个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率100%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误16分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "87.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "R"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LimitedCtripMemberShip,WeakLimitedProduct,EngineLowPrice,PriorityPackage"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 250,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱1.8折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.8,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 1,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "铂金贵宾可享",
+       "style": "VipPrice_Platina",
+       "tcode": "VipPrice",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 44,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "东海航空深圳进出港酒店特惠",
+       "style": "",
+       "tcode": "G_DZSZXJD0410",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 0,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 4,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": null,
+       "tagcnt": "直飞低价",
+       "style": null,
+       "tcode": null,
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": null,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "KLUv/WDVCaUnAFpZMBEp4GaMNyB6Y6UJnWgGWfRmoBxWvsxgO2XURwMQbf0T82EIPGcwwwwzxgEBAQgBBwFWcy/znRPyVwrUnZbUO//T6zCHYVZ0nfJd0f3Oez99aW60a8xzWmpyd31qqtLcae76hPC8P32i7/xPr/Fc7pqim7/z9acPyy2iW4yIX5qxd34hY4rowU8fmo+DtMSYH7pBZ+ErPJPdLC3h9s7NzZiiJj1R9ETRAUogCBKIQwIBOjbf5uYZ5ptucnNK7uFXnIOvWJmjoTkakbuorINh4SAWdS1clVkqbfuKwfQVtOJ85SvTVzRoLnTPVZc7LPVXnCfAI0XTV/S3e0TzrIVh/koBg58+RffDvJQO/e1+vvPQT29Rj2qxLMrCVdkXmB4ldbrfgaYPM7+8o1GeL9NvyJ6/QJgCWLF0jd7G/KIdBCZ0/DauMU/syOGO44KU3AjwaC/IJQRArjvM8T03nNnSWlKVdbHCm9DCYiU1Soa1XBW2LloePkcOdzUX4JFzSJVnMQObYEiSNSTWzidzHbcWNFquwzhTTDCHcdYvzI0armt01cPduG0ofINQDj/SZklxYkseabVCnYJK2LQaatKGgEVmtZZjLDAYFNjzSRCBiCNjShQ4LgFA1EKjKBVVKcLM4qenWEo9mrfrywXyzuswj1+ObNLdzd0jjoVieYwECAGIRGSQpAj76cGNeefvTx/mq8OusXc+IUWHjvHTd+2RmCzt5omWud93fqEiovsihlu0WEZ09/wVA45Bdbmn7/xtWI5H/en1ublpqclQo2aG8M5POu2nx6Q9nxp8559neqLpeS4iGniggUP0RD+9TjP4zhdQjZ9eg+aC54Tde/4C02902THmJX49ay1FM39n4aufProoN2K5j2o5RBBkiAYMoDAF6mabKso21M04v49RvJANbcruGFm6WRACCfcgLQK28YVAG+M6ZDKaQnyog8i5m4UflbAkFEVRFCXh+lnhDJxwjUTlFdjnHiqE8zm5G0OlFWJEUdTHKjiXKKAHrGBkCfDTVXBiy2zUrmyTdKllM8wtWqGPqxdDJ7ZZx7d+Qdiq9yacUMaJSjfAijmML9dh74ITrNFVzIqcgvJrEc6JTaUtCx9lBKQP0JMwZD2AMCAEDEDgYxgQ4BmegYMmuHgH6fDTg1uTvnOw8PanR9HMFx4G/fG6WIZiQfjFgChIuE4BizINJX4UZVEUBYVlqtDKVGGVqcLF5VhQlJGBbZVLUAxtmK7CsB0tVyHM7MYNorG4izcMY1LLQBZ+JBOPJ6pPoSIzCOXuRlF6W8ZxxsSZpUDgGN2G8TXaTFU1ToHAKVA2rF0bltaaGcbGjcSb8zXRHB2kjSLfrm7D4lV1jYxLpIfbFh3H9hoxrhWrGG/YueFNGi0F5NrCfKs2wlYatzSrLpoq3AWVJDzf+UyuDaZH0XcODKZHI1x7+QGWmiTNT3dTk8l3Fp6Nlrmn375cAjsgIEKikCpaD5FJBMCLEJL07Y2bbGA4vdEBD4oWOzQQ4hVFdAXnoierY2eoBY1aqmdQWzaTrKQorwVL4yQFrjywFM9hvjK2KgrMh+Wat0NzMCj5dT/uhGd3etaoR93OP3PLVvlnRA1CDFWJR4UHLfV3+C/CRLYs2HsL7nAqQCn+FJhZkG0ENNq0gUsRkhIQ61a58fGQAwQLNUHwtnWH+STY60Wj"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":250.0,\"flags\":[],\"policyId\":\"79679379162202205\",\"showPrice\":250.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 70
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "DZ6261",
+      "aircode": "DZ",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T1"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 23:40:00",
+      "adate": "2026-10-28 01:15:00",
+      "dcnt": 1,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "波音",
+      "cdisname": "波音 737(中)"
+     },
+     "flagMap": 0,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2;3",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 100,
+       "wifi": false,
+       "prate": 97,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄10年5个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率100%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误11分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "97.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "R"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LimitedCtripMemberShip,WeakLimitedProduct,EngineLowPrice,PriorityPackage"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 270,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱1.9折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.9,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 1,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "铂金贵宾可享",
+       "style": "VipPrice_Platina",
+       "tcode": "VipPrice",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 44,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "东海航空深圳进出港酒店特惠",
+       "style": "",
+       "tcode": "G_DZSZXJD0410",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 0,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "KLUv/WDVCZUnAFpZKBEo4ISMNxD9AW0u05JCH1w8SHOJlrXAFs3Fbqdsz7Mc8Y2BdwxjjDE2OAABCAEIAVbzL/OdFfJ7DHWnpfTNf/Q6zGGYJ1SnfNe+v/nvoy/N3VGNeU5LTW5UnxiqNHeaUX1GeN4VffZv/qPPeC53Tfvm33z96MNyi32LBWIlzdc333AxxX7w0Ycm5CAtE8xK32DT8B7PJGqWlHB/Z+ZeTDFDOBDkQFDiWSgGForEQgE+MpXNzTPMN93k5lxGw/eag/cq7OHIHo6Cy6Dso0HZIpV0KRuFUahMe88geq97zXvvRe9p0GRoNFdd7rDU7zUOAEcBRe/pykYLNM9ZGOb3GAw++rRviGkpH7qy0fObfz76SoJUSlVJlI3CniH6Tup0f/NEH2Zu+UZ3ni3RZ0g0P0PXAlgxwhq/jfnt3QMqdPw6rDFP7LjhjmOClNQG8GgvyCUDQK47zPE9NYzZ0lYICkNFCmfCCouVzDgMZ7kuaKhYffgcN9zVTIDH7YGgPosb1wQ/kowhcXY6eeu4rZ7Rbh3G2DTBm8WRais8YrbO0dUPd6OW4bj29A07CM2S4sSWHMpqfbpJUtCyGmYYDuGCzGqrx0hwOEyXE1rhdS/TlCzwRcPiSIxM4iiJmsIL46PnKKUezYtqiyXyzeswj5VckEk3am60oKFwFMg4oAigWEAHBAK6PnpwJ3zz96MP89Uhqq9v/klAia7x0aP6IxOwFDXPXmb0fvMNnti3RQy3SKGMfaP5PQOe0HUZTb/566gekPrR6zNz01KToe4mhvDNT7rso09I0Xxq8Jt3nMg5RAPQVUACziOQgBzoo9dpBr95Asnx0WvQZPCssFE0P0P0GV2iCaYlVtCss7Rn/k3DUx89ZHG3gHIhlZKAnucACRAgXQvSxTIUhGWki3F+IaN4I/vZ3O4aWKpVkQHJBiEtwrXxjTxaw0pcLtkkOlJC5NvFwoo0OQ6SJEmSJNk6gsIYONkcC+ojsM5N1Afnc3IzB0pPIsRN1bET55LpccAKQnYAO10FJ7bExszCNEmXVhbD3Pb6VLZ68XNii3VcQ60HV/VehfPJeEFpB1jxhvHdOvxdcHI5unpZkXOdX4twTmyK0AIND2XFoxOPszhkLaA4KAIIPKBzEAjwHRyBhB6wfAlE4qMHNyb95qDh7Uffe+aML6E/x+514aoItxqRBcnWLVwQhpHEiiRVEjdJ14UKqwsVUhcqZFgPhsSNjUurXNLxoyV01IXtaLf6XGY3ahFMtV2sXRiT2eWpsCOZfHxBVRYoEnv6djNT+WkYxxcTY9WEsDU6DWNrtBeqZtuEsC1wGs4s7UprxQ6j40LizdmaZI/uyUaRa1anYdGiOgfGJQhn0xgdx9YaMa71qhhr16nhu6DAC3JdYa5VC2GLGLUUoywYKtwElCQ8v6mYXBtE3/s3BwbR9wKuvwwBS02SZkWjJiaT3zQ4u5cZTSvbYgk7ICBCopAqWg+RSQTAixCS9O2Nm2xgOL3RAQ+KFjs0EOIVRXQF56Inq2NnqAWNWqpnUFs2k6ykKK8FS+MkBa48sBTPYb4ytioKzIflmrdDczAo+XU/7oRnd3rWqEfdzj9zy1b5Z0QNQgxViUeFBy31d/gvwkS2LNh7C+5wKkAp/hSYWZBtBDTatIFLEZISEOtWufHxkAMECzVB8LZ1h/kk2OtFow=="
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":270.0,\"flags\":[],\"policyId\":\"79679379162202205\",\"showPrice\":270.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 95
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "HU7024",
+      "aircode": "HU",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T2"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 13:30:00",
+      "adate": "2026-10-27 14:55:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "波音",
+      "cdisname": "波音737(中)"
+     },
+     "flagMap": 0,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 100,
+       "wifi": false,
+       "prate": null,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄17年5个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率73%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误28分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "94.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "U"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LockPrice,StandardPrice,Luggage,AirlineMarketing"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 550,
+     "quantity": 10,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱3.2折",
+       "notetitle": null
+      }
+     ],
+     "drate": 3.2,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "3;4",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 120,
+       "wifi": false,
+       "prate": null,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄17年5个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率73%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误28分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "94.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "R"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "AirlineMarketing"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 1190,
+     "quantity": 2,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱1.7折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.7,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 44,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "自贸港快线",
+       "style": "",
+       "tcode": "G_HUZMGKX2",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 0,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      },
+      {
+       "tagindex": 1,
+       "tagcnt": "宠物友好",
+       "style": "",
+       "tcode": "G_HUPET26",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 0,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 44,
+     "indexno": 4,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "自贸港快线",
+       "style": "",
+       "tcode": "G_HUZMGKX2",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 0,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "KLUv/WDFC0UtAMpkMBMp4IbsNhjmSv+xsfEMV5gQ2bHHZKxvCE598X6CcK2WEX3D8JzBDDPMGActASIBJQEG3d2wDcz/TZ6qwk9ckEIlJs5+gTV5KsGa8DHywdq2LUVBq23/1we9dtVcXv+gJryOrXLfgXdD2Zea2j+Ja8NvYsUNYbXSjSEVuFj1sOdRYB1uxagHaIBAMKznQi4wB49xlCxsk1scpAJMokzSxPAyDY+8YREzOGZlVlCIuOMNmfEzEzxyb4QknCJmvJi6cxq8snFYjqLF0xy5yTLjhykWAahCcXgSDwHUPTYXvUfSw9mpQ70puPS84iR4hboeDuzhOMgak30UWLQIJWUWbbosE3a9ghB5xaw4XvFK5JXcjY1c4ppF7YnZK84D4EkkIq/kiy4P8saY52GvMCB45KepIaOC+MgXXZLuOPXIKQlSLRQlWbTpcobIzTCf2h0auYe3gjvZ3Fgh8k1YYmcIkjvukWcPex5mlPncupraHec8cnHUZpl/41PMoS4zqZnEUZ+4zGRkY33JpOmOe+TYxqKup6m3O149ck/Un6m/g+9yYssdFyBAshak7NpM0LWRsmvvDAJ+WURTTdFbwXVeKnKQaJDQDrD0ZxF6CypFJoMxvkdSfFvLLu8iVVUoSZIkSRLtmepf3URzEEycgX0yRaWPyUm2QUyZ8UEURn0sY28Jgz5d7SB7+Ger3cSKF4hV15VsJ/VfRUtVNNNq9rSillZtray2TdzPNhvFGsGUN8+EtY1mm7qAB3STy7HVfHWbMn7217Yxs4Iu4/ZPGZPXqo2Z1X5qA2+5Ve5fvI5uX3yGVyMvZ7v92tMO/80+hkPTOlDTUKoFnuFb285fVzfTbhvRc4gONFtAAw8dUEAP5JHnE3fuuIHk8MhzNzY2LqDLEjtD5Jsslpix+i4lzthp4u1Og08eOVRRsgNLBqkWBUQpAjJ1fVhm1bDXb6t50Av59tr2LSv6VM0ySF14zNgYtdFLffte+6mtXtrvO6lAq8nJPZ/aBjl5inx7XRsrq32hNNpd2N7Srq1VCl7tDO9km7gJAfjaRiWI7mYY+WBtT15DqZbmCR+rHuvr9ptPrQGFKJNvwmk1e80EPSXBxxLTUygWCHhYBFgQQIhEArI88k5j3PHMI/dwlr0yW+44AnoW1+GRl5kLMddZjqQp4jJzxz1RnxkssZVFDSm15DwAHgJKLbVhgbjjDZXP1Aqfpz+LBTR1ib2CsDFmtnlzeGtcAHuFoepTDA0O4QXNCvoQIHAeWCAWAQZo9yAGAnCIZ0CRDwqcIqHQnO4kNLj1yE0T7waHMT1yhCSzMhQqsquCyIJE2xYs6NJI30WSKInCkKzM5FGZyZsyk9eoHg2JAmaXQK028vRi7OHtBtpKcK3ywY9oIOv7j5QUvGQS1GssjfsS1/pqc+b3F0Pet9W2X6sFf1+MpTS7gfarUKL938w2WZicPLXRfzrwIb+AtW5ntaKyrQtXcyv3BBNXry1JPNptbPttBf7XatX/a33aYxoQu9221O9LWehtArznNSloJk8bTBKPdOcy7owQuWm6k4AQuXmwM4chnZjDcLzkEhs1OHSn4dGmiMvzohUUcHm645mDekCqR57JTXaKOfSyOV4D3PHJhnnkmLPEZO7c8ecJSqjxpFLIIKRoAolkJAUl1QFgIiFTReYBEgiUQNBSzBgjNEZgxI1woqkJq9JSBzqGzplghvsoan19S6slrngdEJprZ5IhXnZKV0QOnFydRdh2Se9MMmheFT21rJgnmBUxo8B0D9KoWkIZffPNoTENABbI76gYLfWT4/7vNOv5Mmr+QublYrinQVEeUxVGm1bpc2mz9BirxlYaMWS75Q/OdJfGX4C2isDtZg3u+8CBDAPsBagfz33SPkjTSUrANhpcUx6ik81vhU9jy/Dt0DqB0xoRHsVei+IP"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":550.0,\"flags\":[],\"policyId\":\"290503661876\",\"showPrice\":550.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 85
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "HU7022",
+      "aircode": "HU",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T2"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 07:25:00",
+      "adate": "2026-10-27 08:55:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "波音",
+      "cdisname": "波音737(中)"
+     },
+     "flagMap": 0,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 100,
+       "wifi": false,
+       "prate": 100,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄13年7个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率96%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误12分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "100.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "U"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LockPrice,StandardPrice,Luggage,AirlineMarketing"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 380,
+     "quantity": 10,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱2.2折",
+       "notetitle": null
+      }
+     ],
+     "drate": 2.2,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "3",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 120,
+       "wifi": false,
+       "prate": 100,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄13年7个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率96%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误12分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "100.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "R"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "Normal"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 1290,
+     "quantity": 2,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱1.8折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.8,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 44,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "自贸港快线",
+       "style": "",
+       "tcode": "G_HUZMGKX2",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 0,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      },
+      {
+       "tagindex": 1,
+       "tagcnt": "宠物友好",
+       "style": "",
+       "tcode": "G_HUPET26",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 0,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "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"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":380.0,\"flags\":[],\"policyId\":\"290538940252\",\"showPrice\":380.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 90
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "HU7026",
+      "aircode": "HU",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T2"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 23:00:00",
+      "adate": "2026-10-28 00:35:00",
+      "dcnt": 1,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "波音",
+      "cdisname": "波音737 MAX8(中)"
+     },
+     "flagMap": 0,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|KLUv/WCaDsU6ADp3mBYq0IbsPBD9YCQN2+inBG7AldFngZQeIfs2eAWBreFrWsf8wKfgiwf44gEVUAFnAWIBeXrnX/pqqbWUsWvHt+L3nb8833Vi2nMd766khqpkBNP7VZK/8y+9hmm+VecXv/PVS2/zDfkNE8Kv0+udf8jokC+89FYjLPRc6o9f0Hn4Cqbj1tli74XcbBkdagUPIoFQGESIxyACH5vvYk1auvU7Xkyh237FWfiKhT0c2sORsDWo7HFg6SLWtFk6CrNQGvcVBekr3FKM+Yrzla9IX6mgbtRNq5qvzfUrzhPgeRDSVzDVrKVfcVB46Tu/CBqTH/W7m3znoZfemhAqi2VNlo7C3kF6Pta+62Ws465kyTuvGY353Wj0Tqhfprvk+ZKbrX671BquXYdfCdas3/CdBwfpr0YP7cUYTAX1t9mV4eIKvlPL3aXP+na6be35kSuuZaWhW760Z/3V7+6Emu9l1J+luLJ0a7iXdyrHFCM9mOs46q9m1tJ3HukdEqxvTZKl9g4B5GTbJKjKCCNKo3oyBsYSBvSAFRhliPl4FTjJMiZqEIyTeN3KsIkzzQP6umqbEDkzzMPchkDTqrYtzCI6DUTJA8STZnPrqgZqAHR4locvb2JuAhGzS064PqGsQU6mRc4Mw7C2IfizNB3X4M2rw3BXQSLX9ZGbeNRlYiDOzoMkCZDb8GRqKNWlecapQZ4rBPHkE8oKQBFlEk4uXbVNDRVNiBMploK6ZPPgmkxIQjXj1MiHdh7OLEjMOm9OjDHJMDxKeDY7UTNyDq+6TFDkNhTMQbybj4LLxnCSZRxpVQV5jImBm5XVosfBheAqzXqIBRIJxvV8CgEL+tBa0oAHFBiIU0ObKNREMWym8dJTLLmKetsVg4m88zbfXsVNr5ovwr6TY6FYEEREwYACgyihUETXSw/e8p3fXnpLt2p3vd75RfQUcI4veaZ7e+cfKiG/mNDe0GIR+d30Kwq45DWr+ELxpQz0Kw7V7QHbd7G0N9yLxuRrL2O3DPQdvOla1hfc+vtovleChl78cTVDftSrqVzr8Kt1h53fkN93HjYN+TtPgCcjdcZU8HkkRASgYOJpCPCgMty9p03BXDH9Imi8neJbXjZ95znH70vf+eeRFAjpeQAMiAgeiGARPdFLXzsFC0yOl37TowR951/6CLbr3Zs23kF63rXDQUF6rjH54t272N/5iBZAdQE9BglaCQoSBQMIIPBJEAy4JB6CRUVgLgvF4uvXOwsKl8mKJCfHEnLBXOrdwU3Svem3Z1oeeGdBQfqKey9DLevb9ag32eD5jqQGHz2XepyqzTT8NFSvHIOJVEsrvuM7D0+99BGEsiVYNoTKsoggKBHx+84TIDBdDdOGbagI20wbhvGGIIZb5EKXcr0DrHNWBCHpEMbMwHXnFoG4A8gik9EY4TMtQtxtmP0miCMzTdM0TZKOk9XEwEnnMKAuBbJnW1TQpAEPXPwoBOy84Z0n7xzLfDvFCS89ZsCPeOkvne7Ky3fwA2QPVP4OJL3OtvJ3Hmwu9ebij6G/s/AFlh7aWzsostmbRgQaeuUrfjX83vknsihIb2nnIlktFT+aUL/LsCsn+9gxdb8zANrvPNAC3nd6p0QANwUz7do7n0Z4rDH56k0+9rYrQ7EiGHIQaZB0XsMVYZop/BiTNVEY05WhrJWhLJWhbAPyaEwU8eDiKijjE+JKj7pmJmZdBV0UFLkIw9FNb7smJH4ZsJoRhcs6RnVpkIycxWjgKo+6NIiY7QpL+ISm5lFXNsWsq3AXmXM2NNaVQcS54aD5QOPMGAjaTcxZkPHrNOOEOIh2CupSYViieDqu4eGZQcQ5q+qq5uQukrouA28UEGfWxJyVRTNTiFzHKIyGsrcAJbFkqTNSZ6Qmx4976WvdDBTzzsN5x4AZHWodlxRTwae89JxT/FXxuwGArKixJIaUQsaMyAzJBClIWjhAQqIQ0RwPEmAQqqbESSiokRkFJSUFNbI/B4Gc3ZiFBK1P2GLCBSuy2ariFWUwqiT2hd6rBiS4Ueto/c3F0APVWnsoDyvv4qdFEySUEHD0NowGPb0zUgsdJYoGJY9R8yiJjnEd+dYCvFNDGDDXXASKZywKv1bvtIwjfRTkTiCiAVjySaP1HhcsaDy8DzJ+u1mbJNR5rO5sC5vBAtz9ikANBh8KgzWjmClGk20lLs7QHdwiomW5oMhZ47WNQH9Va9Wk8EAS+B2fABhhDn5LC7LaueBDMNd+bPggO+IGXw0FEdxXOc709rcZYUJFokuhsyMLDogSfEaBDaRwD80YOcjkT00LkVUiPmdEdttHM/hUYCQyI8IN9hgHpY7iN/bh19Bo+6/rqmDFK+nQqsf9czklbwjFoaSdzgt/nh6QIkBJHeEAx274i4zw7E7ZVeyIKpQXwSs3j3e/7TjsYRCdDeCH5rmX5hOfD1KnrWg4m9IgQmG6V6E2Eg1WCREZM6J60mNaCxcqwwhl2N0xdOvGy0eCudx0fbzyR/DgNB4V",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 100,
+       "wifi": false,
+       "prate": null,
+       "meal": "无餐食",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄4年1个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率92%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误24分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "94.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "U"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LockPrice,StandardPrice,Luggage,AirlineMarketing"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 300,
+     "quantity": 10,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱1.8折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.8,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 44,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "自贸港快线",
+       "style": "",
+       "tcode": "G_HUZMGKX2",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 0,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      },
+      {
+       "tagindex": 1,
+       "tagcnt": "宠物友好",
+       "style": "",
+       "tcode": "G_HUPET26",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 0,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "KLUv/WDHCX0nAMpYDBEp4GbsPAB8lpmUsjoyuGEnG7QX8B63R78F+Vlpz7NDdCcTvGMYY4yxwQH/AAcBBgFdW80tme9cID9Foe5zlN75j15/+fvyZOqT79r3O2/56Edyd1Njns9Ri9vUpYYayX1mU5cRnneny/7Of/QYz+OuZ9/8na8f/TdusG/QAOzObL3zCxkS7Agf/UdCEM4RQ3Z9e87CU3gWTXKsfNtSbrIMCWKKx3AwIBaQ4VlAnmPTbU6WX87OLW6+ZfN7ioPwlOpyNDBHwyBjUNZBUNEilZRVNOqqUNh9ykH0lE5xnvKU6CnaIxnazFWP+xv1U5wHwPMYoqfobpsGmmfs+/JTFA4++rNvCHkZHbrbZvnO04++kiC1UlVSRaOuV4i+i/rc79Dov8wv7+jO8yX6jWjmVwgnppZRTnBVYntdHDMfvKs02k3gsKVdXKs0vNop3glHWSaLEGsclRy8m/EJ1mzV0jwixh6PBXocd0xtAYW2CTixaDXDGgrC9IZbhaAsFhNYE0wlWSNirHyyxnFb0dBqHMbXNLEXFyXdYi3UiLfBVQv2wrvZ+KVdww/iWhGc2JFDWK2Um6QCF9cPgxwEluFWrHKEBYfDZD0dIkAiO0hSksAFKBahxMCkjZKo6cswPvqtMuqQzEx9uUTe+W/cpw7NbOlxQ8wtOZWtAgkNCgGKBXRAICDro/c25p3PPvovZ/oztfXOJ6BHcRsfvaktIuY6TbLsYzazd36BAvZ9Ab8NViph32Z+ygHHBJ81KgekfvS63GTnqMVPd/Ii8M5POOyjx5xmLrX3zj9P9DyRAcoU0MBDBxLQA330+szeO18gNT567ZEMngts08yvEP1GjyaGfICdmTV29szfWXjqo4ceW2ZQySC1koAoPUB9v/MDBkhWgpRdGwq6NlJ2cZ5BQjCLbLq3zRFc560iBokGES0Ba+MsQi/BI5HJYBP4SAmQa9n1ddKjkZEkSZIkidbLii9vojUWlKXAPlmiUpzLSbY5UHoCoY1RHztxLpno41UPsgb8cNWb2PEKscd1JdxZ2Qtzq3HQTqsZpiW2F8ev+aC4qlkGWijjRShxeBxnizOtJmQCXoOrOG5xmN/JI7S7nNwLD2UF1Qn6LA5ZDygOCgED1HsOAwIsh2cgoQ0XSwKR0JzvICz8/eh7z5xhwfTnXGZltirCHwSRBInGJVjQpZHAbpIqaZskK0N9VYb6qAz1MR4OhrSFBNat1HZML4ajLGxDq1VqZS+8kamhYS6zMA27jFcxtF2rTdWSIBFvNSXcylEW9gitWbmkY4oxjrIsDq1WuRbBGDM0lWUfId5cih8qYjsZsob5rR5ip2lETC/NGoKy1ItLEI92GRzH9hFiXKtVMb5WSVl74tnmcVthfisLYYsI73lRFw317QJK8pXvdCTXB9H3/g7CQfTdgGtLhnijFkWy0yapyeI7C8/uYzbPbl8u2TzfCTwgIEKikDJaDziYYMQkAuBBCMn69uZNNkCc3ujGg6bFbg2EeEURXcq54cnq2FlqQbOWihnUns00KyvGazHSAEmBKw8sqXPYLxmrgtVoSgdf8jo0T4MSXvfjTogVp0mFmpLaCWdu2Sp/ha1BiKEq8YrEQZsc5+5acMAWA3svAB3+3Ivit8DUgnQj29HGDVJGIIKAmUvVxkdDDhIs9ATh2tYd5pNgrxeNAg=="
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":300.0,\"flags\":[],\"policyId\":\"290329534307\",\"showPrice\":300.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 95
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "CZ3669",
+      "aircode": "CZ",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T2"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 09:00:00",
+      "adate": "2026-10-27 10:25:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客321(中)"
+     },
+     "flagMap": 0,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 100,
+       "wifi": false,
+       "prate": null,
+       "meal": "无配餐",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄12年8个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "0.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "V"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LimitedCtripMemberShip,WeakLimitedProduct,EngineLowPrice,Luggage,AirlineMarketing"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 470,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱3折",
+       "notetitle": null
+      }
+     ],
+     "drate": 3,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 2,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "3",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 120,
+       "wifi": false,
+       "prate": null,
+       "meal": "无配餐",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄12年8个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "0.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "I"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "AirlineMarketing"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 1370,
+     "quantity": 3,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱1.9折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.9,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 1,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "已优惠￥30",
+       "style": "adsorb",
+       "tcode": "Campaign_MergeReduceShowLabel",
+       "extrainfo": null,
+       "flag": 256,
+       "tcType": 2,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 4,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": null,
+       "tagcnt": "超值优选",
+       "style": null,
+       "tcode": null,
+       "extrainfo": "B",
+       "flag": 0,
+       "tcType": null,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "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"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":470.0,\"flags\":[],\"policyId\":\"290497635065\",\"showPrice\":470.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 85
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "CZ5119",
+      "aircode": "CZ",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T2"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 10:25:00",
+      "adate": "2026-10-27 11:55:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客320(中)"
+     },
+     "flagMap": 0,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 100,
+       "wifi": false,
+       "prate": null,
+       "meal": "点心",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/meal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄12年7个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/meal.png",
+         "content": "有小食"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "0.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "E"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LockPrice,PriceBidding,EngineLowPrice,SurpriseProduct,LowPricePoolV1,PriorityPackage,IataNoProduct"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 1
+        },
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 520,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱3.3折",
+       "notetitle": null
+      }
+     ],
+     "drate": 3.3,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 2,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "3",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 105,
+       "wifi": false,
+       "prate": null,
+       "meal": "点心",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/meal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄12年7个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/meal.png",
+         "content": "有小食"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "0.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "I"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "AirlineMarketing"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 1
+        },
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 1370,
+     "quantity": 2,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱1.9折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.9,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "有小食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 1,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "已优惠￥30",
+       "style": "adsorb",
+       "tcode": "Campaign_MergeReduceShowLabel",
+       "extrainfo": null,
+       "flag": 256,
+       "tcType": 2,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "有小食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "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"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":520.0,\"flags\":[],\"policyId\":\"7145723603272148401\",\"showPrice\":520.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 90
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "CZ6443",
+      "aircode": "CZ",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T2"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 06:45:00",
+      "adate": "2026-10-27 08:10:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客321-200(中)"
+     },
+     "flagMap": 0,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 100,
+       "wifi": false,
+       "prate": 100,
+       "meal": "无配餐",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄2年4个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率57%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误17分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "100.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "T"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LockPrice,PriceBidding,EngineLowPrice,SurpriseProduct,LowPricePoolV1,PriorityPackage,IataNoProduct"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 330,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱2.1折",
+       "notetitle": null
+      }
+     ],
+     "drate": 2.1,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 2,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "3",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 120,
+       "wifi": false,
+       "prate": 100,
+       "meal": "无配餐",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄2年4个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率57%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误17分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "100.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "I"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "AirlineMarketing"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 1170,
+     "quantity": 4,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱1.7折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.7,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 1,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "已优惠￥20",
+       "style": "adsorb",
+       "tcode": "Campaign_MergeReduceShowLabel",
+       "extrainfo": null,
+       "flag": 256,
+       "tcType": 2,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "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"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":330.0,\"flags\":[],\"policyId\":\"408016647553958750\",\"showPrice\":330.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 85
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "CZ3955",
+      "aircode": "CZ",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T2"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 21:00:00",
+      "adate": "2026-10-27 22:30:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客321-200(中)"
+     },
+     "flagMap": 0,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 100,
+       "wifi": false,
+       "prate": null,
+       "meal": "无配餐",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄11年11个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率90%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误26分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "90.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "T"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LockPrice,PriceBidding,EngineLowPrice,SurpriseProduct,LowPricePoolV1,PriorityPackage,IataNoProduct"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 330,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱2.1折",
+       "notetitle": null
+      }
+     ],
+     "drate": 2.1,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 2,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "3",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 120,
+       "wifi": false,
+       "prate": null,
+       "meal": "无配餐",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄11年11个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率90%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误26分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "90.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "I"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "AirlineMarketing"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 1370,
+     "quantity": 5,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱1.9折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.9,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 1,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "已优惠￥20",
+       "style": "adsorb",
+       "tcode": "Campaign_MergeReduceShowLabel",
+       "extrainfo": null,
+       "flag": 256,
+       "tcType": 2,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "KLUv/WBfDJ01AAp7TBcq4GbuNiDAjIgu2ccOihh1lEpXyQmrTPXUl6jD2AM8fNjmA2/OYIYZZowDbwFpAVsBt1P5rFd+X4HMaqn7f+HVSX7YoX4VLzxczYth8buHBZ5UzXuczUr+ay8uylg7ZDoQVHEH/0HmaQzZeITsrya+Y60mb1GZC/lupPzeklGZqu3HP7X//RdnqV12LVpnDenmHeI/tjamIsVVp/oDDpxUblMLWNFF6cwYU3khdLvmtRSGcFaqhxdBIBgTSJMAwLERTlhh2IlMjqbGNWHURDE2TsMlb2BA7YV21AkJFH+8gRNyJAGXfAslBEpQIdSQnfY0+GXnbwxBzNZlxAXLCbmrYBEtDBAIBGKhUCgmZAAhtMeCptuhuGVbdl+3sTxufnkI+KWyHo7r4UBoUPVxgMEUa11K43ocYKjGPaBqNVkMpiwMdV2/DJD8Ql4ev/hF8ovWwoYeM9Vgt4HaLw8UADocJL9oTTci6J2vbct+OTDAJS/JThImgA+t6UbRH58ueTVJKKaqJgymLD8gOfnpsvNnSr7lneCPJndOkHzhG7MfCP+JxK0fZ6ngZjiYwnsxvWVPkxEWym4MuxHhwWAYiXcoMChYRIhEIpq45Fqn4I9bl3zLVm+jnvjjicTikDVc8lFnPgWrHEORBPNo/fEN7ErtjXmiwU4ydtMDBYAKDtMlx9AGRuKPN1w4skvgto7DYDyyG7NfBmwFUle9M3l32UD2ywHaleDkj7vkesvblhmjLndHyc4fZ7jks2pMrgqCsRKKUUTRRET+eMYlB8OOHPXvXIL660Ytdigw7Mo8apGyc6fRIumPu+TXzmBHS7Lb/jh1yTew48iOQ+A0ZZ744wImhgnnbiactplwrs0SUCNDeBusfHxYVLGSzTFY3uwy6LHBpmetWekoE/JWHtamMXHeg4ej8l01TdM0Td4j0Loxgno5V/vlpCyrephMeDqzbKX+6ga9mKF9laFZKpdejFG/Yin1jBLK4L4VEEJv4nr1tUOm07vXe9hhUWU2mvfkz0qoeZdkODJvgQFvKfMeQBQczsXgoEnBbWytTTNVRzhVsOLnW5oFOxZUJlIhq6Dzs2ixCwhKM7gIa1CoMvauMCakUS2qh4cyqlkqaHkXxLqV7L9yFbw6l07wP1a8fcuiGipSHJnfj6KXLda1PqNfadse5s1UzZHx/+ds/wX5ymXbkpAoe9lfDKphmFRaNau3MMCMJfP+QraNdPAvQPZbEIe2bHo5773N/q0Lad6/uKtFvy+QTc0AtdeR7celh+m82NR4GJZ59Sq979xpOb8fE6F8ZfuqIPMxtZ+wDtWi2Cqz/ZTOhzmymb9S2gL5j7yHVe5PrdZrrw6uXeb9AjU1DdGCrfiPO98dIfOrTvQI2X5sUdoxvRt5D+OMytRFleGfmkYC2zEBZZttS2qz4rJ66m21yu+ikApTsos5sv3PXeuzXRfed+5r4sxXdq2RztoQLU/F/bjuS0Gjp3TwtWQz/4P4s//IBw0e5YKpFRNaILImKEAUGBBMDUIQGGQQEIFCHxIyioSiU/pDoMEfLjlJ5t3IKJAuuQDKZp1pkyHuN0FMDrJtMWAH6oBaYEzYtNGJM9kpT3a6JjtFvO0xbRVhQdHL8ahJrVSGE24NV9Ut7kvWqVma9wi1wvYvhSa8DEejT8noJP+mcsJZqf6/kVGTynnPCeek+n0blOFr5tWnX8XToNvYNlMh3mO6K/j/cu792qEyNEHZiptfZfevjMosdNtGJ6oY0I0mQlU20R9NuPUAyUnSHwIDJCcRts5kiQbq7ws1egw7+fOnAepIMI+lpktIyGPpj1tH9ZBQl1yLC7YE9bdpMrQ2/rglu1xyhXLMotb8cQiSIEiakS2ICKBJoIigyCXXZdb88cjkcMm1FjZ2NtCNY/YDki9ocFQIIZxmzPoqybz9aXDKJY8gmEWYExEJEDBNGCZrLVCRtTBZa28r8ThL6WaHddmBVd6KcqhgyVc3ky5KqKEchBRCiJmJGRqRzPAGIEKiTFHZDRLI1FDNKmWUimbimXgmTapcB/piWG8uQaqYh2EVot+UQbtyzzoV6OqOgkOQGLajMTNTKNN6XfOOs/mVp3KltgczVEm9KmKqIxFKhWLtFpqwc6P0iuRCRDW9xIP7QxA8lwNAtHASCvugAqsctExVMrv0Js1EIbc4FmMeVIirArIR832QnoVVPSzYQe2OGczfr/qjH3ZNiQgsKIEDCfMaSSFdYdrz89RI94UfY+AhkVcwOW6VyW1GCJP0FixV/b5N+Fh7ZWEp"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":330.0,\"flags\":[],\"policyId\":\"408016669444489297\",\"showPrice\":330.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 90
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "CZ5921",
+      "aircode": "CZ",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T2"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 16:35:00",
+      "adate": "2026-10-27 18:10:00",
+      "dcnt": 0,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客320(中)"
+     },
+     "flagMap": 0,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 100,
+       "wifi": false,
+       "prate": null,
+       "meal": "点心",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/meal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄11年"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/meal.png",
+         "content": "有小食"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "0.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "E"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LockPrice,PriceBidding,EngineLowPrice,SurpriseProduct,LowPricePoolV1,PriorityPackage,IataNoProduct"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 1
+        },
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 530,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱3.3折",
+       "notetitle": null
+      }
+     ],
+     "drate": 3.3,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 2,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "3",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 120,
+       "wifi": false,
+       "prate": null,
+       "meal": "点心",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/meal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄11年"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/meal.png",
+         "content": "有小食"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "0.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "I"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "AirlineMarketing"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 1
+        },
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 1470,
+     "quantity": 2,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱2.1折",
+       "notetitle": null
+      }
+     ],
+     "drate": 2.1,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "有小食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 1,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "已优惠￥30",
+       "style": "adsorb",
+       "tcode": "Campaign_MergeReduceShowLabel",
+       "extrainfo": null,
+       "flag": 256,
+       "tcType": 2,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "有小食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "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"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":530.0,\"flags\":[],\"policyId\":\"5716220311227061176\",\"showPrice\":530.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 95
+  },
+  {
+   "segno": 1,
+   "weight": 0,
+   "segtpe": 1,
+   "mutilstn": [
+    {
+     "indexno": 1,
+     "basinfo": {
+      "flgno": "CZ6794",
+      "aircode": "CZ",
+      "ishared": null,
+      "crerflgno": null,
+      "crerairlinecode": null,
+      "flyManType": 0
+     },
+     "dportinfo": {
+      "city": "SZX",
+      "aport": "SZX",
+      "bsname": "T3"
+     },
+     "aportinfo": {
+      "city": "HAK",
+      "aport": "HAK",
+      "bsname": "T2"
+     },
+     "dateinfo": {
+      "ddate": "2026-10-27 23:30:00",
+      "adate": "2026-10-28 00:55:00",
+      "dcnt": 1,
+      "status": null,
+      "dtrange": "",
+      "atrange": "",
+      "plandeptime": null
+     },
+     "craftinfo": {
+      "kind": 2,
+      "manuf": "空客",
+      "cdisname": "空客321(中)"
+     },
+     "flagMap": 0,
+     "fsitem": null,
+     "traininfor": [],
+     "BusInfor": [],
+     "frtinfos": null,
+     "trsnotes": null,
+     "fcomlist": [],
+     "extendinfo": null,
+     "transferduration": null
+    }
+   ],
+   "pid": "__Zstd__|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",
+   "policyinfo": [
+    {
+     "flag": 8192,
+     "indexno": "1;2",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 0,
+       "seattilt": 100,
+       "wifi": false,
+       "prate": null,
+       "meal": "无配餐",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄16年11个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率100%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误23分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "90.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "T"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "LockPrice,PriceBidding,EngineLowPrice,SurpriseProduct,LowPricePoolV1,PriorityPackage,IataNoProduct"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 300,
+     "quantity": 9,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "经济舱1.9折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.9,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 2,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    },
+    {
+     "flag": 8192,
+     "indexno": "3",
+     "classinfor": [
+      {
+       "segno": 1,
+       "cgrd": 2,
+       "seattilt": 120,
+       "wifi": false,
+       "prate": null,
+       "meal": "无配餐",
+       "comfort": "",
+       "mealicon": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon_2.png",
+       "comforturl": null,
+       "extendinfos": [
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/plane_age.png",
+         "content": "机龄16年11个月"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/nomeal_icon.png",
+         "content": "无餐食"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/bridge_rate.png",
+         "content": "连廊率100%"
+        },
+        {
+         "title": "https://pic.c-ctrip.com/pic/AssetCatalog/biz/common/average_delay.png",
+         "content": "平均延误23分钟"
+        }
+       ],
+       "classNoteList": [
+        {
+         "notetype": 1,
+         "notecnt": "90.0"
+        },
+        {
+         "notetype": 2,
+         "notecnt": "I"
+        },
+        {
+         "notetype": 3,
+         "notecnt": "AirlineMarketing"
+        }
+       ],
+       "pcomlist": [],
+       "classfilterinfos": [
+        {
+         "type": 3
+        },
+        {
+         "type": 4
+        }
+       ],
+       "wifiicon": "",
+       "classnewfilterinfos": []
+      }
+     ],
+     "tprice": 1170,
+     "quantity": 2,
+     "fnotelst": [
+      {
+       "notetype": 4,
+       "notecnt": "公务舱1.7折",
+       "notetitle": null
+      }
+     ],
+     "drate": 1.7,
+     "htlbdl": null,
+     "aprice": null,
+     "psprices": [],
+     "limitPrice": 0,
+     "discountInfo": {
+      "showType": 0,
+      "disAmount": 0,
+      "discountdetailinfolst": null
+     },
+     "comavgnote": null,
+     "filterinfos": []
+    }
+   ],
+   "aset": [
+    {
+     "atype": 32,
+     "indexno": 1,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 1,
+     "indexno": 2,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "已优惠￥20",
+       "style": "adsorb",
+       "tcode": "Campaign_MergeReduceShowLabel",
+       "extrainfo": null,
+       "flag": 256,
+       "tcType": 2,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    },
+    {
+     "atype": 32,
+     "indexno": 3,
+     "tagarea": [
+      {
+       "tagindex": 1,
+       "tagcnt": "无餐食",
+       "style": null,
+       "tcode": "MealTag",
+       "extrainfo": null,
+       "flag": 0,
+       "tcType": 1,
+       "pUrl": null,
+       "tagurl": null,
+       "useStyle": false
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "notetype": 104,
+     "notecnt": "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"
+    },
+    {
+     "notetype": 105,
+     "notecnt": "{\"aggSalePrice\":300.0,\"flags\":[],\"policyId\":\"408016647553958751\",\"showPrice\":300.0}"
+    }
+   ],
+   "costtime": 0,
+   "fcode": null,
+   "topshow": null,
+   "scoreMap": null,
+   "totalduration": 85
+  }
+ ],
+ "fnotelst": null,
+ "tagstylelst": [
+  {
+   "tagidx": 1,
+   "tagtype": 4,
+   "size": {
+    "height": 0,
+    "width": 0
+   },
+   "coninfo": {
+    "bcolor": "#fffaf6;#ffad77",
+    "tcolor": "#fd6907",
+    "bold": 0
+   }
+  }
+ ],
+ "notiInfo": [],
+ "abtinfo": [],
+ "trancity": null,
+ "airlst": [
+  {
+   "flag": 0,
+   "aircode": "SZX",
+   "airname": "宝安国际机场"
+  },
+  {
+   "flag": 1,
+   "aircode": "HAK",
+   "airname": "美兰国际机场"
+  }
+ ],
+ "filterlst": [],
+ "recomlst": [],
+ "ccinfo": [
+  {
+   "city": "HAK",
+   "cityname": "海口"
+  },
+  {
+   "city": "SZX",
+   "cityname": "深圳"
+  }
+ ],
+ "acinfo": [
+  {
+   "aport": "HAK",
+   "aportsname": "美兰机场"
+  },
+  {
+   "aport": "SZX",
+   "aportsname": "宝安机场"
+  }
+ ],
+ "fcbasicinfo": [
+  {
+   "aircode": "CZ",
+   "airname": "南方航空",
+   "airshname": "南航",
+   "airlineurl": "",
+   "airlinecount": 6
+  },
+  {
+   "aircode": "HU",
+   "airname": "新海航｜海南航空",
+   "airshname": "新海航|海南航空",
+   "airlineurl": "",
+   "airlinecount": 3
+  },
+  {
+   "aircode": "SC",
+   "airname": "山东航空",
+   "airshname": "山航",
+   "airlineurl": "",
+   "airlinecount": 2
+  },
+  {
+   "aircode": "CA",
+   "airname": "中国国航",
+   "airshname": "国航",
+   "airlineurl": "",
+   "airlinecount": 2
+  },
+  {
+   "aircode": "ZH",
+   "airname": "深圳航空",
+   "airshname": "深航",
+   "airlineurl": "",
+   "airlinecount": 2
+  },
+  {
+   "aircode": "DZ",
+   "airname": "东海航空",
+   "airshname": "东海",
+   "airlineurl": "",
+   "airlinecount": 2
+  }
+ ],
+ "allilst": [
+  {
+   "alliname": "星空联盟",
+   "airs": [
+    "CA",
+    "ZH"
+   ]
+  }
+ ],
+ "fhlst": [],
+ "extinfo": [],
+ "flightadlist": [],
+ "adrules": [
+  {
+   "field": 1,
+   "rules": [
+    {
+     "type": 23,
+     "style": 0,
+     "priority": 15
+    },
+    {
+     "type": 20,
+     "style": 0,
+     "priority": 14
+    },
+    {
+     "type": 17,
+     "style": 0,
+     "priority": 13
+    },
+    {
+     "type": 11,
+     "style": 0,
+     "priority": 12
+    },
+    {
+     "type": 1,
+     "style": 0,
+     "priority": 11
+    },
+    {
+     "type": 23,
+     "style": 0,
+     "priority": 11
+    },
+    {
+     "type": 5,
+     "style": 0,
+     "priority": 10
+    },
+    {
+     "type": 4,
+     "style": 0,
+     "priority": 9
+    },
+    {
+     "type": 6,
+     "style": 0,
+     "priority": 8
+    },
+    {
+     "type": 15,
+     "style": 0,
+     "priority": 8
+    },
+    {
+     "type": 9,
+     "style": 0,
+     "priority": 7
+    },
+    {
+     "type": 2,
+     "style": 0,
+     "priority": 6
+    },
+    {
+     "type": 13,
+     "style": 0,
+     "priority": 5
+    },
+    {
+     "type": 7,
+     "style": 0,
+     "priority": 4
+    },
+    {
+     "type": 3,
+     "style": 0,
+     "priority": 3
+    },
+    {
+     "type": 12,
+     "style": 0,
+     "priority": 1
+    }
+   ]
+  },
+  {
+   "field": 2,
+   "rules": [
+    {
+     "type": 8,
+     "style": 0,
+     "priority": 10
+    }
+   ]
+  },
+  {
+   "field": 3,
+   "rules": [
+    {
+     "type": 5,
+     "style": 0,
+     "priority": 10
+    },
+    {
+     "type": 4,
+     "style": 0,
+     "priority": 9
+    },
+    {
+     "type": 9,
+     "style": 0,
+     "priority": 8
+    }
+   ]
+  }
+ ],
+ "extendsortlist": null,
+ "hotelrecommendlist": null,
+ "fNoti": {
+  "segNotiList": [],
+  "commonNoti": null
+ },
+ "crList": [],
+ "trainList": [],
+ "busList": [],
+ "cominfos": [],
+ "popupInfos": [],
+ "filterinfos": [
+  {
+   "type": "TotalDuration",
+   "range": {
+    "min": 70,
+    "max": 95
+   },
+   "filtertype": "Range",
+   "values": []
+  },
+  {
+   "type": "RefundChange",
+   "range": null,
+   "filtertype": "Value",
+   "values": [
+    "CAN_CHANGE",
+    "CAN_REFUND"
+   ]
+  }
+ ]
+}
