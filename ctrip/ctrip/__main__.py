@@ -51,7 +51,7 @@ def cmd_cookies(_args: argparse.Namespace) -> int:
 
 
 def cmd_train(args: argparse.Namespace) -> int:
-    """火车票车次查询(soa2/14666,免登录;需模拟器页面代理)。"""
+    """火车票车次查询(soa2/14666,免登录,纯 HTTP 直连)。"""
     from .client import CtripClient  # pylint: disable=import-outside-toplevel
     date = args.date or time.strftime("%Y-%m-%d")
     r = CtripClient().train_search(args.depart, args.arrive, date,

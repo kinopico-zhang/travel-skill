@@ -9,6 +9,8 @@
 | `amap/` | 高德 H5 服务代理 API（纯 HTTP）：驾车/公交/步行路线、地理编码、未来用车时预估（v4/etd）、App 同款路线偏好策略 |
 | `fliggy/` | 飞猪 H5 mtop 网关 API（纯 HTTP 直连）：单程航班列表（直飞+中转），免登录 |
 
+各包详细 API 参考文档（全部类／方法／字段／异常／CLI）：[airchina/API.md](airchina/API.md)、[ctrip/API.md](ctrip/API.md)、[amap/API.md](amap/API.md)、[fliggy/API.md](fliggy/API.md)。
+
 ## 依赖矩阵
 
 四个包的默认链路都是**纯 Python 标准库 HTTP**，零模拟器、零浏览器：

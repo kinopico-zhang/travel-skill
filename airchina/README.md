@@ -1,6 +1,8 @@
 # airchina
 
 国航 H5（m.airchina.com.cn）查询接口的 Python 客户端。
+详细 API 参考（全部类／方法／字段／异常／CLI）：[API.md](API.md)
+
 
 ## CLI 用法
 
@@ -65,6 +67,9 @@ mitmproxy（`[flows]` extra）。测试 42 个（`pytest -q`），mypy/pylint �
 奖励客票字段：`AwardFlight.flight_no/dep_time/arr_time/aircraft/mileage_price/seats/cabins`，
 `AwardCabin.bookable`（pprice/fprice>0 启发式）、`classCode`（O 头等/I 公务/X 经济）。
 `AwardResult.availability` 是响应里的 lowPriceList（往返可选回程日期）。
+
+**假空现象**：奖励客票查询偶发返回空列表但服务端无错（假空），隔几秒重查即恢复——
+批量扫描请对空结果做一次重试验证，不要把假空当成无票。
 
 往返（`--return-date`）：**一次调用自动查双向**——RT 模式响应只含去程，回程是反向再查一次
 （中间隔 1.5s 模拟翻页）。注意 RT 模式下去程显示的是往返合计价（如 CAN-PEK 经济 26000），

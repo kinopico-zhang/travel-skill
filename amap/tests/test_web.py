@@ -1,4 +1,4 @@
-# pylint: disable=redefined-outer-name,unused-argument,protected-access
+# pylint: disable=redefined-outer-name,unused-argument,protected-access,import-outside-toplevel
 """Web 客户端测试:真实 H5 响应夹具驱动 + 替身 _get,不触网。"""
 import json
 import time
@@ -206,6 +206,8 @@ def test_resolve_strategy():
     assert resolve_strategy("no_highway") == (16, 2)
     assert resolve_strategy(1) == (1, 2)              # v3 数字:费用最少 → 免费
     assert resolve_strategy(0) == (0, 1)
+    assert resolve_strategy("16") == (16, 2)          # CLI 传来的数字串同样接受
+    assert resolve_strategy("2") == (2, 1)
     with pytest.raises(WebError, match="未知策略"):
         resolve_strategy("teleport")
 

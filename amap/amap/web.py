@@ -65,10 +65,13 @@ def resolve_strategy(strategy: Any) -> tuple:  # noqa: UP006  # (v3值, etd值)
     """
     if isinstance(strategy, str):
         s = strategy.lower()
-        if s not in APP_STRATEGIES:
+        if s.isdigit():               # CLI argparse 传来的 v3 数字串
+            strategy = int(s)
+        elif s in APP_STRATEGIES:
+            return APP_STRATEGIES[s][1], APP_STRATEGIES[s][2]
+        else:
             raise WebError(f"未知策略 {strategy!r},可选: "
                            f"{sorted(APP_STRATEGIES)} 或 v3 数字 {sorted(DRIVE_STRATEGIES)}")
-        return APP_STRATEGIES[s][1], APP_STRATEGIES[s][2]
     if strategy not in DRIVE_STRATEGIES:
         raise WebError(f"未知 strategy {strategy},可选: "
                        f"{sorted(DRIVE_STRATEGIES)} 或名字 {sorted(APP_STRATEGIES)}")

@@ -113,7 +113,7 @@ def cmd_check(_args: argparse.Namespace) -> int:
     try:
         print(f"模拟器 App 链路 OK({AmapClient().check()})")
     except Exception as e:  # pylint: disable=broad-exception-caught  # 可选链路
-        print(f"模拟器 App 链路不可用(未来用时需要它): {e}")
+        print(f"模拟器 App 链路不可用(仅 --app 后备需要它): {e}")
     return 0
 
 

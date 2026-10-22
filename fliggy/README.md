@@ -2,6 +2,8 @@
 
 v0.1.0：单程航班列表（直飞 + 中转），免登录、零模拟器、零浏览器。
 
+详细 API 参考（全部类／方法／字段／异常／CLI）：[API.md](API.md)
+
 ## CLI 用法
 
 ```bash
@@ -18,7 +20,7 @@ python -m fliggy flights CAN PEK 2026-11-18
 python -m fliggy flights CAN PEK 2026-11-18 --direct
 ```
 
-输出示例（价格为成人含税总价）：
+输出示例（第二条命令，`--direct` 只看直飞；价格为成人含税总价）：
 
 ```
 CAN→PEK 2026-11-18  共49班(直飞)

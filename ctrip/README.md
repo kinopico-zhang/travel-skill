@@ -3,6 +3,8 @@
 v1.1.0：新增**国际/中国港澳台单程列表**（`search_intl`，soa2/14780）——该接口
 head 指纹（mystery/vid/sessionId）无法离线复刻，走模拟器浏览器 navigate 通道。
 
+详细 API 参考（全部类／方法／字段／异常／CLI）：[API.md](API.md)
+
 v1.0.0：传输层从 CDP 页面代理升级为 **纯 HTTP 直连** —— App 网关头过 WAF，
 不再依赖 MuMu 模拟器/浏览器 tab。CDPProxy 保留为可选后备（登录态维护用）。
 
@@ -65,7 +67,7 @@ cal = ct.low_price_calendar("SZX", "HAK")
 print(cal[0].date, cal[0].price)      # price＝票面（国际线不含税）
 print(cal[0].total)                   # total＝含税总价（totalPrice），比价用这个
 
-# 城市码（内置 36 城，未知自动 fuzzySearch 并缓存 ~/.ctrip_cities.json）
+# 城市码（内置 37 城，未知自动 fuzzySearch 并缓存 ~/.ctrip_cities.json）
 c = ct.city("KHN")               # City(code="KHN", name="南昌", id="376")
 print(c.name, c.id)
 
