@@ -206,18 +206,23 @@ class AirChinaClient:
                 for d, v in sorted(rt.items()) if v.get("price")]
 
     def keepalive_ping(
-            self, deep: bool = False) -> Union[List[DailyPrice], MileageSummary]:
+            self, deep: bool = False) -> Union[List[DailyPrice], Optional[AwardResult]]:
         """会话保活探测。
 
-        服务端会话是滑动过期(闲置 ~25 分钟);任何带 cookie 的请求都会续期。
-        默认用现金低价日历(a=0 p=0, 查询类端点, 全天稳定)做轻量 ping,
-        cookie 失效时 _post 会抛 CookieExpiredError(响应变成登录 HTML)。
-        deep=True 改查账户概要 —— 能顺带校验里程数, 但该端点偶报
-        [01010012] 网络非常繁忙, 只适合低频深检。
+        服务端会话是滑动过期(闲置 ~25 分钟);带 cookie 的登录态请求才会续期。
+        浅 ping 用现金低价日历(a=0 p=0)——注意该端点免 Cookie,只测网络,
+        **不续期**(2026-10-30 教训:守护用它续了 10 天什么都没续上)。
+        deep=True 用奖励客票查询(a=12 p=47,稳定的登录态端点)真正续期;
+        业务错(如 06080325 无航班)也证明会话有效,吞掉返回 None,
+        只有 CookieExpiredError 透传。
         daemon 用法见 `python -m airchina keepalive`。
         """
         if deep:
-            return self.mileage_summary()
+            d = (datetime.date.today() + datetime.timedelta(days=7)).isoformat()
+            try:
+                return self.award_search("CAN", "PEK", d, carrier="ZH")
+            except ApiError:
+                return None
         d = (datetime.date.today() + datetime.timedelta(days=7)).isoformat()
         return self.low_price_calendar("CAN", "PEK", d)
 

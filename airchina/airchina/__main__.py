@@ -20,7 +20,7 @@ from pydantic import BaseModel
 
 from .client import AirChinaClient
 from .errors import AirChinaError, CookieExpiredError
-from .models import MileageSummary
+from .models import AwardResult
 from .session import DEFAULT_FLOWS, DEFAULT_SESSION_FILE
 
 
@@ -83,13 +83,13 @@ def cmd_keepalive(args: argparse.Namespace, ac: AirChinaClient) -> int:
     while True:
         try:
             resp = ac.keepalive_ping(deep=args.deep)
-            if isinstance(resp, MileageSummary):
-                fields = resp.model_dump(exclude={"code", "msg"})
-                miles = next((v for v in fields.values()
-                              if isinstance(v, (int, float)) and 1000 < v < 10**7), "?")
-                log_msg = f"OK(账户) 里程≈{miles}"
-            else:
+            if args.deep:
+                n = len(resp.flights) if isinstance(resp, AwardResult) else 0
+                log_msg = f"OK(奖励票探测) {n}班"
+            elif resp:
                 log_msg = f"OK(日历) 返回{len(resp)}天票价"
+            else:
+                log_msg = "OK(日历) 空"
             _log(log_msg)
             _write_hb(args.heartbeat, Heartbeat(ok=True, ts=time.time()))
         except CookieExpiredError as e:

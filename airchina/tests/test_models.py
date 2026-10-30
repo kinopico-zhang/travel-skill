@@ -27,10 +27,16 @@ def test_parse_award_ow(award_ow):
 
 
 def test_cabin_bookable_heuristic():
-    """pprice>0 只在公务舱 I 行出现;X 行 pprice=-1 不可据此判兑。"""
+    """X 行的 pprice 不可据此判兑(ZH 航班 pprice=-1 仍可兑,看座位数);
+    I 行 pprice>0 是可靠可兑标记。"""
     assert AwardCabin(code="I", pprice=1.0).bookable is True
     assert AwardCabin(code="X", pprice=-1.0, fprice=-1.0).bookable is False
     assert AwardCabin(code="X").bookable is False
+    # ZH 实测样本:pprice/fprice=-1 但 X 档真实可兑(余 2)
+    assert AwardCabin(code="X", pprice=-1.0, fprice=-1.0,
+                      seat_num="2").bookable is True
+    assert AwardCabin(code="X", seat_num="0").bookable is False
+    assert AwardCabin(code="X", seat_num="").bookable is False
 
 
 def test_parse_availability(award_ow):

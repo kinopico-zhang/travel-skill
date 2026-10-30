@@ -16,7 +16,7 @@ python -m airchina calendar ORG DST DATE
 python -m airchina account
 # 从 mitmproxy 抓包提取/保存会话
 python -m airchina session [--from-flows 文件] [--save 文件]
-# 会话保活守护（默认每 15 分钟轻量 ping 续期）
+# 会话保活守护（systemd 服务 --deep 模式：每 15 分钟奖励票端点探测续期）
 python -m airchina keepalive [--interval 900] [--backoff 1800] [--once] \
         [--deep] [--heartbeat 文件]
 ```
@@ -26,7 +26,7 @@ python -m airchina keepalive [--interval 900] [--backoff 1800] [--once] \
 | `award` | `ORG`/`DST` 三字码，`DATE` 为 `YYYY-MM-DD`；`--return-date` 给即查往返（一次调用自动查双向）；`--cabin X` 经济舱奖励票（默认）/`0` 不限；`--adults`/`--children` 人数（默认 1/0）；`--flag D` 国内（默认）/`I` 国际；`--check-token` 过滑块后的 token（一般不需要） |
 | `calendar` | 位置参数同 `award`；无需登录 |
 | `session` | `--from-flows` 抓包文件（默认 `/tmp/airchina.flows`）；`--save` 会话输出（默认 `~/.airchina/session.json`） |
-| `keepalive` | `--interval` 间隔秒（默认 900，须小于约 25 分钟闲置超时）；`--backoff` 瞬时错误退避秒（默认 1800）；`--once` 只 ping 一次；`--deep` 账户接口深检（能看里程，端点较敏感）；`--heartbeat` 心跳文件（默认 `~/.airchina/keepalive.json`） |
+| `keepalive` | `--interval` 间隔秒（默认 900，须小于约 25 分钟闲置超时）；`--backoff` 瞬时错误退避秒（默认 1800）；`--once` 只 ping 一次；`--deep` 奖励票端点探测（登录态请求，真正续期；业务错如无航班也算 ping 通）；`--heartbeat` 心跳文件（默认 `~/.airchina/keepalive.json`） |
 
 ```bash
 python -m airchina award CAN PEK 2026-10-21
@@ -99,15 +99,17 @@ mitmproxy（`[flows]` extra）。测试 42 个（`pytest -q`），mypy/pylint �
 
 ### 保活（已部署 systemd 服务）
 
-服务端会话是**滑动过期**（闲置约 25 分钟死，任何带 cookie 的请求即续期）——
-2026-10-20 实测：登录后靠连续查询活了 2 小时以上。据此部署了守护：
+服务端会话是**滑动过期**（闲置约 25 分钟死，带 cookie 的**登录态**请求才续期）。
+坑：日历端点（a=0 p=0）免 Cookie——用它 ping 只测网络**不续期**（2026-10-30 实证：
+守护用日历 ping 了 10 天，会话照样过期）；账户端点（a=8 p=34）服务端持续 01010012
+拒绝。**deep 探测用奖励票端点（a=12 p=47）**，已部署的 systemd 服务即 `--deep` 模式。
 
 ```bash
 systemctl --user status airchina-keepalive    # 看状态
 journalctl --user -u airchina-keepalive -f    # 看日志（每 15 分钟一条 OK）
 cat ~/.airchina/keepalive.json                # 心跳（最近一次 ping 结果）
 python -m airchina keepalive --once           # 手动 ping 一次
-python -m airchina keepalive --once --deep    # 深检（账户接口，顺带看里程）
+python -m airchina keepalive --once --deep    # 登录态端点探测（真正续期）
 ```
 
 - 默认 ping = 现金低价日历（查询类端点，稳定；账户端点 a=8 会偶报「网络非常繁忙」）。

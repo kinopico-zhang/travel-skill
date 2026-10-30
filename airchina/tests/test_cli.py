@@ -106,14 +106,15 @@ def test_cli_keepalive_once_transient_error(stub, monkeypatch, tmp_path):
 
 
 def test_cli_keepalive_deep_ok(stub, monkeypatch, capsys, tmp_path):
-    monkeypatch.setattr(stub, "keepalive_ping",
-                        lambda deep=False: MileageSummary(code="00000000",
-                                                          mileage=12300))
+    from airchina.models import AwardResult
+    r = AwardResult()
+    r.flights = []
+    monkeypatch.setattr(stub, "keepalive_ping", lambda deep=False: r)
     _patch_load(monkeypatch, stub)
     hb = tmp_path / "hb.json"
     rc = cli.main(["keepalive", "--once", "--deep", "--heartbeat", str(hb)])
     assert rc == 0
-    assert "OK(账户) 里程≈12300" in capsys.readouterr().out
+    assert "OK(奖励票探测)" in capsys.readouterr().out
 
 
 def test_cli_session(monkeypatch, capsys, tmp_path, sample_session):

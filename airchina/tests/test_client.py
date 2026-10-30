@@ -151,11 +151,23 @@ def test_keepalive_ping_light_date(sample_session, monkeypatch):
 
 
 def test_keepalive_ping_deep(sample_session, monkeypatch):
+    """deep ping 走奖励票查询(登录态端点);业务错吞掉(None=会话仍有效)。"""
+    from airchina import ApiError
+    from airchina.models import AwardResult
     ac = ScriptedClient([], sample_session)
-    monkeypatch.setattr(ac, "mileage_summary",
-                        lambda: MileageSummary(code="00000000", mileage=12300))
+    seen: Dict[str, Any] = {}
+    monkeypatch.setattr(ac, "award_search",
+                        lambda org, dst, date, carrier="CA":
+                        seen.update(org=org, dst=dst, carrier=carrier) or
+                        AwardResult())
     out = ac.keepalive_ping(deep=True)
-    assert isinstance(out, MileageSummary)
+    assert isinstance(out, AwardResult)
+    assert seen["org"] == "CAN" and seen["dst"] == "PEK"
+    # 业务错(如无航班)不代表会话失效
+    monkeypatch.setattr(ac, "award_search",
+                        lambda org, dst, date, carrier="CA":
+                        (_ for _ in ()).throw(ApiError("06080325", "没有航班")))
+    assert ac.keepalive_ping(deep=True) is None
 
 
 # ------------------------------------------------------------------ _post 传输层

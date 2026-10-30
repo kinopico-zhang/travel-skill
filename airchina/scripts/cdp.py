@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """CDP helper for driving the emulator WebView. Usage: python3 cdp.py [eval_js_file]"""
 import json
+import os
 import sys
 import time
 import urllib.request
 
 import websocket
 
-DEBUGGER = "http://127.0.0.1:9222"
+DEBUGGER = os.environ.get("AIRCHINA_CDP", "http://127.0.0.1:9222")
 
 
 def targets():

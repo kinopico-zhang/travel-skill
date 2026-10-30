@@ -48,7 +48,13 @@ class AwardCabin(BaseModel):
 
     @property
     def bookable(self) -> bool:
-        """pprice/fprice > 0 视为可兑换(对公务舱 I 行可靠)。"""
+        """可兑启发式:X(经济)看座位数(ZH 航班 pprice 常为 -1 仍可兑);
+        I/O(两舱)看 pprice/fprice > 0。精确可用性以航班级 mileage_price+seats 为准。"""
+        if self.code == "X":
+            try:
+                return int(self.seat_num or 0) > 0
+            except ValueError:
+                return False
         return (self.pprice or 0) > 0 or (self.fprice or 0) > 0
 
     @classmethod

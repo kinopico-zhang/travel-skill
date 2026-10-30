@@ -194,25 +194,25 @@ print(m.model_dump())        # 其余字段随服务端版本
 
 ```python
 def keepalive_ping(
-        self, deep: bool = False) -> Union[List[DailyPrice], MileageSummary]:
+        self, deep: bool = False) -> Union[List[DailyPrice], Optional[AwardResult]]:
 ```
 
 | 参数 | 类型 | 默认值 | 说明 |
 |---|---|---|---|
-| `deep` | `bool` | `False` | `False` 用现金低价日历做轻量 ping（查询类端点，全天稳定）；`True` 改查账户概要——能顺带校验里程，但该端点偶报 `01010012`，只适合低频深检 |
+| `deep` | `bool` | `False` | `True` 用奖励客票查询（`a=12 p=47`，稳定的登录态端点）做**真正续期**的探测；`False` 用现金低价日历（免 Cookie 端点，只测网络**不续期**） |
 
-返回值：`deep=False` → `List[DailyPrice]`（固定查 `CAN` → `PEK`，日期取「今天 + 7 天」）；`deep=True` → `MileageSummary`。
+返回值：`deep=False` → `List[DailyPrice]`（固定查 `CAN` → `PEK`，日期取「今天 + 7 天」）；`deep=True` → `AwardResult`（固定查 `CAN` → `PEK`，`carrier="ZH"`）；业务错（如 `06080325` 无航班）时返回 `None`——业务错也证明会话有效。
 
-异常：透传所调接口的异常。Cookie 失效时（响应变登录 HTML）抛 `CookieExpiredError`——这正是守护进程判断「会话已死」的信号。
+异常：`deep=True` 时吞掉 `ApiError`（业务错）；`CookieExpiredError` 透传——这正是守护进程判断「会话已死」的信号。
 
 示例：
 
 ```python
-ac.keepalive_ping()               # 轻量 ping，续期滑动会话
-ac.keepalive_ping(deep=True)      # 深检，顺带看里程
+ac.keepalive_ping()               # 轻量 ping(只测网络,不续期)
+ac.keepalive_ping(deep=True)      # 登录态端点探测,真正续期
 ```
 
-备注：服务端会话是滑动过期（闲置约 25 分钟），任何带 Cookie 的请求都会续期；守护用法见 CLI `keepalive`。
+备注：服务端会话是滑动过期（闲置约 25 分钟），只有**带 Cookie 的登录态请求**才续期。不要用账户概要（`a=8 p=34`）做探测——该端点服务端持续 `01010012` 拒绝；也不要用日历——它免 Cookie 续不了期（2026-10-30 实证：守护用日历 ping 了 10 天什么都没续上）。守护用法见 CLI `keepalive`。
 
 ## 会话管理（session.py）
 
@@ -322,7 +322,7 @@ keepalive 心跳文件（默认 `~/.airchina/keepalive.json`）的内容模型�
 | `code` | `str`，默认 `""` | 舱位代码：`I` 公务 / `X` 经济 / `O` 头等 |
 | `service` | `str`，默认 `""` | 服务等级英文：`business` / `economy` / `first` |
 | `service_desc` | `str`，默认 `""` | 中文描述：公务舱 / 经济舱 / 头等舱 |
-| `pprice` | `Optional[float]` | 兑换价字段；`>0` 视为该舱可兑（仅对公务舱 `I` 可靠） |
+| `pprice` | `Optional[float]` | 兑换价字段；`>0` 视为该舱可兑（仅对两舱可靠，`X` 行常为 `-1` 仍可兑） |
 | `fprice` | `Optional[float]` | 同上，备用价字段 |
 | `seat_num` | `str`，默认 `""` | 该舱剩余座位 |
 | `hand_baggage` | `str`，默认 `""` | 手提行李（如 `5KG`） |
@@ -335,7 +335,7 @@ keepalive 心跳文件（默认 `~/.airchina/keepalive.json`）的内容模型�
 def bookable(self) -> bool:
 ```
 
-等价于 `(pprice or 0) > 0 or (fprice or 0) > 0`。启发式：真实数据里 `X` 行 `pprice` 常为 `-1`（不可据此判兑），`pprice>0` 只在公务舱 `I` 行可靠；精确可用性看航班级 `mileage_price` + `seats`。
+启发式：`X`（经济）行看座位数 `seat_num`（ZH 航班 `pprice` 常为 `-1` 但真实可兑，2026-10-30 实证）；`I`/`O`（两舱）行看 `(pprice or 0) > 0 or (fprice or 0) > 0`。精确可用性以航班级 `mileage_price` + `seats` 为准。
 
 ```python
 @classmethod
