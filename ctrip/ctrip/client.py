@@ -34,7 +34,8 @@ from .cities import CITIES
 from .models import (City, DailyPrice, IntlSearchResult, SearchResult,
                      TrainSearchResult)
 
-CDP_HTTP = "http://127.0.0.1:9222"
+# CDP 端口可被环境变量覆盖(主机 Chrome 常占 9222,模拟器可 forward 到 9223 等)
+CDP_HTTP = os.environ.get("CTRP_CDP", "http://127.0.0.1:9222")
 LIST_API = "/restapi/soa2/14488/flightListSearchForH5"
 INTL_LIST_API = "/restapi/soa2/14780/listSearchForH5"
 CALENDAR_API = "/restapi/soa2/15380/bjjson/FlightIntlAndInlandLowestPriceSearch"
